@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<fx:root fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" type="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.UI.MenuPrincipalController">
+<AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
    <children>
       <Button fx:id="botonEmitirLicencia" layoutX="174.0" layoutY="119.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Emitir Licencia">
          <font>
@@ -115,4 +114,4 @@
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
-</fx:root>
+</AnchorPane>

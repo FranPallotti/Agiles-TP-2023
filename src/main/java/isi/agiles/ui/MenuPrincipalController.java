@@ -6,8 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-
-public class MenuPrinicpalController {
+public class MenuPrincipalController {
     @FXML
     private Button botonDarAltaTitular;
 
