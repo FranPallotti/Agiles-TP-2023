@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<fx:root fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" type="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.UI.MenuPrincipalController">
+   <children>
+      <Button fx:id="botonEmitirLicencia" layoutX="174.0" layoutY="119.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Emitir Licencia">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonImprimirLicencia" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Imprimir Licencia">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonRenovarLicencia" layoutX="174.0" layoutY="338.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Renovar Licencia">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonDarAltaUsuario" layoutX="574.0" layoutY="228.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Dar de Alta Usuario">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonDarAltaTitular" layoutX="574.0" layoutY="119.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Dar de Alta Titular">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonModificarDatosTitular" layoutX="574.0" layoutY="445.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text=" Modificar Datos de Titular">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonModificarDatosUsuario" layoutX="574.0" layoutY="338.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text=" Modificar Datos de Usuario">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonListarLicenciasVigentes" layoutX="174.0" layoutY="445.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Listar Licencias Vigentes">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonListarLicenciasExpiradas" layoutX="174.0" layoutY="544.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Listar Licencias Expiradas">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonModificarCostorsLicencias" layoutX="574.0" layoutY="544.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="284.0" text="Modificar Costos de Licencias">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="labelMenuPrincipal" alignment="CENTER" contentDisplay="RIGHT" layoutX="174.0" layoutY="26.0" prefHeight="57.0" prefWidth="679.0" text="Menú Principal" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="Times New Roman Bold" size="51.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="677.0" prefHeight="28.0" prefWidth="375.0" text="Municipalidad de Santa Fe.">
+         <font>
+            <Font name="Times New Roman Italic" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="logoStaFeIzq" fitHeight="150.0" fitWidth="167.0" layoutX="31.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logoMuniStaFe.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logoStaFeDer" fitHeight="150.0" fitWidth="167.0" layoutX="889.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logoMuniStaFe.png" />
+         </image>
+      </ImageView>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</fx:root>
