@@ -2,6 +2,8 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 import java.time.Period;
+
+import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.Titular;
@@ -23,9 +25,9 @@ public class GestorTitular {
     }
 
     public Boolean tieneEdadParaLicenciaProf(Titular titular){
-        //declara LicenciaDAO
+        LicenciaDAO dao = new LicenciaDAO();
 
-        List<Licencia> licenciasProf =  licenciaDao.getLicenciasProfesionales(titular);
+        List<Licencia> licenciasProf =  dao.getLicenciasProfesionales(titular);
 
         return !licenciasProf.isEmpty() || this.getEdadTitular(titular) <= ClaseLicencia.getEdadMaxPrimeraLicenciaProf();
     }
