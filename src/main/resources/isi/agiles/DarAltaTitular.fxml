@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="frameDarAltaTitular" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.DarAltaTitularController">
+   <children>
+      <Text fx:id="tituloDarAltaTitular" layoutX="202.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dar Alta Titular" underline="true">
+         <font>
+            <Font name="Times New Roman" size="30.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboTipoDocumento" layoutX="105.0" layoutY="78.0" onShowing="#initialize" prefHeight="21.0" prefWidth="138.0" promptText="Tipo Documento" visibleRowCount="4" />
+      <TextField fx:id="nroDocumento" layoutX="258.0" layoutY="78.0" prefHeight="26.0" prefWidth="220.0" promptText="Nro. Documento" />
+      <TextField fx:id="textNombre" layoutX="104.0" layoutY="116.0" prefHeight="26.0" prefWidth="182.0" promptText="Nombre" />
+      <TextField fx:id="textApellido" layoutX="296.0" layoutY="116.0" prefHeight="26.0" prefWidth="182.0" promptText="Apellido" />
+      <DatePicker fx:id="dateFechaNacimiento" layoutX="104.0" layoutY="156.0" prefHeight="26.0" prefWidth="182.0" promptText="Fecha de Nacimiento" />
+      <TextField fx:id="textDireccion" layoutX="296.0" layoutY="156.0" prefHeight="26.0" prefWidth="182.0" promptText="Dirección " />
+      <ComboBox fx:id="comboGrupoSanguineo" layoutX="104.0" layoutY="195.0" prefHeight="26.0" prefWidth="182.0" promptText="Grupo Sanguíneo" visibleRowCount="4" />
+      <ComboBox fx:id="comboFactorRH" layoutX="295.0" layoutY="195.0" prefHeight="26.0" prefWidth="182.0" promptText="Factor RH" visibleRowCount="4" />
+      <Label fx:id="labelClaseSolicitada" layoutX="105.0" layoutY="233.0" text="Clases Solicitadas" />
+      <CheckBox fx:id="choiceClaseA" layoutX="106.0" layoutY="254.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="A" />
+      <CheckBox fx:id="choiceClaseB" layoutX="106.0" layoutY="278.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="B" />
+      <CheckBox fx:id="choiceClaseC" layoutX="106.0" layoutY="301.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="C" />
+      <CheckBox fx:id="choiceClaseD" layoutX="106.0" layoutY="325.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="D" />
+      <CheckBox fx:id="choiceClaseE" layoutX="173.0" layoutY="254.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="E" />
+      <CheckBox fx:id="choiceClaseF" layoutX="173.0" layoutY="278.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="F" />
+      <CheckBox fx:id="choiceClaseG" layoutX="173.0" layoutY="301.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="29.0" text="G" />
+      <ComboBox fx:id="comboDonante" layoutX="295.0" layoutY="234.0" prefHeight="26.0" prefWidth="182.0" promptText="Donante de Órganos" visibleRowCount="4" />
+      <Button fx:id="botonVolver" layoutX="440.0" layoutY="347.0" mnemonicParsing="false" onAction="#accionVolver" text="Volver" />
+      <Button fx:id="botonGuardar" layoutX="497.0" layoutY="347.0" mnemonicParsing="false" onAction="#accionGuardar" text="Guardar" />
+   </children>
+</AnchorPane>
