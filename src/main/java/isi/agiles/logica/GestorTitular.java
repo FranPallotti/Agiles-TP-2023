@@ -18,7 +18,7 @@ public class GestorTitular {
         return this.getEdad(dto.getFechaNacimiento());
     }
 
-    public Integer getEdadTitular(Titular titular){
+    /*public Integer getEdadTitular(Titular titular){
         return this.getEdad(titular.getFechaNacimiento());
     }
 
@@ -34,5 +34,5 @@ public class GestorTitular {
         //declara LicenciaDAO
 
         List<Licencia> licenciasClaseB =  licenciaDao.getLicenciasClaseB(titular);
-    }
+    }*/
 }

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -41,13 +42,16 @@ public class App extends Application {
         usuario.setNmoDoc("22103847");
         usuario.setSexo(TipoSexo.MASCULINO);
         usuario.setNombreUsuario("JPerez");
-        usuario.setRol(TipoRol.OPERADOR);
+        usuario.setRol(TipoRol.ADMINISTRADOR);
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
+        Image icono =  new Image("isi/agiles/logoStaFe.png");
         scene = new Scene(loadFXML("MenuPrincipal"));
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(icono);
         stage.show();
     }
 
@@ -62,5 +66,16 @@ public class App extends Application {
 
     public static Usuario getUsuarioLogueado(){
         return usuarioLogueado;
+    }
+
+    public static void cambiarVentana(String fxml, Stage ventActual) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
+        ventActual.close();
+        stage.show();
     }
 }

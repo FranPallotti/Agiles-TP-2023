@@ -17,8 +17,8 @@ public class GestorLicencia {
 
     }
 
-    public Boolean esLicenciaProfesionalValida(LicenciaDTO dto){
-        if(dto.getClase().getEsProfesional().equals(false)){
+    /*public Boolean esLicenciaProfesionalValida(LicenciaDTO dto){
+         if(dto.getClase().getEsProfesional().equals(false)){
             return true;
         }
         
@@ -32,5 +32,5 @@ public class GestorLicencia {
         GestorTitular gestor = new GestorTitular();
 
         return  gestor.getEdadTitular(dto.getTitular()) >= dto.getClase().getEdadMinima();
-    }
+    }*/
 }
