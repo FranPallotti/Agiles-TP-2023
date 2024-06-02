@@ -61,7 +61,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonGuardar" layoutX="575.0" layoutY="644.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="203.0" text="Guardar">
+      <Button fx:id="botonGuardar" layoutX="575.0" layoutY="644.0" mnemonicParsing="false" onAction="#accionGuardar" prefHeight="39.0" prefWidth="203.0" text="Guardar">
          <font>
             <Font name="Times New Roman Bold Italic" size="22.0" />
          </font>
@@ -109,42 +109,42 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorNombre" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorNombre" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorApellido" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorApellido" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorMail" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorMail" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorSexo" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorSexo" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorTipoDoc" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorTipoDoc" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorNroDoc" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorNroDoc" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorNombreUsuario" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="labelErrorNombreUsuario" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="15.0" />
          </font>

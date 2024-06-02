@@ -9,15 +9,21 @@ import java.util.function.UnaryOperator;
 import isi.agiles.App;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.util.DatosInvalidosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.LocalDateStringConverter;
@@ -119,11 +125,23 @@ public class AltaDeUsuarioController{
     }
 
     @FXML
+    void accionGuardar(ActionEvent event) {
+        try{
+            datosValidos();
+            //Logica para guardar cliente
+            informacionClienteGuardado();
+        }catch (DatosInvalidosException e){
+            errorDatosInvalidos(e.getMessage());
+        }
+    }
+
+    @FXML
     public void initialize(){
         ocultarlabelErrores();
         iniciarlistas();
        //reguladorCampoFechaNacimiento();
        campoFechaNacimiento.setEditable(false);
+       campoNroDoc.setText(null);
     }
 
     private void iniciarlistas() {
@@ -140,6 +158,217 @@ public class AltaDeUsuarioController{
         labelErrorNroDoc.setVisible(false);
         labelErrorSexo.setVisible(false);
         labelErrorTipoDoc.setVisible(false);
+    }
+
+    private void errorDatosInvalidos(String message) {
+        Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
+
+    private void informacionClienteGuardado() {
+        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El usuario ha sido se creó correctamente.", ButtonType.OK);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
+
+    private void datosValidos() throws DatosInvalidosException{
+        Boolean invalidos = false;
+        invalidos |=nombreInvalido();
+        invalidos |=apellidoInvalido();
+        invalidos |=fechaNacimientoInvalido();
+        invalidos |=mailInvalido();
+        invalidos |=sexoInvalido();
+        invalidos |=tipoDocNroDocInvalido();
+        invalidos =nombreUsuarioInvalido();
+        if(invalidos){
+            throw new DatosInvalidosException("Advertencia: Por favor, revise los campos ingresados y vuelva a intentarlo.");
+        }
+    }
+
+    private boolean nombreUsuarioInvalido() {
+        Boolean invalido =  false;
+        if (campoNombreUsuario.getText() == null){
+            labelErrorNombreUsuario.setVisible(true);
+            invalido=true;
+            campoNombreUsuario.setText(null);
+        } else if(campoNombreUsuario.getText().matches("^\\s+$") || campoNombreUsuario.getText().isEmpty()){
+            labelErrorNombreUsuario.setVisible(true);
+            campoNombreUsuario.setText(null);
+            invalido = true;
+        }else if(campoNombreUsuario.getText().length()>16){
+            labelErrorNombreUsuario.setText("*Máximo 16 caracteres sin\r\n espacios.*");
+            labelErrorNombreUsuario.setVisible(true);
+            campoNombreUsuario.setText(null);
+            invalido=true;
+        }else if(campoNombreUsuario.getText().matches("^(\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+)$")){
+            labelErrorNombreUsuario.setText("*Sólo letras y/o números sin\r\n espacios.*");
+            labelErrorNombreUsuario.setVisible(true);
+            campoNombreUsuario.setText(null);
+            invalido=true;
+        }
+
+        if(invalido == false){
+            labelErrorNombreUsuario.setVisible(false);
+        }
+        return invalido;
+    }
+
+    private boolean tipoDocNroDocInvalido() {
+        Boolean invalido = false;
+
+        if(listaTipoDoc.getValue() != null && campoNroDoc.getText() != null){
+            switch ((TipoDoc)listaTipoDoc.getValue()) {
+                case DNI:
+                    labelErrorTipoDoc.setVisible(false);
+                    if(campoNroDoc.getText().isEmpty()){
+                        invalido = true;
+                        labelErrorNroDoc.setVisible(true);
+                    }else if (!campoNroDoc.getText().matches("^\\d{8}$")){
+                        invalido = true;
+                        labelErrorNroDoc.setText("*Formato: 99999999*");
+                        labelErrorNroDoc.setVisible(true);
+                        campoNroDoc.setText(null);
+                    }
+                break;
+                case PASAPORTE:
+                    labelErrorTipoDoc.setVisible(false);
+                    if(campoNroDoc.getText().isEmpty()){
+                        invalido = true;
+                        labelErrorNroDoc.setVisible(true);
+                    }else if (!campoNroDoc.getText().matches("^[a-zA-Z]{3}\\d{6}$")){
+                        invalido = true;
+                        labelErrorNroDoc.setText("*Formato: AAA999999*");
+                        labelErrorNroDoc.setVisible(true);
+                        campoNroDoc.setText(null);
+                    }
+                break;
+                default:
+                    break;
+            }
+        }else if (campoNroDoc.getText() == null && listaTipoDoc.getValue() == null){
+            invalido = true;
+            labelErrorNroDoc.setVisible(true);
+            labelErrorTipoDoc.setVisible(true);
+        }else if (listaTipoDoc.getValue() == null){
+            invalido = true;
+            labelErrorTipoDoc.setVisible(true);
+            labelErrorNroDoc.setVisible(false);            
+        }else {
+            invalido = true;
+            labelErrorNroDoc.setVisible(true);
+            labelErrorTipoDoc.setVisible(false);
+        }
+
+        if(invalido == false){
+            labelErrorTipoDoc.setVisible(false);
+            labelErrorNroDoc.setVisible(false);
+        }
+        return invalido;
+    }
+
+    private boolean sexoInvalido() {
+        Boolean invalido = listaTipoSexo.getValue() == null;
+        if(invalido){
+            labelErrorSexo.setVisible(true);
+        }else{
+            labelErrorSexo.setVisible(false);
+        }
+        return invalido;
+    }
+
+    private boolean mailInvalido() {
+       Boolean invalido = false;
+        if (campoMail.getText() == null){
+            invalido = true;
+            labelErrorMail.setVisible(true);
+            campoMail.setText(null);
+        }else if(campoMail.getText().isEmpty()){
+            invalido = true;
+            labelErrorMail.setVisible(true);
+            campoMail.setText(null);
+        }else if(!campoMail.getText().matches("^[\\w.-]+@(gmail|hotmail)\\.com$")){
+                invalido = true;
+                labelErrorMail.setText("*ejemplo@gmail.com \r\n o ejemplo@hotmail.com*");
+                labelErrorMail.setVisible(true);
+                campoMail.setText(null);
+        }
+        if(invalido == false){
+            labelErrorMail.setVisible(false);
+        }
+       return invalido;
+    }
+
+    private boolean fechaNacimientoInvalido() {
+        Boolean invalido = campoFechaNacimiento.getValue() == null;
+        if(invalido){
+            labelErrorFechaNacimiento.setVisible(true);
+        }else if(campoFechaNacimiento.getValue().isAfter(LocalDate.now().minusYears(18))){
+            invalido = true;
+            labelErrorFechaNacimiento.setText("*El usuario debe\r\ntener más de 18 años.*");
+            labelErrorFechaNacimiento.setVisible(true);
+            campoFechaNacimiento.setValue(null);
+        }
+        if(invalido == false){
+            labelErrorFechaNacimiento.setVisible(false);
+        }
+        return invalido;
+    }
+
+    private boolean apellidoInvalido() {
+        Boolean invalido =  false;
+        if(campoApellido.getText() == null){
+            labelErrorApellido.setVisible(true);
+            campoApellido.setText(null);
+            invalido = true;
+        }else if(campoApellido.getText().matches("^\\s+$") || campoApellido.getText().isEmpty()){
+            labelErrorApellido.setVisible(true);
+            campoApellido.setText(null);
+            invalido = true;
+        }else if(campoApellido.getText().length()>32){
+            labelErrorApellido.setText("*Máximo 32 caracteres.*");
+            labelErrorApellido.setVisible(true);
+            campoApellido.setText(null);
+            invalido=true;
+        }
+        if(invalido == false){
+            labelErrorApellido.setVisible(false);
+        }
+        return invalido;
+    }
+
+    private boolean nombreInvalido() {
+        Boolean invalido = false;
+        if(campoNombre.getText() == null){
+            labelErrorNombre.setVisible(true);
+            campoNombre.setText(null);
+            invalido = true;
+        }else if(campoNombre.getText().matches("^\\s+$") || campoNombre.getText().isEmpty()){
+            labelErrorNombre.setVisible(true);
+            campoNombre.setText(null);
+            invalido = true;
+        }else if(campoNombre.getText().length()>32){
+            labelErrorNombre.setText("*Máximo 32 caracteres.*");
+            labelErrorNombre.setVisible(true);
+            campoNombre.setText(null);
+            invalido=true;
+        }
+        if(invalido == false){
+            labelErrorNombre.setVisible(false);
+        }
+        return invalido;
     }
     
     /* DEJO ESTO POR SI SE QUIERE INGRESAR LA FECHA MANUAL Y NO USAR EL ICONITO, IGUAL HAY Q VERLO Y VALIDAR PQ SI SE SALE
