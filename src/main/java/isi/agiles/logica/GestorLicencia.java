@@ -2,9 +2,7 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 
-import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.LicenciaDAO;
-import isi.agiles.dao.TitularDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
@@ -33,11 +31,46 @@ public class GestorLicencia {
     }
 
     public static Float getCostoLicencia(LicenciaDTO dto){
+        //TODO: Lo hace Fran.
         return 0F; //(!)
     }
 
-    public static void calcularVigenciaLicencia(LicenciaDTO dto){
+    public static void calcularVigenciaLicencia(LicenciaDTO dto)
+    throws ObjetoNoEncontradoException{
+        Titular titular = GestorTitular.getTitular(dto.getTitular());
+        Integer edadTitular = GestorTitular.getEdadTitular(titular);
+        Integer aniosVigencia;
 
+        if(edadTitular <= 20 /*Menores de 21*/){
+            if(titular.getLicencias().isEmpty()){
+                aniosVigencia = 1;
+            }else{
+                aniosVigencia = 3;
+            }
+        }else if(edadTitular <= 46){
+            aniosVigencia = 5;
+        }else if (edadTitular <= 60) {
+            aniosVigencia = 4;
+        }else if (edadTitular <= 70) {
+            aniosVigencia = 3;
+        }else{
+            aniosVigencia = 1;
+        }
+        
+        //posibleProxCumpleanios: Es la fecha de nacimiento del titular llevada al año actual.
+        LocalDate posibleProxCumpleanios = titular.getFechaNacimiento().withYear(LocalDate.now().getYear());
+        LocalDate vigenteHasta;
+
+        if(posibleProxCumpleanios.compareTo(LocalDate.now()) > 0){
+            //Si la fecha de cumpleaños ya pasó para este año, se cuenta desde el cumpleaños del año que viene
+            vigenteHasta = titular.getFechaNacimiento().withYear(LocalDate.now().getYear() + aniosVigencia + 1);
+        }else{
+            //Si la fecha de cumpleaños no pasó todavia para este año (o incluso es hoy), se cuenta desde el cumpleaños de este año
+            vigenteHasta = titular.getFechaNacimiento().withYear(LocalDate.now().getYear() + aniosVigencia);
+        }
+
+        dto.setInicioVigencia(LocalDate.now());
+        dto.setFinVigencia(vigenteHasta);
     }
 
     public static Licencia altaLicencia(LicenciaDTO dto)

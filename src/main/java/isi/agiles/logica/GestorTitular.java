@@ -33,8 +33,9 @@ public class GestorTitular {
         return edad.getYears();
     }
 
-    public static Integer getEdadTitular(TitularDTO dto){
-        return getEdad(dto.getFechaNacimiento());
+    public static Integer getEdadTitular(TitularDTO dto)
+    throws ObjetoNoEncontradoException{
+        return getEdadTitular(getTitular(dto));
     }
 
     public static Integer getEdadTitular(Titular titular){
