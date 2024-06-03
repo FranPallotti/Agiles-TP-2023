@@ -87,14 +87,20 @@ public class MenuPrincipalController {
 
     @FXML
     void accionDarAltaTitular(ActionEvent event) {
-
+        try {
+            Stage currentStage = (Stage) botonDarAltaTitular.getScene().getWindow();
+            App.cambiarVentana("DarAltaTitular.fxml", currentStage);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void accionDarAltaUsuario(ActionEvent event) {
         if(App.getUsuarioLogueado().getRol().equals(TipoRol.ADMINISTRADOR)){
             try{
-                Stage currentStage = (Stage) botonDarAltaTitular.getScene().getWindow();
+                Stage currentStage = (Stage) botonDarAltaUsuario.getScene().getWindow();
+                // Cami> cambie botonDarAltaTitular por botonDarAltaUsuario
                 App.cambiarVentana("AltaDeUsuario.fxml", currentStage);
             }catch(IOException e){
                 e.printStackTrace();
