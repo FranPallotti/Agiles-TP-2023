@@ -75,7 +75,6 @@ public class GestorLicencia {
 
     public static Licencia altaLicencia(LicenciaDTO dto)
     throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException{
-
         if(!GestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClase())){
             throw new NoCumpleCondicionesLicenciaException();
         }
@@ -86,5 +85,4 @@ public class GestorLicencia {
 
         return licencia;
     }
-
 }
