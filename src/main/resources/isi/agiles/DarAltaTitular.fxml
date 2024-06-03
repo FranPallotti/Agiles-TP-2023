@@ -118,7 +118,7 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="tipoObligatorio1" layoutX="689.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="donanteObligatorio" layoutX="689.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
