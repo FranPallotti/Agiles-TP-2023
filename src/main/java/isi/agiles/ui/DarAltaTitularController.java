@@ -10,6 +10,7 @@ import isi.agiles.App;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
+import isi.agiles.entidad.TipoSexo;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -90,6 +91,9 @@ public class DarAltaTitularController{
     private ComboBox<String> comboDonante;
 
     @FXML
+    private ComboBox<TipoSexo> sexo;
+
+    @FXML
     private Label tipoObligatorio;
 
     @FXML
@@ -115,6 +119,9 @@ public class DarAltaTitularController{
 
     @FXML
     private Label donanteObligatorio;
+
+    @FXML
+    private Label sexoObligatorio;
 
     @FXML
     private Button botonVolver;
@@ -144,28 +151,82 @@ public class DarAltaTitularController{
         Boolean datoInvalido = false;
         datoInvalido |= validarDocumento();
         datoInvalido |= validarNombreYapellido();
-        //datoInvalido |= validarNacimiento();
-        /*datoInvalido |= validarDireccion();
-        datoInvalido |= validarComboboxes();*/
+        datoInvalido |= validarNacimiento();
+        datoInvalido |= validarDireccion();
+        datoInvalido |= validarComboboxes();
         if (datoInvalido){
             throw new DatosInvalidosException("Advertencia: por favor, revise los campos ingresados y vuelva a intentarlo");
         }
     }
 
-     /*private Boolean validarNacimiento() {
+     private Boolean validarNacimiento() {
         Boolean esInvalido = false;
-        LocalDate date;
 
         if(dateFechaNacimiento.getValue() != null){
             fechaObligatorio.setVisible(false);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+           /* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if(dateFechaNacimiento.getValue().parse("yyyy-MM-dd")))
+            FALTA LA LOGICA SI SE INGRESA A MANO*/
+            if(dateFechaNacimiento.getValue().isAfter(LocalDate.now().minusYears(18))){
+                esInvalido=true;
+                fechaObligatorio.setText("El titular debe tener más de 18 años");
+                fechaObligatorio.setVisible(true);
+            } 
         } else {
+            fechaObligatorio.setText("*Campo Obligatorio*");
             fechaObligatorio.setVisible(true);
-            esInvalido=false;
+            esInvalido=true;
         }
         return esInvalido;
-    }*/
+    }
+
+    private Boolean validarComboboxes() {
+        Boolean esInvalido = false;
+        
+        if(comboDonante.getValue() == null){
+            esInvalido = true;
+            donanteObligatorio.setVisible(true);
+        } else {
+            donanteObligatorio.setVisible(false);
+        }
+        if(comboFactorRH.getValue() == null) {
+            esInvalido = true;
+            factorRHObligatorio.setVisible(true);
+        } else{
+            factorRHObligatorio.setVisible(false);
+        }
+        if(comboGrupoSanguineo.getValue() == null){
+            esInvalido = true;
+            gruposObligatorio.setVisible(true);
+        } else {
+            gruposObligatorio.setVisible(false);
+        }
+        if(sexo.getValue() == null){
+            esInvalido = true;
+            sexoObligatorio.setVisible(true);
+        } else {
+            sexoObligatorio.setVisible(false);
+        }
+
+        return esInvalido;
+    }
+
+    private Boolean validarDireccion() {
+        Boolean esInvalido = false;
+        if(!textDireccion.getText().isEmpty()){
+            dirObligatorio.setVisible(false);
+            if(textDireccion.getText().length()>64){
+                dirObligatorio.setText("Máximo 64 caracteres");
+                dirObligatorio.setVisible(true);
+                esInvalido = true;
+            }
+        } else {
+            dirObligatorio.setText("*Campo Obligatorio*");
+            dirObligatorio.setVisible(true);
+            esInvalido = true;
+        }
+        return esInvalido;
+    }
 
     private Boolean validarNombreYapellido() {
         Boolean esInvalido = false;
@@ -267,6 +328,7 @@ public class DarAltaTitularController{
         comboGrupoSanguineo.getItems().addAll(TipoGrupoS.values());
         comboFactorRH.getItems().addAll(TipoFactorRH.values());
         comboDonante.getItems().addAll("SI", "NO");
+        sexo.getItems().addAll(TipoSexo.values());
     }
 
     private void ocultarObligatorios() {
@@ -279,5 +341,6 @@ public class DarAltaTitularController{
         gruposObligatorio.setVisible(false);
         factorRHObligatorio.setVisible(false);
         donanteObligatorio.setVisible(false);
+        sexoObligatorio.setVisible(false);
     }
 }

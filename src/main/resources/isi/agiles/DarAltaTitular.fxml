@@ -35,8 +35,8 @@
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font></TextField>
-      <ComboBox fx:id="comboGrupoSanguineo" layoutX="145.0" layoutY="340.0" prefHeight="35.0" prefWidth="210.0" promptText="Grupo Sanguíneo" visibleRowCount="4" />
-      <ComboBox fx:id="comboFactorRH" layoutX="396.0" layoutY="340.0" prefHeight="35.0" prefWidth="210.0" promptText="Factor RH" visibleRowCount="4" />
+      <ComboBox fx:id="comboGrupoSanguineo" layoutX="145.0" layoutY="340.0" prefHeight="35.0" prefWidth="146.0" promptText="Grupo Sanguíneo" visibleRowCount="4" />
+      <ComboBox fx:id="comboFactorRH" layoutX="332.0" layoutY="340.0" prefHeight="35.0" prefWidth="146.0" promptText="Factor RH" visibleRowCount="4" />
       <Label fx:id="labelClaseSolicitada" layoutX="149.0" layoutY="414.0" text="Clases Solicitadas">
          <font>
             <Font name="Times New Roman Italic" size="24.0" />
@@ -69,7 +69,7 @@
          <font>
             <Font name="Times New Roman" size="18.0" />
          </font></CheckBox>
-      <ComboBox fx:id="comboDonante" layoutX="645.0" layoutY="340.0" prefHeight="35.0" prefWidth="210.0" promptText="Donante de Órganos" visibleRowCount="4" />
+      <ComboBox fx:id="comboDonante" layoutX="517.0" layoutY="340.0" prefHeight="35.0" prefWidth="146.0" promptText="Donante de Órganos" visibleRowCount="4" />
       <Button fx:id="botonVolver" layoutX="294.0" layoutY="633.0" mnemonicParsing="false" onAction="#accionVolver" prefHeight="39.0" prefWidth="203.0" text="Volver">
          <font>
             <Font name="Times New Roman" size="18.0" />
@@ -98,7 +98,7 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="fechaObligatorio" layoutX="253.0" layoutY="307.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="fechaObligatorio" alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="310.0" prefHeight="30.0" prefWidth="270.0" text="*Campo Obligatorio*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
@@ -108,17 +108,23 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="gruposObligatorio" layoutX="184.0" layoutY="374.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="gruposObligatorio" layoutX="150.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="factorRHObligatorio" layoutX="440.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="factorRHObligatorio" layoutX="338.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="donanteObligatorio" layoutX="689.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+      <Label fx:id="donanteObligatorio" layoutX="522.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="sexo" layoutX="707.0" layoutY="340.0" prefHeight="35.0" prefWidth="146.0" promptText="Sexo" visibleRowCount="4" />
+      <Label fx:id="sexoObligatorio" layoutX="712.0" layoutY="373.0" prefHeight="30.0" prefWidth="135.0" text="*Campo Obligatorio*" textFill="RED">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
