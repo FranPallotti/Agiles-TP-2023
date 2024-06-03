@@ -2,20 +2,53 @@ package isi.agiles.entidad;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Table
+//@Entity
 public class Titular {
     
-    private TipoDoc tipoDoc;
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_titular")*/
+    private Long idTitular;
+
+    //@Column(name="nro_doc", nullable = false)
     private String nroDoc;
+    
+    /*@Column(name="tipo_doc")
+    @Enumerated(EnumType.STRING)*/
+    private TipoDoc tipoDoc;
+   
+    //@Column(nullable = false)
     private String nombre;
+
+    //@Column(nullable = false)
     private String apellido;
+
+    //@Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fechaNacimiento;
+
+    //@Column(nullable = false)
     private String direccion;
+
+    //@Column(name = "clases_solicitadas") //nullable false? deberia aunq sea tener 1 clase solicitada para darlo de alta?
     private ArrayList<String> claseSol;
+
+    /*@Column(name = "grupo_sanguineo", nullable = false)
+    @Enumerated(EnumType.STRING)*/
     private TipoGrupoS grupoSanguineo;
+
+    /*@Column(name = "factor_rh", nullable = false)
+    @Enumerated(EnumType.STRING)*/
     private TipoFactorRH factorRH;
+
+    //@Column(name = "es_donante")
     private Boolean esDonante;
 
     public TipoDoc getTipoDoc() {

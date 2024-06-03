@@ -1,10 +1,13 @@
 package isi.agiles.ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.google.protobuf.DescriptorProtos.FieldDescriptorProto.Label;
-
+import isi.agiles.App;
+import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.TipoFactorRH;
+import isi.agiles.entidad.TipoGrupoS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,8 +19,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
-public class DarAltaTitularController implements Initializable{
+public class DarAltaTitularController{
     
     @FXML
     private AnchorPane frameDarAltaTitular;
@@ -26,7 +31,7 @@ public class DarAltaTitularController implements Initializable{
     private Text tituloDarAltaTitular;
 
     @FXML
-    private ComboBox<String> comboTipoDocumento;
+    private ComboBox<TipoDoc> comboTipoDocumento;
 
     @FXML
     private TextField nroDocumento;
@@ -44,10 +49,10 @@ public class DarAltaTitularController implements Initializable{
     private TextField textDireccion;
 
     @FXML
-    private ComboBox<String> comboGrupoSanguineo;
+    private ComboBox<TipoGrupoS> comboGrupoSanguineo;
 
     @FXML
-    private ComboBox<String> comboFactorRH;
+    private ComboBox<TipoFactorRH> comboFactorRH;
 
     @FXML
     private Label labelClaseSolicitada;
@@ -77,24 +82,74 @@ public class DarAltaTitularController implements Initializable{
     private ComboBox<String> comboDonante;
 
     @FXML
+    private Label tipoObligatorio;
+
+    @FXML
+    private Label numObligatorio;
+
+    @FXML
+    private Label nombreObligatorio;
+
+    @FXML
+    private Label apellidoObligatorio;
+
+    @FXML
+    private Label fechaObligatorio;
+
+    @FXML
+    private Label dirObligatorio;
+
+    @FXML
+    private Label gruposObligatorio;
+
+    @FXML
+    private Label factorRHObligatorio;
+
+    @FXML
+    private Label donanteObligatorio;
+
+    @FXML
     private Button botonVolver;
 
     @FXML
     private Button botonGuardar;
-    
+
 
     public void accionVolver(){
-
+        try{
+            Stage currentStage = (Stage) botonVolver.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void accionGuardar(){
 
     }
 
-   
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<String> tipoDoc = FXCollections.observableArrayList("DNI", "PASAPORTE");
-        comboTipoDocumento.setItems(tipoDoc);
+    @FXML
+    public void initialize() {
+        ocultarObligatorios();
+        inicializarDesplegables();
+    }
+
+    private void inicializarDesplegables() {
+        comboTipoDocumento.getItems().addAll(TipoDoc.values());
+        comboGrupoSanguineo.getItems().addAll(TipoGrupoS.values());
+        comboFactorRH.getItems().addAll(TipoFactorRH.values());
+        comboDonante.getItems().addAll("SI", "NO");
+    }
+
+    private void ocultarObligatorios() {
+        tipoObligatorio.setVisible(false);
+        numObligatorio.setVisible(false);
+        nombreObligatorio.setVisible(false);
+        apellidoObligatorio.setVisible(false);
+        fechaObligatorio.setVisible(false);
+        dirObligatorio.setVisible(false);
+        gruposObligatorio.setVisible(false);
+        factorRHObligatorio.setVisible(false);
+        donanteObligatorio.setVisible(false);
     }
 }
