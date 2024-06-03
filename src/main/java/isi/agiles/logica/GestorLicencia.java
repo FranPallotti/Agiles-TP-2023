@@ -3,6 +3,7 @@ package isi.agiles.logica;
 import java.time.LocalDate;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
+import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dao.TitularDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
@@ -41,11 +42,14 @@ public class GestorLicencia {
 
     public static Licencia altaLicencia(LicenciaDTO dto)
     throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException{
-        if(!GestorTitular.puedeTenerLicencia(dto.getTitular(), dto.getClase())){
+
+        if(!GestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClase())){
             throw new NoCumpleCondicionesLicenciaException();
         }
-        Licencia licencia = crearLicencia(dto);
 
+        Licencia licencia = crearLicencia(dto);
+        LicenciaDAO dao = new LicenciaDAO();
+        dao.saveInstance(licencia);
 
         return licencia;
     }
