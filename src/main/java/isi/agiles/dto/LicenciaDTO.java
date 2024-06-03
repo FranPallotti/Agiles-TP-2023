@@ -2,6 +2,8 @@ package isi.agiles.dto;
 
 import java.time.LocalDate;
 
+import isi.agiles.entidad.EstadoLicencia;
+
 public class LicenciaDTO {
 
     private ClaseLicenciaDTO clase;
@@ -9,9 +11,16 @@ public class LicenciaDTO {
     private TitularDTO titular;
     private LocalDate inicioVigencia;
     private LocalDate finVigencia;
-
+    private EstadoLicencia estado;
+    private Float costo;
     /*Getters y setters */
     
+    public EstadoLicencia getEstado() {
+        return estado;
+    }
+    public void setEstado(EstadoLicencia estado) {
+        this.estado = estado;
+    }
     public ClaseLicenciaDTO getClase() {
         return clase;
     }
@@ -41,6 +50,12 @@ public class LicenciaDTO {
     }
     public void setFinVigencia(LocalDate finVigencia) {
         this.finVigencia = finVigencia;
-    }  
+    }
+    public Float getCosto() {
+        return costo;
+    }
+    public void setCosto(Float costo) {
+        this.costo = costo;
+    }
     
 }

@@ -3,6 +3,7 @@ package isi.agiles.dto;
 import java.time.LocalDate;
 
 public class TitularDTO {
+    private Long idTitular;
     private String nombre;
     private String apellido;
     private String documento;
@@ -31,6 +32,12 @@ public class TitularDTO {
     }
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+    public Long getIdTitular() {
+        return idTitular;
+    }
+    public void setIdTitular(Long idTitular) {
+        this.idTitular = idTitular;
     }
 
     

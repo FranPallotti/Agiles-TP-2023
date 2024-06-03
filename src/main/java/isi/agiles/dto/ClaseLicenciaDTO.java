@@ -1,12 +1,10 @@
 package isi.agiles.dto;
 
-import java.util.List;
-
+//TODO: Rever que campos son realmente necesarios
 public class ClaseLicenciaDTO {
     private Character clase;
     private Integer edadMinima;
-    private Integer esProfesional;
-    private List<Character> incluye;
+    private Boolean esProfesional;
 
     public Character getClase() {
         return clase;
@@ -20,17 +18,11 @@ public class ClaseLicenciaDTO {
     public void setEdadMinima(Integer edadMinima) {
         this.edadMinima = edadMinima;
     }
-    public Integer getEsProfesional() {
+    public Boolean getEsProfesional() {
         return esProfesional;
     }
-    public void setEsProfesional(Integer esProfesional) {
+    public void setEsProfesional(Boolean esProfesional) {
         this.esProfesional = esProfesional;
-    }
-    public List<Character> getIncluye() {
-        return incluye;
-    }
-    public void setIncluye(List<Character> incluye) {
-        this.incluye = incluye;
     }
     
 }
