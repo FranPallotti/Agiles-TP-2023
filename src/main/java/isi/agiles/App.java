@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -62,5 +63,15 @@ public class App extends Application {
 
     public static Usuario getUsuarioLogueado(){
         return usuarioLogueado;
+    }
+    public static void cambiarVentana(String fxml, Stage ventActual) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
+        ventActual.close();
+        stage.show();
     }
 }

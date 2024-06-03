@@ -1,5 +1,7 @@
 package isi.agiles.ui;
 
+import java.io.IOException;
+
 import isi.agiles.App;
 import isi.agiles.entidad.TipoRol;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 public class MenuPrincipalController {
     @FXML
@@ -96,7 +99,14 @@ public class MenuPrincipalController {
 
     @FXML
     void accionEmitirLicencia(ActionEvent event) {
-
+        try{
+            Stage currentStage = (Stage) botonEmitirLicencia.getScene().getWindow();
+            App.cambiarVentana("BuscarTitular.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
     }
 
     @FXML
