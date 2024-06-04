@@ -27,7 +27,8 @@ public class Titular {
     @Column(name = "id_titular")
     private Long idTitular;
 
-    @Column(name = "fecha_nacimiento", nullable = false)
+    
+    @Column(name = "fecha_nacimiento", nullable = true)
     private LocalDate fechaNacimiento;
 
     @NaturalId
@@ -45,21 +46,22 @@ public class Titular {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
+    
+    @Column(nullable = true)
     private String direccion;
 
     @Column(name = "clases_solicitadas") //nullable false? deberia aunq sea tener 1 clase solicitada para darlo de alta?
     private List<String> claseSol;
-
-    @Column(name = "grupo_sanguineo", nullable = false)
+    
+    @Column(name = "grupo_sanguineo", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoGrupoS grupoSanguineo;
-
-    @Column(name = "factor_rh", nullable = false)
+    
+    @Column(name = "factor_rh", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoFactorRH factorRH;
-
-    @Column(name = "es_donante", nullable = false)
+    
+    @Column(name = "es_donante", nullable = true)
     private Boolean esDonante;
 
     /*Asocaciones */

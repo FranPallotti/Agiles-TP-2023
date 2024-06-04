@@ -29,7 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class BuscarTitularController implements Initializable{
-    private List<TitularDTO> titulares = new ArrayList<>();
+    private List<TitularDTO> titulares = new ArrayList<TitularDTO>();
 
     @FXML
     private TableColumn<TitularDTO,String> apellidosColumn;
@@ -99,14 +99,21 @@ public class BuscarTitularController implements Initializable{
     }
     public TitularDTO getTitularDTO(){
         TitularDTO dto = new TitularDTO();
-        dto.setDocumento(this.nroDoc.getText());
+        dto.setNroDoc(this.nroDoc.getText());
         dto.setTipoDoc(this.tipoDoc.getValue());
         return dto;
 
     }
     public void buscarCliqueado(){
-        titulares = GestorTitular.buscarTitularDTO(this.getTitularDTO());
+    try{
+        titulares.add(GestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getNroDoc(), this.getTitularDTO().getTipoDoc()));
+
         this.actualizarTabla();
+    }
+    catch(ObjetoNoEncontradoException e){
+        e.printStackTrace();
+    }
+       
     }
 
     public void poblarTipoDoc() {
