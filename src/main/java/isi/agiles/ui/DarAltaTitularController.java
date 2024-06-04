@@ -1,21 +1,20 @@
 package isi.agiles.ui;
 
 import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import isi.agiles.App;
+import isi.agiles.dto.TitularDTO;
+import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -129,6 +128,8 @@ public class DarAltaTitularController{
     @FXML
     private Button botonGuardar;
 
+    private EntityManager entityManager;
+
 
     public void accionVolver(){
         try{
@@ -140,11 +141,61 @@ public class DarAltaTitularController{
     }
 
     public void accionGuardar(){
+        GestorTitular gestorTitular = new GestorTitular(entityManager);
         try {
             validarDatos();
+            TitularDTO titular = crearTitularDTO();
+            gestorTitular.persistir(titular);
+            informacionClienteGuardado();
         } catch (Exception e) {
             errorDatosInvalidos(e.getMessage());
         }
+    }
+
+    private TitularDTO crearTitularDTO() {
+        TitularDTO titularDTO = new TitularDTO();
+        titularDTO.setNombre(textNombre.getText());
+        titularDTO.setApellido(textApellido.getText());
+        titularDTO.setClaseSol(generarListaClases());
+        titularDTO.setDireccion(textDireccion.getText());
+        titularDTO.setDocumento(nroDocumento.getText());
+        Boolean esDonante = false;
+        if(comboDonante.getValue() == "SI"){
+            esDonante = true;}
+        titularDTO.setEsDonante(esDonante);
+        titularDTO.setFactorRH(comboFactorRH.getValue());
+        titularDTO.setFechaNacimiento(dateFechaNacimiento.getValue());
+        titularDTO.setGrupoSanguineo(comboGrupoSanguineo.getValue());
+        titularDTO.setTipoDoc(comboTipoDocumento.getValue());
+        titularDTO.setSexo(sexo.getValue());
+    
+        return titularDTO;
+    }
+
+    private ArrayList<TipoClasesLicencia> generarListaClases() {
+        ArrayList<TipoClasesLicencia> claseSolicitadas = new ArrayList<>();
+        if(choiceClaseA.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.A);
+        }
+        if(choiceClaseB.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.B);
+        }
+        if(choiceClaseC.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.C);
+        }
+        if(choiceClaseD.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.D);
+        }
+        if(choiceClaseE.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.E);
+        }
+        if(choiceClaseF.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.F);
+        }
+        if(choiceClaseG.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.G);
+        }
+        return claseSolicitadas;
     }
 
     private void validarDatos() throws DatosInvalidosException {
@@ -308,6 +359,18 @@ public class DarAltaTitularController{
     private void errorDatosInvalidos(String message) {
         Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
         alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
+
+    private void informacionClienteGuardado() {
+        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El titular ha sido dado de alta.", ButtonType.OK);
+        alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
