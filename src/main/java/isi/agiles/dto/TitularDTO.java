@@ -2,12 +2,15 @@ package isi.agiles.dto;
 
 import java.time.LocalDate;
 
+import isi.agiles.entidad.TipoDoc;
+
 public class TitularDTO {
     private Long idTitular;
     private String nombre;
     private String apellido;
     private String documento;
     private LocalDate fechaNacimiento;
+    private TipoDoc tipoDoc;
     
     public String getNombre() {
         return nombre;
@@ -38,6 +41,12 @@ public class TitularDTO {
     }
     public void setIdTitular(Long idTitular) {
         this.idTitular = idTitular;
+    }
+    public void setTipoDoc(TipoDoc tipoDoc) {
+        this.tipoDoc = tipoDoc;
+    }
+    public TipoDoc getTipoDoc() {
+        return tipoDoc;
     }
 
     

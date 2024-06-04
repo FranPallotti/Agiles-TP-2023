@@ -111,4 +111,8 @@ public class GestorTitular {
     throws ObjetoNoEncontradoException{
         return puedeTenerLicencia(getTitular(titularDto), GestorClaseLicencia.getClaseLicencia(claseLicDto));
     }
+    ///sacar
+    public static ArrayList<TitularDTO> buscarTitularDTO(TitularDTO t){
+        return new ArrayList<TitularDTO>();
+    } 
 }

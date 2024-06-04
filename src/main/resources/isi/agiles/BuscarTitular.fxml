@@ -14,7 +14,7 @@
    <children>
       <ComboBox fx:id="tipoDoc" layoutX="49.0" layoutY="134.0" prefWidth="150.0" promptText="Tipo Documento" />
       <TextField fx:id="nroDoc" layoutX="241.0" layoutY="134.0" promptText="Ingrese Documento" />
-      <Button fx:id="buscarButton" layoutX="903.0" layoutY="134.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="botonBuscar" layoutX="903.0" layoutY="134.0" mnemonicParsing="false" onAction="#buscarCliqueado" text="Buscar" />
       <Label layoutX="49.0" layoutY="35.0" prefHeight="73.0" prefWidth="532.0" text="Buscar Titular">
          <font>
             <Font name="Times New Roman" size="50.0" />
@@ -28,7 +28,7 @@
             <TableColumn fx:id="numDocColumn" prefWidth="346.0" text="Numero de Documento" />
         </columns>
       </TableView>
-      <Button fx:id="confirmarButton" layoutX="885.0" layoutY="658.0" mnemonicParsing="false" text="Confirmar" />
-      <Button fx:id="volverAtrasButton" layoutX="782.0" layoutY="658.0" mnemonicParsing="false" text="Volver Atras" />
+      <Button fx:id="botonConfirmar" layoutX="885.0" layoutY="658.0" mnemonicParsing="false" onAction="#confirmarCliqueado" text="Confirmar" />
+      <Button fx:id="botonVolverAtras" layoutX="782.0" layoutY="658.0" mnemonicParsing="false" onAction="#handleExit" text="Volver Atras" />
    </children>
 </AnchorPane>
