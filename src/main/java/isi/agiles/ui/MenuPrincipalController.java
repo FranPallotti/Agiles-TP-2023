@@ -114,7 +114,7 @@ public class MenuPrincipalController {
     void accionEmitirLicencia(ActionEvent event) {
         try{
             Stage currentStage = (Stage) botonEmitirLicencia.getScene().getWindow();
-            App.cambiarVentana("BuscarTitular.fxml", currentStage);
+            App.cambiarVentana("EmitirLicencia.fxml", currentStage);
         }
         catch(IOException e){
             e.printStackTrace();

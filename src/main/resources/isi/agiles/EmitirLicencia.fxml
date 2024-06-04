@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.EmitirLicenciaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.EmitirLicenciaController">
    <children>
-      <Button fx:id="botonVolverAtras" layoutX="751.0" layoutY="652.0" mnemonicParsing="false" onAction="#volverAtrasCliqueado" text="Volver Atras" />
+      <ComboBox fx:id="tipoDoc" layoutX="50.0" layoutY="134.0" prefWidth="150.0" promptText="Tipo Documento" />
+      <TextField fx:id="nroDoc" layoutX="224.0" layoutY="134.0" promptText="Ingrese Documento" />
+      <Button fx:id="botonBuscar" layoutX="393.0" layoutY="134.0" mnemonicParsing="false" onAction="#buscarCliqueado" text="Buscar" />
+      <Label layoutX="49.0" layoutY="35.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia">
+         <font>
+            <Font name="Times New Roman" size="50.0" />
+         </font>
+      </Label>
+      <Button fx:id="botonEmitir" layoutX="726.0" layoutY="658.0" mnemonicParsing="false" onAction="#emitirCliqueado" text="Emitir" />
+      <Button fx:id="botonVolverAtras" layoutX="620.0" layoutY="658.0" mnemonicParsing="false" onAction="#handleExit" text="Volver Atras" />
+      <TextField fx:id="campoNombre" editable="false" layoutX="49.0" layoutY="278.0" />
+      <TextField fx:id="campoApellido" editable="false" layoutX="224.0" layoutY="278.0" />
+      <Label layoutX="49.0" layoutY="250.0" text="Nombre">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="250.0" text="Apellido">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="393.0" layoutY="250.0" text="Fecha de Nacimiento">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="campoTipoLicencia" layoutX="566.0" layoutY="278.0" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="566.0" layoutY="250.0" text="Tipo de Licencia Pedida">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoFecha" editable="false" layoutX="393.0" layoutY="278.0" />
+      <TextArea fx:id="campoObservaciones" layoutX="47.0" layoutY="377.0" prefHeight="200.0" prefWidth="736.0" />
+      <Label layoutX="47.0" layoutY="213.0" text="Beneficiario">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="343.0" text="Observaciones">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorFormatoObservaciones" layoutX="47.0" layoutY="589.0" prefHeight="35.0" prefWidth="433.0" text="El campo no cumple con el formato requerido" textFill="RED" visible="false" wrapText="true" />
+      <Label fx:id="errorFaltaClaseLicencia" layoutX="567.0" layoutY="177.0" prefHeight="73.0" prefWidth="318.0" text="Seleccione una clase de licencia" textFill="RED" visible="false" wrapText="true" />
    </children>
 </AnchorPane>
