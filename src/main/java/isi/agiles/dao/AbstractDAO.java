@@ -14,10 +14,6 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 	private Class<T> clase;
 	
 
-	public AbstractDAO(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
-
 	@Override
 	public Optional<T> getById(long id) {
 		return Optional.ofNullable(entityManager.find(clase, id)); //ver de cambiar por elsethrow

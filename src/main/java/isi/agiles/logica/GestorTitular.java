@@ -14,7 +14,7 @@ public class GestorTitular {
     private TitularDAO titularDao;
 
     public GestorTitular(EntityManager entityManager){
-        titularDao = new TitularDAO(entityManager);
+        titularDao = new TitularDAO();
     }
 
     private Integer getEdad(LocalDate fechaNacimiento){
