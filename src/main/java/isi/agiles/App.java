@@ -85,7 +85,7 @@ public class App extends Application {
         stage.show();
     }
     public static void poblar(){
-        
+        /*
         TitularDAO t = new TitularDAO();
             Titular titular1= new Titular();
             titular1.setApellido("Pallotti");
@@ -102,7 +102,7 @@ public class App extends Application {
             titular2.setNroDoc("42925454");
 
            t.saveInstance(titular2);
-
+        */
 
            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
            ClaseLicencia a= new ClaseLicencia();

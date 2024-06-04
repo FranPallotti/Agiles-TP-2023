@@ -12,6 +12,7 @@ import isi.agiles.App;
 import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
+import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Titular;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
@@ -113,15 +114,10 @@ public class EmitirLicenciaController implements Initializable{
         campoApellido.setText("");
         campoFecha.setText("");
         campoNombre.setText("");
-        ObservableList<ClaseLicenciaDTO> opClaseLicencia = FXCollections.observableArrayList(GestorClaseLicencia.getAllDTOs());
         
-        try{
-            
-            campoClaseLicencia.getItems().addAll(opClaseLicencia);
-        }
-        catch(Exception e ){
-            System.out.println("ACA no se que pasa");
-        }
+        campoClaseLicencia.setItems(FXCollections.observableArrayList(GestorClaseLicencia.getAllDTOs()));
+       // campoClaseLicencia.getItems().addAll(opClaseLicencia);
+        
         
 
         
@@ -178,6 +174,9 @@ public class EmitirLicenciaController implements Initializable{
     public void poblarTipoDoc() {
         tipoDoc.setItems(FXCollections.observableArrayList(TipoDoc.values()));
     }
+    private void poblarTipoLicencia(){
+        //campoClaseLicencia.setItems(FXCollections.observableArrayList(TipoClasesLicencia.values()));
+    }
    
     @FXML
     private void emitirCliqueado(ActionEvent event) throws IOException{
@@ -185,7 +184,8 @@ public class EmitirLicenciaController implements Initializable{
               
 
         if(validarDatos()){
-            LicenciaDTO l = getLicenciaDTO(titular, campoObservaciones.getText(), campoClaseLicencia.getValue());
+            //campoClaseLicencia.getValue()
+            LicenciaDTO l = getLicenciaDTO(titular, campoObservaciones.getText(), campoClaseLicencia.getSelectionModel().getSelectedItem());
         
 
             try{
@@ -219,6 +219,7 @@ public class EmitirLicenciaController implements Initializable{
         @Override
         public void initialize(URL location, ResourceBundle resources) {
             poblarTipoDoc();
+            //poblarTipoLicencia();
 
             try{
 
@@ -257,6 +258,7 @@ public class EmitirLicenciaController implements Initializable{
         private void setErroresFalse() {
             errorFormatoObservaciones.setVisible(false);
             errorFaltaClaseLicencia.setVisible(false);
+            errorFaltaTitular.setVisible(false);
             
         }
 
@@ -280,18 +282,6 @@ public class EmitirLicenciaController implements Initializable{
             else{
                 errorFaltaTitular.setVisible(true);
             }
-
-            //Compruebo que haya un titular
-
-            //compruebo que el campo observaciones sea valido
-
-
-
-            //compruebo que haya una licencia
-
-            
-
-
 
             return datosValidos;
         }

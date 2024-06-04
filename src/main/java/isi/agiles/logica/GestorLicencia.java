@@ -30,9 +30,9 @@ public class GestorLicencia {
         return licencia;
     }
 
-    public static Float getCostoLicencia(LicenciaDTO dto){
+    public static float getCostoLicencia(LicenciaDTO dto){
         //TODO: Lo hace Fran.
-        return 0F; //(!)
+        return (float)10.0; //(!)
     }
 
     public static void calcularVigenciaLicencia(LicenciaDTO dto)
