@@ -26,5 +26,6 @@ public class Poblador {
             //titular2.setNroDoc("42925454");
 
             t.saveInstance(titular2);
+
     }
 }

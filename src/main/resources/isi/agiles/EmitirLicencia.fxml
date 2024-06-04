@@ -57,5 +57,6 @@
       </Label>
       <Label fx:id="errorFormatoObservaciones" layoutX="47.0" layoutY="589.0" prefHeight="35.0" prefWidth="433.0" text="El campo no cumple con el formato requerido" textFill="RED" visible="false" wrapText="true" />
       <Label fx:id="errorFaltaClaseLicencia" layoutX="567.0" layoutY="177.0" prefHeight="73.0" prefWidth="318.0" text="Seleccione una clase de licencia" textFill="RED" visible="false" wrapText="true" />
+      <Label fx:id="errorFaltaTitular" layoutX="50.0" layoutY="168.0" prefHeight="35.0" prefWidth="325.0" text="Falta Ingresar un Titular" textFill="RED" visible="false" wrapText="true" />
    </children>
 </AnchorPane>

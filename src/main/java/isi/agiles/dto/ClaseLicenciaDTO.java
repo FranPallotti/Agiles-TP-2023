@@ -27,7 +27,7 @@ public class ClaseLicenciaDTO {
     @Override
     public String toString() {
         
-        return this.clase;
+        return Character.toString(this.clase);
     }
     
 }

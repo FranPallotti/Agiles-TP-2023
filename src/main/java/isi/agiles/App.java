@@ -13,7 +13,9 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 
+import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
+import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
@@ -100,6 +102,15 @@ public class App extends Application {
             titular2.setNroDoc("42925454");
 
            t.saveInstance(titular2);
+
+
+           ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('A');
+           a.setDescripcion("Licencia de clase A");
+           a.setEdadMinima(18);
+           a.setEsProfesional(false);
+           d.saveInstance(a);
     
         }
     
