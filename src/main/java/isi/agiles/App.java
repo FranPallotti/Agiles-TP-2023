@@ -42,13 +42,16 @@ public class App extends Application {
         usuario.setNmoDoc("22103847");
         usuario.setSexo(TipoSexo.MASCULINO);
         usuario.setNombreUsuario("JPerez");
-        usuario.setRol(TipoRol.OPERADOR);
+        usuario.setRol(TipoRol.ADMINISTRADOR);
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
+        Image icono =  new Image("isi/agiles/logoStaFe.png");
         scene = new Scene(loadFXML("MenuPrincipal"));
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(icono);
         stage.show();
     }
 

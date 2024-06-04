@@ -69,6 +69,7 @@ public class MenuPrincipalController {
                 .filter(node -> node instanceof Label)
                 .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
         alert.showAndWait();
     }
 
@@ -80,18 +81,30 @@ public class MenuPrincipalController {
                 .filter(node -> node instanceof Label)
                 .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
         alert.showAndWait();
     }
 
     @FXML
     void accionDarAltaTitular(ActionEvent event) {
-        
+        try {
+            Stage currentStage = (Stage) botonDarAltaTitular.getScene().getWindow();
+            App.cambiarVentana("DarAltaTitular.fxml", currentStage);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void accionDarAltaUsuario(ActionEvent event) {
         if(App.getUsuarioLogueado().getRol().equals(TipoRol.ADMINISTRADOR)){
-            
+            try{
+                Stage currentStage = (Stage) botonDarAltaUsuario.getScene().getWindow();
+                // Cami> cambie botonDarAltaTitular por botonDarAltaUsuario
+                App.cambiarVentana("AltaDeUsuario.fxml", currentStage);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }else{
             errorCredencialesIncorrectas();
         }
@@ -153,18 +166,3 @@ public class MenuPrincipalController {
     }
 
 }
-
-/*  PARA PASAR ENTRE PANTALLAS  
-		AltaPolizaInicioController controller = new AltaPolizaInicioController();
-		
-		FXMLLoader loader = new FXMLLoader();
-		
-		loader.setController(controller);
-		
-		loader.setLocation(getClass().getResource("../altapoliza/AltaPolizaInicio.fxml"));
-		
-		AnchorPane altaPoliza = loader.load();
-		
-		controller.setActual(altaPoliza);
-		
-		App.switchScreenTo(altaPoliza); */

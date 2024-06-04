@@ -10,7 +10,7 @@ import isi.agiles.util.*;
 
 public abstract class AbstractDAO<T> implements DAO<T> {
 
-	private EntityManager entityManager = EntityManagerUtil.getEntityManager();
+	protected EntityManager entityManager = EntityManagerUtil.getEntityManager();
 	private Class<T> clase;
 	
 	@Override
