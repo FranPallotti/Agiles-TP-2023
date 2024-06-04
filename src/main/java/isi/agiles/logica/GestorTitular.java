@@ -54,6 +54,23 @@ public class GestorTitular {
         return getEdad(dto.getFechaNacimiento());
     }
 
+    public void persistir(TitularDTO titular) {
+        Titular entidad = new Titular();
+        entidad.setApellido(titular.getApellido());
+        entidad.setClaseSol(titular.getClaseSol());
+        entidad.setDireccion(titular.getDireccion());
+        entidad.setEsDonante(titular.getEsDonante());
+        entidad.setFactorRH(titular.getFactorRH());
+        entidad.setFechaNacimiento(titular.getFechaNacimiento());
+        entidad.setSexo(titular.getSexo());
+        entidad.setGrupoSanguineo(titular.getGrupoSanguineo());
+        entidad.setNombre(titular.getNombre());
+        entidad.setNroDoc(titular.getDocumento());
+        entidad.setTipoDoc(titular.getTipoDoc());
+        TitularDAO t = new TitularDAO();
+        t.saveInstance(entidad);
+    }
+
     public static Integer getEdadTitular(Titular titular){
         return getEdad(titular.getFechaNacimiento());
     }

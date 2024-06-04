@@ -40,8 +40,10 @@ public class Titular {
     private TipoDoc tipoDoc;
    
     @Column(nullable = false)
+    @Column(nullable = false)
     private String nombre;
 
+    @Column(nullable = false)
     @Column(nullable = false)
     private String apellido;
 
