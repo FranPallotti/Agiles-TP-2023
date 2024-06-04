@@ -220,6 +220,24 @@ public class EmitirLicenciaController implements Initializable{
             
         }
 
+        public Boolean validarDatos(){
+            boolean datosValidos=true;
+            
+
+            //Compruebo que haya un titular
+
+            //compruebo que el campo observaciones sea valido
+
+
+
+            //compruebo que haya una licencia
+
+            
+
+
+
+            return datosValidos;
+        }
 
 
 
