@@ -155,7 +155,7 @@ public class EmitirLicenciaController implements Initializable{
     }
     public TitularDTO getTitularDTO(){
         TitularDTO dto = new TitularDTO();
-        dto.setNroDoc(this.nroDoc.getText());
+        dto.setDocumento(this.nroDoc.getText());
         dto.setTipoDoc(this.tipoDoc.getValue());
         return dto;
 
@@ -164,7 +164,7 @@ public class EmitirLicenciaController implements Initializable{
     public void buscarCliqueado(){
         
     try{
-        titular=GestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getNroDoc(), this.getTitularDTO().getTipoDoc());
+        titular=GestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getDocumento(), this.getTitularDTO().getTipoDoc());
 
         this.actualizarTabla();
     }

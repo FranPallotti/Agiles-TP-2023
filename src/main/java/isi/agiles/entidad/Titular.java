@@ -39,20 +39,23 @@ public class Titular {
     @Enumerated(EnumType.STRING)
     private TipoDoc tipoDoc;
    
-    @Column(nullable = false)
+    
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
+    
     @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false)
+    private TipoSexo sexo;
 
     
     @Column(nullable = true)
     private String direccion;
 
     @Column(name = "clases_solicitadas") //nullable false? deberia aunq sea tener 1 clase solicitada para darlo de alta?
-    private List<String> claseSol;
+    private List<TipoClasesLicencia> claseSol;
     
     @Column(name = "grupo_sanguineo", nullable = true)
     @Enumerated(EnumType.STRING)
@@ -142,12 +145,12 @@ public class Titular {
     }
 
 
-    public List<String> getClaseSol() {
+    public List<TipoClasesLicencia> getClaseSol() {
         return claseSol;
     }
 
 
-    public void setClaseSol(List<String> claseSol) {
+    public void setClaseSol(List<TipoClasesLicencia> claseSol) {
         this.claseSol = claseSol;
     }
 
@@ -190,5 +193,16 @@ public class Titular {
     public void setLicencias(List<Licencia> licencias) {
         this.licencias = licencias;
     }
+
+
+    public TipoSexo getSexo() {
+        return sexo;
+    }
+
+
+    public void setSexo(TipoSexo sexo) {
+        this.sexo = sexo;
+    }
+    
 
 }

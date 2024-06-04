@@ -18,7 +18,7 @@ public class GestorTitular {
         dto.setIdTitular(titular.getIdTitular());
         dto.setNombre(titular.getNombre());
         dto.setApellido(titular.getApellido());
-        dto.setNroDoc(titular.getNroDoc());
+        dto.setDocumento(titular.getNroDoc());
         dto.setTipoDoc(titular.getTipoDoc());
         dto.setFechaNacimiento(titular.getFechaNacimiento());
         return dto;
@@ -54,7 +54,7 @@ public class GestorTitular {
         return getEdad(dto.getFechaNacimiento());
     }
 
-    public void persistir(TitularDTO titular) {
+    public static void persistir(TitularDTO titular) {
         Titular entidad = new Titular();
         entidad.setApellido(titular.getApellido());
         entidad.setClaseSol(titular.getClaseSol());

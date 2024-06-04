@@ -128,7 +128,7 @@ public class DarAltaTitularController{
     @FXML
     private Button botonGuardar;
 
-    private EntityManager entityManager;
+    
 
 
     public void accionVolver(){
@@ -141,11 +141,11 @@ public class DarAltaTitularController{
     }
 
     public void accionGuardar(){
-        GestorTitular gestorTitular = new GestorTitular(entityManager);
+        
         try {
             validarDatos();
             TitularDTO titular = crearTitularDTO();
-            gestorTitular.persistir(titular);
+            GestorTitular.persistir(titular);
             informacionClienteGuardado();
         } catch (Exception e) {
             errorDatosInvalidos(e.getMessage());

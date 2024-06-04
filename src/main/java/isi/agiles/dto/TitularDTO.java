@@ -16,7 +16,7 @@ public class TitularDTO {
     private String nroDoc;
     private TipoDoc tipoDoc;
     private LocalDate fechaNacimiento;
-    private TipoDoc tipoDoc;
+    
     private String direccion;
     private ArrayList<TipoClasesLicencia> claseSol;
     private TipoGrupoS grupoSanguineo;
@@ -43,15 +43,13 @@ public class TitularDTO {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public String getNroDoc() {
+    public String getDocumento() {
         return nroDoc;
     }
-    public void setNroDoc(String nroDoc) {
+    public void setDocumento(String nroDoc) {
         this.nroDoc = nroDoc;
     }
-    public TipoDoc getTipoDoc() {
-        return tipoDoc;
-    }
+    
     public void setTipoDoc(TipoDoc tipoDoc) {
         this.tipoDoc = tipoDoc;
     }
@@ -64,9 +62,7 @@ public class TitularDTO {
     public TipoDoc getTipoDoc() {
         return tipoDoc;
     }
-    public void setTipoDoc(TipoDoc tipoDoc) {
-        this.tipoDoc = tipoDoc;
-    }
+    
     public String getDireccion() {
         return direccion;
     }
@@ -97,6 +93,13 @@ public class TitularDTO {
     public void setEsDonante(Boolean esDonante) {
         this.esDonante = esDonante;
     }
+    public Long getIdTitular() {
+        return idTitular;
+    }
+    public void setIdTitular(Long idTitular) {
+        this.idTitular = idTitular;
+    }
+    
 
     
 }
