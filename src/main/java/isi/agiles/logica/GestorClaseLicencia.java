@@ -1,11 +1,29 @@
 package isi.agiles.logica;
 
+import java.util.List;
+
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorClaseLicencia {
+
+    public static List<ClaseLicenciaDTO> getAllDTOs()
+    throws ObjetoNoEncontradoException{
+        List<ClaseLicencia> clases = getAll();
+        return clases.stream().map(c -> getClaseLicenciaDTO(c)).toList();
+    }
+
+    public static List<ClaseLicencia> getAll()
+    throws ObjetoNoEncontradoException{
+        ClaseLicenciaDAO dao = new ClaseLicenciaDAO();
+        List<ClaseLicencia> clases = dao.getAll();
+        if(clases.isEmpty()){
+            throw new ObjetoNoEncontradoException();
+        }
+        return clases;
+    }
 
     public static ClaseLicenciaDTO getClaseLicenciaDTO(ClaseLicencia claseLic){
         ClaseLicenciaDTO dto = new ClaseLicenciaDTO();
