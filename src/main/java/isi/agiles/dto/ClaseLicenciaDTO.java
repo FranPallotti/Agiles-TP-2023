@@ -24,5 +24,10 @@ public class ClaseLicenciaDTO {
     public void setEsProfesional(Boolean esProfesional) {
         this.esProfesional = esProfesional;
     }
+    @Override
+    public String toString() {
+        
+        return this.clase;
+    }
     
 }
