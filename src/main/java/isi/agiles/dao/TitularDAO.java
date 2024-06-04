@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.hibernate.Session;
 
-import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Titular;
 
