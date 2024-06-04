@@ -13,10 +13,14 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorTitular {
 
-    //TODO: Esperar a que quien hace el CRUD de Titular complete la entidad Titular
     public static TitularDTO getTitularDTO(Titular titular){
         TitularDTO dto = new TitularDTO();
         dto.setIdTitular(titular.getIdTitular());
+        dto.setNombre(titular.getNombre());
+        dto.setApellido(titular.getApellido());
+        dto.setNroDoc(titular.getNroDoc());
+        dto.setTipoDoc(titular.getTipoDoc());
+        dto.setFechaNacimiento(titular.getFechaNacimiento());
         return dto;
     }
 
@@ -24,6 +28,18 @@ public class GestorTitular {
     throws ObjetoNoEncontradoException{
         TitularDAO dao = new TitularDAO();
         Titular titular = dao.getById(dto.getIdTitular()).orElseThrow(() -> new ObjetoNoEncontradoException());
+        return titular;
+    }
+
+    public static TitularDTO getTitularDTOByDocumento(String nroDoc, TipoDoc tipoDoc)
+    throws ObjetoNoEncontradoException{
+        return getTitularDTO(getTitularByDocumento(nroDoc, tipoDoc));
+    }
+
+    public static Titular getTitularByDocumento(String nroDoc, TipoDoc tipoDoc)
+    throws ObjetoNoEncontradoException{
+        TitularDAO dao = new TitularDAO();
+        Titular titular = dao.getByDocumento(nroDoc, tipoDoc).orElseThrow(() -> new ObjetoNoEncontradoException());
         return titular;
     }
     
@@ -35,7 +51,7 @@ public class GestorTitular {
 
     public static Integer getEdadTitular(TitularDTO dto)
     throws ObjetoNoEncontradoException{
-        return getEdadTitular(getTitular(dto));
+        return getEdad(dto.getFechaNacimiento());
     }
 
     public static Integer getEdadTitular(Titular titular){
