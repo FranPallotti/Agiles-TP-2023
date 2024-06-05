@@ -2,6 +2,8 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
@@ -10,79 +12,79 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorLicencia {
     
-    public static Licencia crearLicencia(LicenciaDTO dto)
+    @Autowired
+    private LicenciaDAO licenciaDao;
+    @Autowired
+    private GestorTitular gestorTitular;
+    @Autowired
+    private GestorClaseLicencia gestorClaseLic;
+
+    public Licencia getLicencia(LicenciaDTO dto)
+    throws ObjetoNoEncontradoException{
+        Licencia licencia = licenciaDao.getById(dto.getIdLicencia()).orElseThrow(()-> new ObjetoNoEncontradoException());
+        return licencia;
+    }
+
+    public LicenciaDTO getLicenciaDTO(Licencia licencia){
+        LicenciaDTO dto = new LicenciaDTO();
+        dto.setIdLicencia(licencia.getIdLicencia());
+        dto.setClase(gestorClaseLic.getClaseLicenciaDTO(licencia.getClaseLicencia()));
+        dto.setCosto(licencia.getCosto());
+        dto.setEstado(licencia.getEstado());
+        dto.setFinVigencia(licencia.getFinVigencia());
+        dto.setInicioVigencia(licencia.getInicioVigencia());
+        dto.setObservaciones(licencia.getObservaciones());
+        dto.setTitular(gestorTitular.getTitularDTO(licencia.getTitular()));
+        return dto;
+    }
+
+    public Licencia crearLicencia(LicenciaDTO dto)
     throws ObjetoNoEncontradoException{
         Licencia licencia = new Licencia();
-
         licencia.setObservaciones(dto.getObservaciones());
         licencia.setInicioVigencia(LocalDate.now());
         licencia.setFinVigencia(dto.getFinVigencia());
         licencia.setEstado(EstadoLicencia.VIGENTE);
         licencia.setCantDeCopias(0);
         licencia.setCosto(dto.getCosto());
-
         /*Asociaciones */
-        licencia.setClaseLicencia(GestorClaseLicencia.getClaseLicencia(dto.getClase()));
-        licencia.setTitular(GestorTitular.getTitular(dto.getTitular()));
-
+        licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClase()));
+        licencia.setTitular(gestorTitular.getTitular(dto.getTitular()));
         //TODO: Setear Usuario con el usuario que este logeado en la sesion
-
         return licencia;
     }
 
-    public static Float getCostoLicencia(LicenciaDTO dto){
+    public Float getCostoLicencia(LicenciaDTO dto){
         //TODO: Lo hace Fran.
         return 0F; //(!)
     }
 
-    public static void calcularVigenciaLicencia(LicenciaDTO dto)
+    public void calcularVigenciaLicencia(LicenciaDTO dto)
     throws ObjetoNoEncontradoException{
-        Titular titular = GestorTitular.getTitular(dto.getTitular());
-        Integer edadTitular = GestorTitular.getEdadTitular(titular);
-        Integer aniosVigencia;
-
-        if(edadTitular <= 20 /*Menores de 21*/){
-            if(titular.getLicencias().isEmpty()){
-                aniosVigencia = 1;
-            }else{
-                aniosVigencia = 3;
-            }
-        }else if(edadTitular <= 46){
-            aniosVigencia = 5;
-        }else if (edadTitular <= 60) {
-            aniosVigencia = 4;
-        }else if (edadTitular <= 70) {
-            aniosVigencia = 3;
-        }else{
-            aniosVigencia = 1;
-        }
-        
+        Titular titular = gestorTitular.getTitular(dto.getTitular());
+        Integer aniosVigencia = gestorTitular.aniosDeVigenciaLicencia(titular);
         //posibleProxCumpleanios: Es la fecha de nacimiento del titular llevada al año actual.
-        LocalDate posibleProxCumpleanios = titular.getFechaNacimiento().withYear(LocalDate.now().getYear());
+        LocalDate hoy = LocalDate.now();
+        LocalDate posibleProxCumpleanios = titular.getFechaNacimiento().withYear(hoy.getYear());
         LocalDate vigenteHasta;
-
-        if(posibleProxCumpleanios.compareTo(LocalDate.now()) > 0){
+        if(posibleProxCumpleanios.compareTo(hoy) > 0){
             //Si la fecha de cumpleaños ya pasó para este año, se cuenta desde el cumpleaños del año que viene
-            vigenteHasta = titular.getFechaNacimiento().withYear(LocalDate.now().getYear() + aniosVigencia + 1);
+            vigenteHasta = titular.getFechaNacimiento().withYear(hoy.getYear() + aniosVigencia + 1);
         }else{
             //Si la fecha de cumpleaños no pasó todavia para este año (o incluso es hoy), se cuenta desde el cumpleaños de este año
-            vigenteHasta = titular.getFechaNacimiento().withYear(LocalDate.now().getYear() + aniosVigencia);
+            vigenteHasta = titular.getFechaNacimiento().withYear(hoy.getYear() + aniosVigencia);
         }
-
         dto.setInicioVigencia(LocalDate.now());
         dto.setFinVigencia(vigenteHasta);
     }
 
-    public static Licencia altaLicencia(LicenciaDTO dto)
+    public Licencia altaLicencia(LicenciaDTO dto)
     throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException{
-        if(!GestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClase())){
+        if(!gestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClase())){
             throw new NoCumpleCondicionesLicenciaException();
         }
-
-        Licencia licencia = crearLicencia(dto);
-        LicenciaDAO dao = new LicenciaDAO();
-        dao.saveInstance(licencia);
-
+        Licencia licencia = this.crearLicencia(dto);
+        licenciaDao.saveInstance(licencia);
         return licencia;
     }
 }

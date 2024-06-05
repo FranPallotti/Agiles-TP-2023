@@ -6,6 +6,7 @@ import isi.agiles.entidad.EstadoLicencia;
 
 public class LicenciaDTO {
 
+    private Long idLicencia;
     private ClaseLicenciaDTO clase;
     private String observaciones;
     private TitularDTO titular;
@@ -13,8 +14,8 @@ public class LicenciaDTO {
     private LocalDate finVigencia;
     private EstadoLicencia estado;
     private Float costo;
-    /*Getters y setters */
     
+    /*Getters y setters */
     public EstadoLicencia getEstado() {
         return estado;
     }
@@ -56,6 +57,12 @@ public class LicenciaDTO {
     }
     public void setCosto(Float costo) {
         this.costo = costo;
+    }
+    public Long getIdLicencia() {
+        return idLicencia;
+    }
+    public void setIdLicencia(Long idLicencia) {
+        this.idLicencia = idLicencia;
     }
     
 }

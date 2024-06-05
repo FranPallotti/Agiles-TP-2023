@@ -2,9 +2,6 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.function.UnaryOperator;
 
 import isi.agiles.App;
 import isi.agiles.entidad.TipoDoc;
@@ -21,12 +18,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.LocalDateStringConverter;
 
 public class AltaDeUsuarioController{
 
