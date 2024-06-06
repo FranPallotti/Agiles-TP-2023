@@ -48,7 +48,7 @@ public class Titular {
     private String direccion;
 
     @Column(name = "clases_solicitadas") //nullable false? deberia aunq sea tener 1 clase solicitada para darlo de alta?
-    private List<String> claseSol;
+    private List<Character> claseSol;
 
     @Column(name = "grupo_sanguineo", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -135,11 +135,11 @@ public class Titular {
         this.direccion = direccion;
     }
 
-    public List<String> getClaseSol() {
+    public List<Character> getClaseSol() {
         return claseSol;
     }
 
-    public void setClaseSol(List<String> claseSol) {
+    public void setClaseSol(List<Character> claseSol) {
         this.claseSol = claseSol;
     }
 

@@ -159,9 +159,9 @@ public class DarAltaTitularController{
         TitularDTO titularDTO = new TitularDTO();
         titularDTO.setNombre(textNombre.getText());
         titularDTO.setApellido(textApellido.getText());
-        titularDTO.setClaseSol(generarListaClases());
+        //TODO: titularDTO.setClaseSol(generarListaClases());
         titularDTO.setDireccion(textDireccion.getText());
-        titularDTO.setDocumento(nroDocumento.getText());
+        titularDTO.setNroDoc(nroDocumento.getText());
         Boolean esDonante = false;
         if(comboDonante.getValue() == "SI"){
             esDonante = true;}
@@ -175,6 +175,7 @@ public class DarAltaTitularController{
         return titularDTO;
     }
 
+    //TODO: Hablar con quien hizo esta parte para charlarlo.
     private ArrayList<TipoClasesLicencia> generarListaClases() {
         ArrayList<TipoClasesLicencia> claseSolicitadas = new ArrayList<>();
         if(choiceClaseA.isSelected()){
