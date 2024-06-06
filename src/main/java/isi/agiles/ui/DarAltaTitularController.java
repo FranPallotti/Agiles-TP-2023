@@ -2,11 +2,21 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import isi.agiles.App;
+import isi.agiles.dto.TitularDTO;
+import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
+import isi.agiles.entidad.TipoSexo;
+import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
+import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
@@ -83,6 +93,9 @@ public class DarAltaTitularController{
     private ComboBox<String> comboDonante;
 
     @FXML
+    private ComboBox<TipoSexo> sexo;
+
+    @FXML
     private Label tipoObligatorio;
 
     @FXML
@@ -110,10 +123,16 @@ public class DarAltaTitularController{
     private Label donanteObligatorio;
 
     @FXML
+    private Label sexoObligatorio;
+
+    @FXML
     private Button botonVolver;
 
     @FXML
     private Button botonGuardar;
+
+    @Autowired
+    private GestorTitular gestorTitular;
 
 
     public void accionVolver(){
@@ -128,37 +147,140 @@ public class DarAltaTitularController{
     public void accionGuardar(){
         try {
             validarDatos();
+            TitularDTO titular = crearTitularDTO();
+            gestorTitular.persistir(titular);
+            informacionClienteGuardado();
         } catch (Exception e) {
             errorDatosInvalidos(e.getMessage());
         }
+    }
+
+    private TitularDTO crearTitularDTO() {
+        TitularDTO titularDTO = new TitularDTO();
+        titularDTO.setNombre(textNombre.getText());
+        titularDTO.setApellido(textApellido.getText());
+        titularDTO.setClaseSol(generarListaClases());
+        titularDTO.setDireccion(textDireccion.getText());
+        titularDTO.setDocumento(nroDocumento.getText());
+        Boolean esDonante = false;
+        if(comboDonante.getValue() == "SI"){
+            esDonante = true;}
+        titularDTO.setEsDonante(esDonante);
+        titularDTO.setFactorRH(comboFactorRH.getValue());
+        titularDTO.setFechaNacimiento(dateFechaNacimiento.getValue());
+        titularDTO.setGrupoSanguineo(comboGrupoSanguineo.getValue());
+        titularDTO.setTipoDoc(comboTipoDocumento.getValue());
+        titularDTO.setSexo(sexo.getValue());
+    
+        return titularDTO;
+    }
+
+    private ArrayList<TipoClasesLicencia> generarListaClases() {
+        ArrayList<TipoClasesLicencia> claseSolicitadas = new ArrayList<>();
+        if(choiceClaseA.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.A);
+        }
+        if(choiceClaseB.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.B);
+        }
+        if(choiceClaseC.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.C);
+        }
+        if(choiceClaseD.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.D);
+        }
+        if(choiceClaseE.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.E);
+        }
+        if(choiceClaseF.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.F);
+        }
+        if(choiceClaseG.isSelected()){
+            claseSolicitadas.add(TipoClasesLicencia.G);
+        }
+        return claseSolicitadas;
     }
 
     private void validarDatos() throws DatosInvalidosException {
         Boolean datoInvalido = false;
         datoInvalido |= validarDocumento();
         datoInvalido |= validarNombreYapellido();
-        //datoInvalido |= validarNacimiento();
-        /*datoInvalido |= validarDireccion();
-        datoInvalido |= validarComboboxes();*/
+        datoInvalido |= validarNacimiento();
+        datoInvalido |= validarDireccion();
+        datoInvalido |= validarComboboxes();
         if (datoInvalido){
             throw new DatosInvalidosException("Advertencia: por favor, revise los campos ingresados y vuelva a intentarlo");
         }
     }
 
-     /*private Boolean validarNacimiento() {
+     private Boolean validarNacimiento() {
         Boolean esInvalido = false;
-        LocalDate date;
 
         if(dateFechaNacimiento.getValue() != null){
             fechaObligatorio.setVisible(false);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+           /* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if(dateFechaNacimiento.getValue().parse("yyyy-MM-dd")))
+            FALTA LA LOGICA SI SE INGRESA A MANO*/
+            if(dateFechaNacimiento.getValue().isAfter(LocalDate.now().minusYears(18))){
+                esInvalido=true;
+                fechaObligatorio.setText("El titular debe tener más de 18 años");
+                fechaObligatorio.setVisible(true);
+            } 
         } else {
+            fechaObligatorio.setText("*Campo Obligatorio*");
             fechaObligatorio.setVisible(true);
-            esInvalido=false;
+            esInvalido=true;
         }
         return esInvalido;
-    }*/
+    }
+
+    private Boolean validarComboboxes() {
+        Boolean esInvalido = false;
+        
+        if(comboDonante.getValue() == null){
+            esInvalido = true;
+            donanteObligatorio.setVisible(true);
+        } else {
+            donanteObligatorio.setVisible(false);
+        }
+        if(comboFactorRH.getValue() == null) {
+            esInvalido = true;
+            factorRHObligatorio.setVisible(true);
+        } else{
+            factorRHObligatorio.setVisible(false);
+        }
+        if(comboGrupoSanguineo.getValue() == null){
+            esInvalido = true;
+            gruposObligatorio.setVisible(true);
+        } else {
+            gruposObligatorio.setVisible(false);
+        }
+        if(sexo.getValue() == null){
+            esInvalido = true;
+            sexoObligatorio.setVisible(true);
+        } else {
+            sexoObligatorio.setVisible(false);
+        }
+
+        return esInvalido;
+    }
+
+    private Boolean validarDireccion() {
+        Boolean esInvalido = false;
+        if(!textDireccion.getText().isEmpty()){
+            dirObligatorio.setVisible(false);
+            if(textDireccion.getText().length()>64){
+                dirObligatorio.setText("Máximo 64 caracteres");
+                dirObligatorio.setVisible(true);
+                esInvalido = true;
+            }
+        } else {
+            dirObligatorio.setText("*Campo Obligatorio*");
+            dirObligatorio.setVisible(true);
+            esInvalido = true;
+        }
+        return esInvalido;
+    }
 
     private Boolean validarNombreYapellido() {
         Boolean esInvalido = false;
@@ -249,6 +371,18 @@ public class DarAltaTitularController{
         alert.showAndWait();
     }
 
+    private void informacionClienteGuardado() {
+        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El titular ha sido dado de alta.", ButtonType.OK);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
+
     @FXML
     public void initialize() {
         ocultarObligatorios();
@@ -260,6 +394,7 @@ public class DarAltaTitularController{
         comboGrupoSanguineo.getItems().addAll(TipoGrupoS.values());
         comboFactorRH.getItems().addAll(TipoFactorRH.values());
         comboDonante.getItems().addAll("SI", "NO");
+        sexo.getItems().addAll(TipoSexo.values());
     }
 
     private void ocultarObligatorios() {
@@ -272,5 +407,6 @@ public class DarAltaTitularController{
         gruposObligatorio.setVisible(false);
         factorRHObligatorio.setVisible(false);
         donanteObligatorio.setVisible(false);
+        sexoObligatorio.setVisible(false);
     }
 }

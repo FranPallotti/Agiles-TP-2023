@@ -31,6 +31,7 @@ public class GestorTitular {
         dto.setNroDoc(titular.getNroDoc());
         dto.setTipoDoc(titular.getTipoDoc());
         dto.setFechaNacimiento(titular.getFechaNacimiento());
+        /*Incompleto */
         return dto;
     }
 
@@ -50,7 +51,7 @@ public class GestorTitular {
         Titular titular = titularDao.getByDocumento(nroDoc, tipoDoc).orElseThrow(() -> new ObjetoNoEncontradoException());
         return titular;
     }
-    
+
     private Integer getEdad(LocalDate fechaNacimiento){
         LocalDate hoy = LocalDate.now();
         Period edad = Period.between(fechaNacimiento, hoy);
@@ -60,6 +61,22 @@ public class GestorTitular {
     public Integer getEdadTitular(TitularDTO dto)
     throws ObjetoNoEncontradoException{
         return this.getEdad(dto.getFechaNacimiento());
+    }
+
+    public void persistir(TitularDTO titular) {
+        Titular entidad = new Titular();
+        entidad.setApellido(titular.getApellido());
+        entidad.setClaseSol(titular.getClaseSol());
+        entidad.setDireccion(titular.getDireccion());
+        entidad.setEsDonante(titular.getEsDonante());
+        entidad.setFactorRH(titular.getFactorRH());
+        entidad.setFechaNacimiento(titular.getFechaNacimiento());
+        entidad.setSexo(titular.getSexo());
+        entidad.setGrupoSanguineo(titular.getGrupoSanguineo());
+        entidad.setNombre(titular.getNombre());
+        entidad.setNroDoc(titular.getNroDoc());
+        entidad.setTipoDoc(titular.getTipoDoc());
+        titularDao.saveInstance(entidad);
     }
 
     public Integer getEdadTitular(Titular titular){
