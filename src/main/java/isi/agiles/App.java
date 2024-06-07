@@ -7,16 +7,22 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import static isi.agiles.util.Poblador.poblar;
 
 import java.io.IOException;
 
 import java.time.LocalDate;
 
+import isi.agiles.dao.ClaseLicenciaDAO;
+import isi.agiles.dao.TitularDAO;
+import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.entidad.Titular;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.util.EntityManagerUtil;
+import isi.agiles.util.Poblador;
 
 /**
  * JavaFX App
@@ -29,6 +35,7 @@ public class App extends Application {
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
         completarUsuario(usuarioLogueado); 
+       //App.poblar();
         launch();
     }
 
@@ -67,7 +74,6 @@ public class App extends Application {
     public static Usuario getUsuarioLogueado(){
         return usuarioLogueado;
     }
-
     public static void cambiarVentana(String fxml, Stage ventActual) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
         Parent root = loader.load();
@@ -78,4 +84,34 @@ public class App extends Application {
         ventActual.close();
         stage.show();
     }
+    public static void poblar(){
+        /*
+        TitularDAO t = new TitularDAO();
+            Titular titular1= new Titular();
+            titular1.setApellido("Pallotti");
+            titular1.setNombre("Francisco");
+            titular1.setTipoDoc(TipoDoc.DNI);
+            titular1.setNroDoc("42925453");
+            
+           t.saveInstance(titular1);
+
+            Titular titular2 = new Titular();
+            titular2.setApellido("Pallotti");
+            titular2.setNombre("Fernando");
+            titular2.setTipoDoc(TipoDoc.DNI);
+            titular2.setNroDoc("42925454");
+
+           t.saveInstance(titular2);
+        */
+
+           ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('A');
+           a.setDescripcion("Licencia de clase A");
+           a.setEdadMinima(18);
+           a.setEsProfesional(false);
+           d.saveInstance(a);
+    
+        }
+    
 }

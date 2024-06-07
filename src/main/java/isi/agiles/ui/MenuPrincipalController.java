@@ -112,7 +112,14 @@ public class MenuPrincipalController {
 
     @FXML
     void accionEmitirLicencia(ActionEvent event) {
-
+        try{
+            Stage currentStage = (Stage) botonEmitirLicencia.getScene().getWindow();
+            App.cambiarVentana("EmitirLicencia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
     }
 
     @FXML

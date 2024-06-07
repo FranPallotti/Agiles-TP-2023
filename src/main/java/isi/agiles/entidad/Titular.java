@@ -26,7 +26,8 @@ public class Titular {
     @Column(name = "id_titular")
     private Long idTitular;
 
-    @Column(name = "fecha_nacimiento", nullable = false)
+    
+    @Column(name = "fecha_nacimiento", nullable = true)
     private LocalDate fechaNacimiento;
 
     @NaturalId
@@ -38,13 +39,19 @@ public class Titular {
     @Enumerated(EnumType.STRING)
     private TipoDoc tipoDoc;
    
+    
     @Column(nullable = false)
     private String nombre;
 
+    
     @Column(nullable = false)
     private String apellido;
 
     @Column(nullable = false)
+    private TipoSexo sexo;
+
+    
+    @Column(nullable = true)
     private String direccion;
 
     @Column(name = "clases_solicitadas") //nullable false? deberia aunq sea tener 1 clase solicitada para darlo de alta?
@@ -53,8 +60,8 @@ public class Titular {
     @Column(name = "grupo_sanguineo", nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoGrupoS grupoSanguineo;
-
-    @Column(name = "factor_rh", nullable = false)
+    
+    @Column(name = "factor_rh", nullable = true)
     @Enumerated(EnumType.STRING)
     private TipoFactorRH factorRH;
 
@@ -174,5 +181,16 @@ public class Titular {
     public void setLicencias(List<Licencia> licencias) {
         this.licencias = licencias;
     }
+
+
+    public TipoSexo getSexo() {
+        return sexo;
+    }
+
+
+    public void setSexo(TipoSexo sexo) {
+        this.sexo = sexo;
+    }
+    
 
 }

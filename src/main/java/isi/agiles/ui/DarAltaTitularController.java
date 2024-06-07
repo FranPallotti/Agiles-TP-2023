@@ -148,7 +148,7 @@ public class DarAltaTitularController{
         try {
             validarDatos();
             TitularDTO titular = crearTitularDTO();
-            gestorTitular.persistir(titular);
+            GestorTitular.persistir(titular);
             informacionClienteGuardado();
         } catch (Exception e) {
             errorDatosInvalidos(e.getMessage());
