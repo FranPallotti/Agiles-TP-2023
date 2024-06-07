@@ -28,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -44,6 +45,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.time.LocalDate;
 import javafx.scene.control.Label;
+import javafx.scene.Parent;
 
 public class EmitirLicenciaController implements Initializable{
     private TitularDTO titular;
@@ -184,12 +186,53 @@ public class EmitirLicenciaController implements Initializable{
               
 
         if(validarDatos()){
-            //campoClaseLicencia.getValue()
             LicenciaDTO l = getLicenciaDTO(titular, campoObservaciones.getText(), campoClaseLicencia.getSelectionModel().getSelectedItem());
-        
-
             try{
-                GestorLicencia.altaLicencia(l);
+                if(GestorTitular.puedeTenerLicencia(titular,l.getClase())){
+                    try{
+                        Stage currentStage = (Stage) this.botonEmitir.getScene().getWindow();
+                        //campoClaseLicencia.getValue()
+                        
+                        //GestorLicencia.altaLicencia(l);
+                       // FXMLLoader loader = new FXMLLoader(getClass().getResource("EmitirLicenciaCostoController.fxml"));
+                       FXMLLoader loader = new FXMLLoader();
+                       loader.setLocation(App.class.getResource("EmitirLicenciaCosto.fxml")); 
+                       Parent root = loader.load();
+        
+                        EmitirLicenciaCostoController formularioCosto = loader.getController();
+                        formularioCosto.setLicencia(l);
+                        //loader.setController(formularioCosto);
+                        Stage stage = new Stage();
+                        stage.setTitle("Confirme los datos y el Costo");
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                        currentStage.close();
+        
+        
+                    }
+                    catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    noCumpleCondicionesLicencia();
+                }
+            }
+            catch(ObjetoNoEncontradoException e){
+                // Si no encuentra el objeto a la hora de validar si puede tener licencia o no
+                e.printStackTrace();
+            }
+            
+
+           
+            
+            
+
+            /* 
+            try{
+                
+
+
             }
             catch(ObjetoNoEncontradoException e){
                 e.printStackTrace();
@@ -201,6 +244,13 @@ public class EmitirLicenciaController implements Initializable{
                 noCumpleCondicionesLicencia();
 
             }
+            */
+
+
+        }
+        else{
+            /// poner un popup de datos invalidos
+            titularNoEncontrado();
         }
         
 
