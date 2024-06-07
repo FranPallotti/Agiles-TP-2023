@@ -28,7 +28,7 @@ public class GestorTitular {
         dto.setIdTitular(titular.getIdTitular());
         dto.setNombre(titular.getNombre());
         dto.setApellido(titular.getApellido());
-        dto.setDocumento(titular.getNroDoc());
+        dto.setNroDoc(titular.getNroDoc());
         dto.setTipoDoc(titular.getTipoDoc());
         dto.setFechaNacimiento(titular.getFechaNacimiento());
         /*Incompleto */

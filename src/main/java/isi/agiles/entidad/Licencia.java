@@ -16,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import isi.agiles.entidad.EstadoLicencia;;
 
 @Entity
 @Table(name = "licencia")
@@ -46,7 +45,7 @@ public class Licencia {
 
     @Column(name = "costo", nullable = false)
     private Float costo;
-
+        
     /*Asociaciones */
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -151,6 +150,7 @@ public class Licencia {
     public void setCosto(Float costo) {
         this.costo = costo;
     }
+
 
     /*Lei que no se recomienda usar IDs auto generados para equals() y hashCode()
      * por ahora lo dejo asi, pero buscar alguna mejor alternativa como una @NaturalId

@@ -16,7 +16,6 @@ import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
-import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
@@ -148,7 +147,7 @@ public class DarAltaTitularController{
         try {
             validarDatos();
             TitularDTO titular = crearTitularDTO();
-            GestorTitular.persistir(titular);
+            gestorTitular.persistir(titular);
             informacionClienteGuardado();
         } catch (Exception e) {
             errorDatosInvalidos(e.getMessage());

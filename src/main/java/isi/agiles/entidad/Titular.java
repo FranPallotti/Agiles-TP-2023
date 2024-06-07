@@ -49,7 +49,6 @@ public class Titular {
 
     @Column(nullable = false)
     private TipoSexo sexo;
-
     
     @Column(nullable = true)
     private String direccion;
@@ -67,9 +66,6 @@ public class Titular {
 
     @Column(name = "es_donante", nullable = false)
     private Boolean esDonante;
-
-    @Column(name = "sexo")
-    private TipoSexo sexo;
 
     /*Asocaciones */
     @OneToMany(fetch = FetchType.LAZY,
@@ -100,14 +96,6 @@ public class Titular {
 
     public void setNroDoc(String nroDoc) {
         this.nroDoc = nroDoc;
-    }
-
-    public TipoSexo getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(TipoSexo sexo) {
-        this.sexo = sexo;
     }
 
     public TipoDoc getTipoDoc() {
@@ -192,5 +180,4 @@ public class Titular {
         this.sexo = sexo;
     }
     
-
 }

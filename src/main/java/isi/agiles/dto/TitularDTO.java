@@ -23,11 +23,11 @@ public class TitularDTO {
     private Boolean esDonante;
     private TipoSexo sexo;
     
-    public TipoSexo getSexo() {
-        return sexo;
+    public Long getIdTitular() {
+        return idTitular;
     }
-    public void setSexo(TipoSexo sexo) {
-        this.sexo = sexo;
+    public void setIdTitular(Long idTitular) {
+        this.idTitular = idTitular;
     }
     public String getNombre() {
         return nombre;
@@ -41,15 +41,11 @@ public class TitularDTO {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public String getDocumento() {
+    public String getNroDoc() {
         return nroDoc;
     }
-    public void setDocumento(String nroDoc) {
+    public void setNroDoc(String nroDoc) {
         this.nroDoc = nroDoc;
-    }
-    
-    public void setTipoDoc(TipoDoc tipoDoc) {
-        this.tipoDoc = tipoDoc;
     }
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
@@ -57,11 +53,23 @@ public class TitularDTO {
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    public TipoDoc getTipoDoc() {
+        return tipoDoc;
+    }
+    public void setTipoDoc(TipoDoc tipoDoc) {
+        this.tipoDoc = tipoDoc;
+    }
     public String getDireccion() {
         return direccion;
     }
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+    public List<Character> getClaseSol() {
+        return claseSol;
+    }
+    public void setClaseSol(List<Character> claseSol) {
+        this.claseSol = claseSol;
     }
     public TipoGrupoS getGrupoSanguineo() {
         return grupoSanguineo;
@@ -81,16 +89,12 @@ public class TitularDTO {
     public void setEsDonante(Boolean esDonante) {
         this.esDonante = esDonante;
     }
-    public Long getIdTitular() {
-        return idTitular;
+    public TipoSexo getSexo() {
+        return sexo;
     }
-    public void setIdTitular(Long idTitular) {
-        this.idTitular = idTitular;
+    public void setSexo(TipoSexo sexo) {
+        this.sexo = sexo;
     }
-    public List<Character> getClaseSol() {
-        return claseSol;
-    }
-    public void setClaseSol(List<Character> claseSol) {
-        this.claseSol = claseSol;
-    }
+
+    
 }
