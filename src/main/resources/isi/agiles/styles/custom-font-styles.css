@@ -1,18 +1,21 @@
-@font-face {
-    font-family: 'Proxima Soft Bold';
-    src: url('/font/ProximaSoft-Bold.ttf');
-}
-
-@font-face {
+.fontProximaMedium{
     font-family: 'Proxima Soft Medium';
     src: url('/font/ProximaSoft-Medium.ttf');
-}
-
-@font-face {
-    font-family: 'Proxima Soft Medium Italic';
-    src: url('/font/ProximaSoft-MediumIt.ttf');
-}
-
-.label {
     -fx-font-family: "Proxima Soft Medium";
+}
+
+.fontProximaMediumItalic{
+    font-family: 'Proxima Soft Medium';
+    font-style: italic;
+    src: url('/font/ProximaSoft-MediumIt.ttf');
+    -fx-font-family: "Proxima Soft Medium";
+    -fx-font-style: italic;
+}
+
+.fontProximaBold{
+    font-family: 'Proxima Soft';
+    font-weight: bold;
+    src: url('/font/ProximaSoft-Bold.ttf');
+    -fx-font-family: "Proxima Soft";
+    -fx-font-weight: bold;
 }
