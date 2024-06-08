@@ -40,6 +40,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -190,23 +191,35 @@ public class EmitirLicenciaController implements Initializable{
             try{
                 if(GestorTitular.puedeTenerLicencia(titular,l.getClase())){
                     try{
-                        Stage currentStage = (Stage) this.botonEmitir.getScene().getWindow();
-                        //campoClaseLicencia.getValue()
                         
-                        //GestorLicencia.altaLicencia(l);
-                       // FXMLLoader loader = new FXMLLoader(getClass().getResource("EmitirLicenciaCostoController.fxml"));
-                       FXMLLoader loader = new FXMLLoader();
-                       loader.setLocation(App.class.getResource("EmitirLicenciaCosto.fxml")); 
-                       Parent root = loader.load();
-        
-                        EmitirLicenciaCostoController formularioCosto = loader.getController();
-                        formularioCosto.setLicencia(l);
-                        //loader.setController(formularioCosto);
+                        FXMLLoader loader = new FXMLLoader();
+                       
+                        loader.setLocation(App.class.getResource("EmitirLicenciaCosto.fxml"));
+                        
+                        
                         Stage stage = new Stage();
                         stage.setTitle("Confirme los datos y el Costo");
+                        
+                         
+                        Parent root = loader.load();
+                        //aca recien me carga el controlador
+                        EmitirLicenciaCostoController formularioCosto = loader.getController();
                         stage.setScene(new Scene(root));
+                        stage.setResizable(false);
+                        stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
                         stage.show();
+
+                        GestorLicencia.calcularVigenciaLicencia(l);
+                        l.setCosto(GestorLicencia.getCostoLicencia(l));
+                        formularioCosto.setLicencia(l);
+                        formularioCosto.setearDatos();
+
+
+                        Stage currentStage = (Stage) this.botonEmitir.getScene().getWindow();
                         currentStage.close();
+                        
+                        
+
         
         
                     }

@@ -65,7 +65,7 @@ public class Licencia {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "realizo_tramite",
-                nullable = false,
+                nullable = true,
                 referencedColumnName = "id_usuario",
                 foreignKey = @ForeignKey(name = "fk_licencia_usuario"))
     private Usuario realizoTramite;

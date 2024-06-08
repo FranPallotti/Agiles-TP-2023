@@ -12,10 +12,13 @@ import static isi.agiles.util.Poblador.poblar;
 import java.io.IOException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
 import isi.agiles.entidad.ClaseLicencia;
+import isi.agiles.entidad.CostoLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
@@ -35,7 +38,7 @@ public class App extends Application {
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
         completarUsuario(usuarioLogueado); 
-       //App.poblar();
+        //App.poblar();
         launch();
     }
 
@@ -110,6 +113,28 @@ public class App extends Application {
            a.setDescripcion("Licencia de clase A");
            a.setEdadMinima(18);
            a.setEsProfesional(false);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("20.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("25.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("30.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("40.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           c.add(costoA4);
+           a.setCostoClase(c);
            d.saveInstance(a);
     
         }

@@ -1,6 +1,10 @@
 package isi.agiles.logica;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
@@ -30,9 +34,25 @@ public class GestorLicencia {
         return licencia;
     }
 
-    public static float getCostoLicencia(LicenciaDTO dto){
-        //TODO: Lo hace Fran.
-        return (float)10.0; //(!)
+    public static Float getCostoLicencia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
+        Float ret;
+        ClaseLicencia c = GestorClaseLicencia.getClaseLicencia(dto.getClase());
+        
+        Period period = dto.getInicioVigencia().until(dto.getFinVigencia());
+        Integer duracionVigencia = Integer.valueOf(period.getYears());
+        List<CostoLicencia> lcosto= c.getCostoClase().stream().sorted((t1,t2) -> t1.getDuracion().compareTo(t2.getDuracion())).collect(Collectors.toList());
+        List<CostoLicencia> or = lcosto.stream().filter(t -> t.getDuracion().compareTo(duracionVigencia)>0).collect(Collectors.toList());
+        if(or.isEmpty()){
+            ret=Float.valueOf(lcosto.get(lcosto.size()-1).getCosto()+Float.parseFloat("8.0"));
+        }
+        else{
+            
+            ret = Float.valueOf(or.get(0).getCosto()+Float.parseFloat("8.0"));
+            
+        }
+
+
+        return ret; //(!)
     }
 
     public static void calcularVigenciaLicencia(LicenciaDTO dto)

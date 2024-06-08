@@ -2,11 +2,14 @@ package isi.agiles.entidad;
 
 import java.util.*;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /* (!!) Ver como agregar el dato de "edad maxima para pedir por primera vez"
@@ -30,6 +33,8 @@ public class ClaseLicencia {
 
     @Column(name = "edad_minima", nullable = false)
     private Integer edadMinima;
+
+    
     
     private static final Integer EDAD_MAX_PRIMERA_LICENCIA_PROF = 65; //(!)
 
@@ -37,6 +42,10 @@ public class ClaseLicencia {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<ClaseLicencia> incluye = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER,
+               cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "clase")
+    private List<CostoLicencia> costoClase;
 
     public static Integer getEdadMaxPrimeraLicenciaProf() {
         return EDAD_MAX_PRIMERA_LICENCIA_PROF;
@@ -81,6 +90,11 @@ public class ClaseLicencia {
     public void setIncluye(List<ClaseLicencia> incluye) {
         this.incluye = incluye;
     }
-    
+    public List<CostoLicencia> getCostoClase() {
+        return costoClase;
+    }
+    public void setCostoClase(List<CostoLicencia> costoClase) {
+        this.costoClase = costoClase;
+    }
 
 }
