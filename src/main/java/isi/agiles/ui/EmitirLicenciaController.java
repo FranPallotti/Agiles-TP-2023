@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import isi.agiles.App;
 import isi.agiles.dto.ClaseLicenciaDTO;
@@ -78,14 +78,11 @@ public class EmitirLicenciaController implements Initializable{
     @FXML
     private Label errorFaltaTitular;
 
-    @Autowired
-    private GestorLicencia gestorLicencia;
+    private GestorLicencia gestorLicencia = new GestorLicencia();
 
-    @Autowired
-    private GestorClaseLicencia gestorClaseLic;
+    private GestorClaseLicencia gestorClaseLic = new GestorClaseLicencia();
 
-    @Autowired
-    private GestorTitular gestorTitular;
+    private GestorTitular gestorTitular = new GestorTitular();
 
     @FXML
     private void handleExit(ActionEvent event) throws IOException{
@@ -106,10 +103,6 @@ public class EmitirLicenciaController implements Initializable{
         
         campoClaseLicencia.setItems(FXCollections.observableArrayList(gestorClaseLic.getAllDTOs()));
        // campoClaseLicencia.getItems().addAll(opClaseLicencia);
-        
-        
-
-        
     }
 
     public void actualizarTabla(){

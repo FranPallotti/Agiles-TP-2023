@@ -13,6 +13,9 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
 import isi.agiles.entidad.ClaseLicencia;
@@ -28,7 +31,7 @@ import isi.agiles.util.Poblador;
  * JavaFX App
  */
 public class App extends Application {
-    
+
     private static Scene scene;
     private static Usuario usuarioLogueado = new Usuario();
 

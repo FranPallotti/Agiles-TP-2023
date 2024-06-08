@@ -2,8 +2,6 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
@@ -12,12 +10,9 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorLicencia {
     
-    @Autowired
-    private LicenciaDAO licenciaDao;
-    @Autowired
-    private GestorTitular gestorTitular;
-    @Autowired
-    private GestorClaseLicencia gestorClaseLic;
+    private LicenciaDAO licenciaDao = new LicenciaDAO();
+    private GestorTitular gestorTitular = new GestorTitular();
+    private GestorClaseLicencia gestorClaseLic = new GestorClaseLicencia();
 
     public Licencia getLicencia(LicenciaDTO dto)
     throws ObjetoNoEncontradoException{

@@ -2,8 +2,6 @@ package isi.agiles.logica;
 
 import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -18,10 +16,8 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorTitular {
 
-    @Autowired
-    private TitularDAO titularDao;
-    @Autowired
-    private GestorClaseLicencia gestorClaseLic;
+    private TitularDAO titularDao = new TitularDAO();
+    private GestorClaseLicencia gestorClaseLic = new GestorClaseLicencia();
 
     public TitularDTO getTitularDTO(Titular titular){
         TitularDTO dto = new TitularDTO();

@@ -2,8 +2,6 @@ package isi.agiles.logica;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.entidad.ClaseLicencia;
@@ -11,8 +9,7 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 
 public class GestorClaseLicencia {
 
-    @Autowired
-    private ClaseLicenciaDAO claseLicDao;
+    private ClaseLicenciaDAO claseLicDao = new ClaseLicenciaDAO();
 
     public List<ClaseLicenciaDTO> getAllDTOs()
     throws ObjetoNoEncontradoException{

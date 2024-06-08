@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import isi.agiles.App;
 import isi.agiles.dto.TitularDTO;
@@ -130,8 +130,7 @@ public class DarAltaTitularController{
     @FXML
     private Button botonGuardar;
 
-    @Autowired
-    private GestorTitular gestorTitular;
+    private GestorTitular gestorTitular = new GestorTitular();
 
 
     public void accionVolver(){
