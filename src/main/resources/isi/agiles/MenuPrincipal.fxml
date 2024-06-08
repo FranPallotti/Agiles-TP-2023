@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
+<AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" stylesheets="@styles/custom-font-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
    <children>
       <Button fx:id="botonEmitirLicencia" layoutX="174.0" layoutY="119.0" mnemonicParsing="false" onAction="#accionEmitirLicencia" prefHeight="57.0" prefWidth="284.0" text="Emitir Licencia">
          <font>
@@ -90,7 +90,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="labelMenuPrincipal" alignment="CENTER" contentDisplay="RIGHT" layoutX="174.0" layoutY="26.0" prefHeight="57.0" prefWidth="679.0" text="Menú Principal" textAlignment="CENTER" underline="true">
+      <Label fx:id="labelMenuPrincipal" alignment="CENTER" contentDisplay="RIGHT" layoutX="174.0" layoutY="26.0" prefHeight="57.0" prefWidth="679.0" styleClass="fontProximaMedium" text="Menú Principal" textAlignment="CENTER" underline="true">
          <font>
             <Font name="Times New Roman Bold" size="51.0" />
          </font>

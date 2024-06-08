@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-
-
 import isi.agiles.App;
 import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
@@ -231,7 +229,7 @@ public class EmitirLicenciaController implements Initializable{
             LicenciaDTO l = new LicenciaDTO();
             l.setTitular(t);
             l.setObservaciones(obs);
-            l.setClase(clase);
+            l.setClaseLic(clase);
             return l;
     
         }

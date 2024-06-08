@@ -1,6 +1,7 @@
 package isi.agiles.logica;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
@@ -23,7 +24,7 @@ public class GestorLicencia {
     public LicenciaDTO getLicenciaDTO(Licencia licencia){
         LicenciaDTO dto = new LicenciaDTO();
         dto.setIdLicencia(licencia.getIdLicencia());
-        dto.setClase(gestorClaseLic.getClaseLicenciaDTO(licencia.getClaseLicencia()));
+        dto.setClaseLic(gestorClaseLic.getClaseLicenciaDTO(licencia.getClaseLicencia()));
         dto.setCosto(licencia.getCosto());
         dto.setEstado(licencia.getEstado());
         dto.setFinVigencia(licencia.getFinVigencia());
@@ -43,7 +44,7 @@ public class GestorLicencia {
         licencia.setCantDeCopias(0);
         licencia.setCosto(dto.getCosto());
         /*Asociaciones */
-        licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClase()));
+        licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClaseLic()));
         licencia.setTitular(gestorTitular.getTitular(dto.getTitular()));
         //TODO: Setear Usuario con el usuario que este logeado en la sesion
         return licencia;
@@ -75,11 +76,26 @@ public class GestorLicencia {
 
     public Licencia altaLicencia(LicenciaDTO dto)
     throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException{
-        if(!gestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClase())){
+        if(!gestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClaseLic())){
             throw new NoCumpleCondicionesLicenciaException();
         }
         Licencia licencia = this.crearLicencia(dto);
         licenciaDao.saveInstance(licencia);
         return licencia;
+    }
+
+    public List<Licencia> getLicenciasExpiradas()
+    throws ObjetoNoEncontradoException{
+        List<Licencia> listadoExpiradas = licenciaDao.getLicenciasExpiradas();
+        if(listadoExpiradas.isEmpty()){
+            throw new ObjetoNoEncontradoException();
+        }
+        return listadoExpiradas;
+    }
+
+    public List<LicenciaDTO> getLicenciasExpiradasDTO()
+    throws ObjetoNoEncontradoException{
+        List<Licencia> listaExpiradas = this.getLicenciasExpiradas();
+        return listaExpiradas.stream().map(l -> this.getLicenciaDTO(l)).toList();
     }
 }

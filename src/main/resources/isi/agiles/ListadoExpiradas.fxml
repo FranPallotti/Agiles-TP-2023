@@ -10,31 +10,44 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" styleClass="fontProximaBold" stylesheets="@styles/custom-font-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.LicenciasExpiradasController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1027.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ImageView fitHeight="110.0" fitWidth="85.0" layoutX="930.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="muniImageView" fitHeight="110.0" fitWidth="85.0" layoutX="930.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/santafemuni-white-tiny.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="24.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="fontProximaBold" text="Listado de Licencias Expiradas" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="75.0">
+      <Text fx:id="tituloText" fill="WHITE" layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listado de Licencias Expiradas" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="74.98291015625">
          <font>
-            <Font size="42.0" />
+            <Font name="Tahoma Bold" size="35.0" />
          </font>
       </Text>
-      <TableView layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" styleClass="fontProximaMedium" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
+      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
          <columns>
-            <TableColumn editable="false" prefWidth="158.33333587646484" text="Fecha de Vencimiento" />
-            <TableColumn editable="false" prefWidth="75.0" text="Tipo de Licencia" />
-            <TableColumn editable="false" prefWidth="75.0" text="Nombre" />
-            <TableColumn editable="false" prefWidth="75.0" text="Apellido" />
-            <TableColumn editable="false" prefWidth="75.0" text="Documento" />
+            <TableColumn fx:id="fechaVencimientoColumn" editable="false" prefWidth="158.33333587646484" text="Fecha de Vencimiento" />
+            <TableColumn fx:id="claseLicColumn" editable="false" prefWidth="75.0" text="Tipo de Licencia" />
+            <TableColumn fx:id="nombreColumn" editable="false" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="apellidoColumn" editable="false" prefWidth="75.0" text="Apellido" />
+            <TableColumn prefWidth="75.0" text="Documento">
+               <columns>
+                  <TableColumn fx:id="tipoDocColumn" prefWidth="75.0" text="Tipo" />
+                  <TableColumn fx:id="nroDocColumn" editable="false" prefWidth="75.0" text="Numero" />
+               </columns>
+            </TableColumn>
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="947.0" layoutY="661.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" style="-fx-font-size: 16;" styleClass="fontProximaBold" text="Volver" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="volverButton" layoutX="947.0" layoutY="661.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Volver" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="Tahoma Bold" size="13.0" />
+         </font></Button>
+      <Text fx:id="licenciasNoEncontradasText" fill="#01ae7a" layoutX="79.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVISO: No se han encontrado licencias expiradas" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="160.0">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

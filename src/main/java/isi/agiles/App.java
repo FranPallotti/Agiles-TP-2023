@@ -7,14 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static isi.agiles.util.Poblador.poblar;
-
 import java.io.IOException;
 
 import java.time.LocalDate;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
@@ -38,7 +33,7 @@ public class App extends Application {
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
         completarUsuario(usuarioLogueado); 
-       //App.poblar();
+        //App.poblar();
         launch();
     }
 

@@ -7,7 +7,7 @@ import isi.agiles.entidad.EstadoLicencia;
 public class LicenciaDTO {
 
     private Long idLicencia;
-    private ClaseLicenciaDTO clase;
+    private ClaseLicenciaDTO claseLic;
     private String observaciones;
     private TitularDTO titular;
     private LocalDate inicioVigencia;
@@ -22,11 +22,11 @@ public class LicenciaDTO {
     public void setEstado(EstadoLicencia estado) {
         this.estado = estado;
     }
-    public ClaseLicenciaDTO getClase() {
-        return clase;
+    public ClaseLicenciaDTO getClaseLic() {
+        return claseLic;
     }
-    public void setClase(ClaseLicenciaDTO clase) {
-        this.clase = clase;
+    public void setClaseLic(ClaseLicenciaDTO clase) {
+        this.claseLic = clase;
     }
     public String getObservaciones() {
         return observaciones;
