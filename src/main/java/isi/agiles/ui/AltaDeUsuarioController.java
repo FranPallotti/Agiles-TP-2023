@@ -7,8 +7,13 @@ import java.time.format.DateTimeParseException;
 import java.util.function.UnaryOperator;
 
 import isi.agiles.App;
+import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.entidad.Usuario;
+import isi.agiles.excepcion.UsernameNoUnicoException;
+import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -129,11 +134,15 @@ public class AltaDeUsuarioController{
         try{
             datosValidos();
             //Logica para guardar cliente
-
+            UsuarioDTO dto = this.getUsuarioDTO();
+            GestorUsuario.altaUsuario(dto);
             
             informacionClienteGuardado();
         }catch (DatosInvalidosException e){
             errorDatosInvalidos(e.getMessage());
+        }
+        catch(UsernameNoUnicoException u){
+            errorDatosInvalidos(u.getMessage());
         }
     }
 
@@ -371,6 +380,21 @@ public class AltaDeUsuarioController{
             labelErrorNombre.setVisible(false);
         }
         return invalido;
+    }
+
+
+    private UsuarioDTO getUsuarioDTO(){
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setApellido(this.campoApellido.getText());
+        dto.setFechaNaciemiento(this.campoFechaNacimiento.getValue());
+        dto.setMail(this.campoMail.getText());
+        dto.setNombre(this.campoNombre.getText());
+        dto.setNombreUsuario(this.campoNombreUsuario.getText());
+        dto.setNumDoc(this.campoNroDoc.getText());
+        dto.setRol(TipoRol.OPERADOR);
+        dto.setSexo(this.listaTipoSexo.getValue());
+        dto.setTipoDoc(this.listaTipoDoc.getValue());
+        return dto;
     }
     
     /* DEJO ESTO POR SI SE QUIERE INGRESAR LA FECHA MANUAL Y NO USAR EL ICONITO, IGUAL HAY Q VERLO Y VALIDAR PQ SI SE SALE

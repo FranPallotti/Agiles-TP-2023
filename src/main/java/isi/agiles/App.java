@@ -17,6 +17,7 @@ import java.util.List;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
+import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.CostoLicencia;
 import isi.agiles.entidad.TipoDoc;
@@ -24,6 +25,8 @@ import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
 import isi.agiles.entidad.Titular;
 import isi.agiles.entidad.Usuario;
+import isi.agiles.excepcion.ObjetoNoEncontradoException;
+import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.EntityManagerUtil;
 import isi.agiles.util.Poblador;
 
@@ -33,12 +36,14 @@ import isi.agiles.util.Poblador;
 public class App extends Application {
     
     private static Scene scene;
-    private static Usuario usuarioLogueado = new Usuario();
+    private static UsuarioDTO usuarioLogueado = new UsuarioDTO();
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        completarUsuario(usuarioLogueado); 
+        //completarUsuario(usuarioLogueado); 
         //App.poblar();
+        loguear(usuarioLogueado);
+        
         launch();
     }
 
@@ -49,7 +54,7 @@ public class App extends Application {
         usuario.setFechaNacimiento(LocalDate.of(2003,03,04));
         usuario.setMail("ejemplo@gmail.com");
         usuario.setTipoDoc(TipoDoc.DNI);
-        usuario.setNmoDoc("22103847");
+        usuario.setNumDoc("22103847");
         usuario.setSexo(TipoSexo.MASCULINO);
         usuario.setNombreUsuario("JPerez");
         usuario.setRol(TipoRol.ADMINISTRADOR);
@@ -74,7 +79,7 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static Usuario getUsuarioLogueado(){
+    public static UsuarioDTO getUsuarioLogueado(){
         return usuarioLogueado;
     }
     public static void cambiarVentana(String fxml, Stage ventActual) throws IOException {
@@ -86,6 +91,20 @@ public class App extends Application {
         stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
         ventActual.close();
         stage.show();
+    }
+
+    public static void loguear(UsuarioDTO dto){
+
+        //UsuarioDTO dto= new UsuarioDTO();
+        dto.setNombreUsuario("franpallotti");
+        try{
+            dto=GestorUsuario.getUsuarioDTO(GestorUsuario.getUsuario(dto));
+        }
+        catch(ObjetoNoEncontradoException e){
+            System.out.println(e.getMessage());
+        }
+
+        
     }
     public static void poblar(){
         /*

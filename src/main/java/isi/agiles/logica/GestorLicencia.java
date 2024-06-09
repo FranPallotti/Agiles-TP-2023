@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import isi.agiles.App;
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
@@ -30,7 +31,7 @@ public class GestorLicencia {
         licencia.setTitular(GestorTitular.getTitular(dto.getTitular()));
 
         //TODO: Setear Usuario con el usuario que este logeado en la sesion
-
+        licencia.setRealizoTramite(GestorUsuario.getUsuario(App.getUsuarioLogueado()));
         return licencia;
     }
 

@@ -38,7 +38,7 @@ public class Usuario {
     private TipoDoc tipoDoc;
     
     @Column(name= "numeroDoc", nullable = false)
-    private String nmoDoc;
+    private String numDoc;
     
     @Column(name= "nombreUsuario", unique = true)
     private String nombreUsuario;
@@ -91,11 +91,11 @@ public class Usuario {
     public void setTipoDoc(TipoDoc tipoDoc) {
         this.tipoDoc = tipoDoc;
     }
-    public String getNmoDoc() {
-        return nmoDoc;
+    public String getNumDoc() {
+        return numDoc;
     }
-    public void setNmoDoc(String nmoDoc) {
-        this.nmoDoc = nmoDoc;
+    public void setNumDoc(String nmoDoc) {
+        this.numDoc = nmoDoc;
     }
     public String getNombreUsuario() {
         return nombreUsuario;
