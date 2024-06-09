@@ -129,6 +129,8 @@ public class AltaDeUsuarioController{
         try{
             datosValidos();
             //Logica para guardar cliente
+
+            
             informacionClienteGuardado();
         }catch (DatosInvalidosException e){
             errorDatosInvalidos(e.getMessage());

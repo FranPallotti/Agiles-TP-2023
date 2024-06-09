@@ -3,15 +3,13 @@ package isi.agiles.entidad;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.hibernate.annotations.CollectionId;
+
+
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario",uniqueConstraints = {@UniqueConstraint(columnNames={"nroDoc","tipoDoc"})})
 public class Usuario {
 
     @Id
@@ -19,23 +17,37 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long idUsuario;
 
+    @Column(name = "nombre",nullable = false)
     private String nombre;
     
+    @Column(name = "apellido", nullable = false)
     private String apellido;
     
+    @Column(name = "fechaNacimiento", nullable = false)
     private LocalDate fechaNacimiento;
     
+    @Column(name = "email", nullable = false)
     private String mail;
     
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sexo", nullable = false)
     private TipoSexo sexo;
     
+    @Enumerated(EnumType.STRING)
+    @Column(name="tipoDoc", nullable = false)
     private TipoDoc tipoDoc;
     
+    @Column(name= "numeroDoc", nullable = false)
     private String nmoDoc;
     
+    @Column(name= "nombreUsuario", unique = true)
     private String nombreUsuario;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rol", nullable = false)
     private TipoRol rol;
+
+    
 
     public TipoRol getRol() {
         return rol;
