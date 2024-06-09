@@ -24,7 +24,16 @@ public class CostoLicencia {
     @Column(name= "costo", nullable = false)
     private Float costo;
 
+    @Column(name = "costoadm", nullable = false)
+    private Float costoAdministrativo;
+    
 
+    public Float getCostoAdministrativo() {
+        return costoAdministrativo;
+    }
+    public void setCostoAdministrativo(Float costoAdministrativo) {
+        this.costoAdministrativo = costoAdministrativo;
+    }
     public Float getCosto() {
         return costo;
     }

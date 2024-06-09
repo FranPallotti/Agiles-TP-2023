@@ -44,11 +44,11 @@ public class GestorLicencia {
         List<CostoLicencia> lcosto= c.getCostoClase().stream().sorted((t1,t2) -> t1.getDuracion().compareTo(t2.getDuracion())).collect(Collectors.toList());
         List<CostoLicencia> or = lcosto.stream().filter(t -> t.getDuracion().compareTo(duracionVigencia)>0).collect(Collectors.toList());
         if(or.isEmpty()){
-            ret=Float.valueOf(lcosto.get(lcosto.size()-1).getCosto()+Float.parseFloat("8.0"));
+            ret=Float.valueOf(lcosto.get(lcosto.size()-1).getCosto()+lcosto.get(lcosto.size()-1).getCostoAdministrativo());
         }
         else{
             
-            ret = Float.valueOf(or.get(0).getCosto()+Float.parseFloat("8.0"));
+            ret = Float.valueOf(or.get(0).getCosto()+or.get(0).getCostoAdministrativo());
             
         }
 

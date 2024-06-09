@@ -33,7 +33,7 @@ public class UsuarioDTO {
     public LocalDate getFechaNaciemiento() {
         return fechaNaciemiento;
     }
-    public void setFechaNaciemiento(LocalDate fechaNaciemiento) {
+    public void setFechaNacimiento(LocalDate fechaNaciemiento) {
         this.fechaNaciemiento = fechaNaciemiento;
     }
     public String getMail() {

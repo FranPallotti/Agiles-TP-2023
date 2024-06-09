@@ -10,7 +10,7 @@ public class GestorUsuario {
     public static UsuarioDTO getUsuarioDTO(Usuario usuario){
         UsuarioDTO dto= new UsuarioDTO();
         dto.setApellido(usuario.getApellido());
-        dto.setFechaNaciemiento(usuario.getFechaNacimiento());
+        dto.setFechaNacimiento(usuario.getFechaNacimiento());
         dto.setNombre(usuario.getNombre());
         dto.setMail(usuario.getMail());
         dto.setSexo(usuario.getSexo());

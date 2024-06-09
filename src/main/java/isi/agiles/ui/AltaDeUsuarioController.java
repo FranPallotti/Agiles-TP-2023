@@ -386,7 +386,7 @@ public class AltaDeUsuarioController{
     private UsuarioDTO getUsuarioDTO(){
         UsuarioDTO dto = new UsuarioDTO();
         dto.setApellido(this.campoApellido.getText());
-        dto.setFechaNaciemiento(this.campoFechaNacimiento.getValue());
+        dto.setFechaNacimiento(this.campoFechaNacimiento.getValue());
         dto.setMail(this.campoMail.getText());
         dto.setNombre(this.campoNombre.getText());
         dto.setNombreUsuario(this.campoNombreUsuario.getText());
