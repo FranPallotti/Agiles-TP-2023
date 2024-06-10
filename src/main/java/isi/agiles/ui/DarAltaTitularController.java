@@ -11,6 +11,7 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.excepcion.TitularYaCargadoException;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
 import jakarta.persistence.EntityManager;
@@ -147,7 +148,10 @@ public class DarAltaTitularController{
             TitularDTO titular = crearTitularDTO();
             GestorTitular.persistir(titular);
             informacionClienteGuardado();
-        } catch (Exception e) {
+            accionVolver();
+        } catch (DatosInvalidosException e) {
+            errorDatosInvalidos(e.getMessage());
+        } catch (TitularYaCargadoException e){
             errorDatosInvalidos(e.getMessage());
         }
     }
