@@ -132,7 +132,6 @@ public class DarAltaTitularController{
 
     private GestorTitular gestorTitular = new GestorTitular();
 
-
     public void accionVolver(){
         try{
             Stage currentStage = (Stage) botonVolver.getScene().getWindow();

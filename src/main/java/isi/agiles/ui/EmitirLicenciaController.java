@@ -94,7 +94,7 @@ public class EmitirLicenciaController implements Initializable{
     }
 
     public void inicializarTabla()throws ObjetoNoEncontradoException{
-
+        
         campoApellido.setText("");
         campoFecha.setText("");
         campoNombre.setText("");
