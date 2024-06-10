@@ -1,8 +1,11 @@
 package isi.agiles.logica;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import isi.agiles.App;
 import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
@@ -47,12 +50,29 @@ public class GestorLicencia {
         licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClaseLic()));
         licencia.setTitular(gestorTitular.getTitular(dto.getTitular()));
         //TODO: Setear Usuario con el usuario que este logeado en la sesion
+        licencia.setRealizoTramite(GestorUsuario.getUsuario(App.getUsuarioLogueado()));
         return licencia;
     }
 
-    public Float getCostoLicencia(LicenciaDTO dto){
-        //TODO: Lo hace Fran.
-        return (float)10.0; //(!)
+    public Float getCostoLicencia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
+        Float ret;
+        ClaseLicencia c = gestorClaseLic.getClaseLicencia(dto.getClaseLic());
+        
+        Period period = dto.getInicioVigencia().until(dto.getFinVigencia());
+        Integer duracionVigencia = Integer.valueOf(period.getYears());
+        List<CostoLicencia> lcosto= c.getCostoClase().stream().sorted((t1,t2) -> t1.getDuracion().compareTo(t2.getDuracion())).collect(Collectors.toList());
+        List<CostoLicencia> or = lcosto.stream().filter(t -> t.getDuracion().compareTo(duracionVigencia)>0).collect(Collectors.toList());
+        if(or.isEmpty()){
+            ret=Float.valueOf(lcosto.get(lcosto.size()-1).getCosto()+lcosto.get(lcosto.size()-1).getCostoAdministrativo());
+        }
+        else{
+            
+            ret = Float.valueOf(or.get(0).getCosto()+or.get(0).getCostoAdministrativo());
+            
+        }
+
+
+        return ret; //(!)
     }
 
     public void calcularVigenciaLicencia(LicenciaDTO dto)

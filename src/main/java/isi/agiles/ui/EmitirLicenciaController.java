@@ -17,8 +17,10 @@ import isi.agiles.logica.GestorTitular;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -27,9 +29,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.Parent;
 
 public class EmitirLicenciaController implements Initializable{
     private TitularDTO titular;
@@ -160,16 +166,54 @@ public class EmitirLicenciaController implements Initializable{
    
     @FXML
     private void emitirCliqueado(ActionEvent event) throws IOException{
-
-              
-
         if(validarDatos()){
-            //campoClaseLicencia.getValue()
             LicenciaDTO l = getLicenciaDTO(titular, campoObservaciones.getText(), campoClaseLicencia.getSelectionModel().getSelectedItem());
-        
-
             try{
-                gestorLicencia.altaLicencia(l);
+                if(gestorTitular.puedeTenerLicencia(titular,l.getClaseLic())){
+                    try{
+                        FXMLLoader loader = new FXMLLoader();
+                       
+                        loader.setLocation(App.class.getResource("EmitirLicenciaCosto.fxml"));
+                        
+                        
+                        Stage stage = new Stage();
+                        stage.setTitle("Confirme los datos y el Costo");
+                        
+                         
+                        Parent root = loader.load();
+                        //aca recien me carga el controlador
+                        EmitirLicenciaCostoController formularioCosto = loader.getController();
+                        stage.setScene(new Scene(root));
+                        stage.setResizable(false);
+                        stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
+                        stage.show();
+
+                        gestorLicencia.calcularVigenciaLicencia(l);
+                        l.setCosto(gestorLicencia.getCostoLicencia(l));
+                        formularioCosto.setLicencia(l);
+                        formularioCosto.setearDatos();
+
+                        Stage currentStage = (Stage) this.botonEmitir.getScene().getWindow();
+                        currentStage.close();
+                    }
+                    catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    noCumpleCondicionesLicencia();
+                }
+            }
+            catch(ObjetoNoEncontradoException e){
+                // Si no encuentra el objeto a la hora de validar si puede tener licencia o no
+                e.printStackTrace();
+            }
+
+            /* 
+            try{
+                
+
+
             }
             catch(ObjetoNoEncontradoException e){
                 e.printStackTrace();
@@ -181,6 +225,12 @@ public class EmitirLicenciaController implements Initializable{
                 noCumpleCondicionesLicencia();
 
             }
+            */
+
+        }
+        else{
+            /// poner un popup de datos invalidos
+            titularNoEncontrado();
         }
         
 
