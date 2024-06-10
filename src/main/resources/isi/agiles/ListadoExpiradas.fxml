@@ -20,19 +20,19 @@
       </ImageView>
       <Text fx:id="tituloText" fill="WHITE" layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listado de Licencias Expiradas" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="74.98291015625">
          <font>
-            <Font name="Tahoma Bold" size="35.0" />
+            <Font name="Arial Rounded MT Bold" size="35.0" />
          </font>
       </Text>
-      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
+      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" style="-fx-font-family: 'Arial Rounded MT Bold';" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
          <columns>
-            <TableColumn fx:id="fechaVencimientoColumn" editable="false" prefWidth="158.33333587646484" text="Fecha de Vencimiento" />
-            <TableColumn fx:id="claseLicColumn" editable="false" prefWidth="75.0" text="Tipo de Licencia" />
-            <TableColumn fx:id="nombreColumn" editable="false" prefWidth="75.0" text="Nombre" />
-            <TableColumn fx:id="apellidoColumn" editable="false" prefWidth="75.0" text="Apellido" />
-            <TableColumn prefWidth="75.0" text="Documento">
+            <TableColumn fx:id="fechaVencimientoColumn" editable="false" prefWidth="158.33333587646484" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Fecha de Vencimiento" />
+            <TableColumn fx:id="claseLicColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Tipo de Licencia" />
+            <TableColumn fx:id="nombreColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Nombre" />
+            <TableColumn fx:id="apellidoColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Apellido" />
+            <TableColumn prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Documento">
                <columns>
-                  <TableColumn fx:id="tipoDocColumn" prefWidth="75.0" text="Tipo" />
-                  <TableColumn fx:id="nroDocColumn" editable="false" prefWidth="75.0" text="Numero" />
+                  <TableColumn fx:id="tipoDocColumn" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Tipo" />
+                  <TableColumn fx:id="nroDocColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Numero" />
                </columns>
             </TableColumn>
          </columns>
@@ -42,7 +42,7 @@
       </TableView>
       <Button fx:id="volverButton" layoutX="947.0" layoutY="661.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Volver" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="25.0">
          <font>
-            <Font name="Tahoma Bold" size="13.0" />
+            <Font name="Arial Rounded MT Bold" size="13.0" />
          </font></Button>
       <Text fx:id="licenciasNoEncontradasText" fill="#01ae7a" layoutX="79.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVISO: No se han encontrado licencias expiradas" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="160.0">
          <font>

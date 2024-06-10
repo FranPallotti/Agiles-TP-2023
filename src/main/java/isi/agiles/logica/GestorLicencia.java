@@ -54,7 +54,8 @@ public class GestorLicencia {
         return licencia;
     }
 
-    public Float getCostoLicencia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
+    public Float getCostoLicencia(LicenciaDTO dto)
+    throws ObjetoNoEncontradoException{
         Float ret;
         ClaseLicencia c = gestorClaseLic.getClaseLicencia(dto.getClaseLic());
         
@@ -62,15 +63,13 @@ public class GestorLicencia {
         Integer duracionVigencia = Integer.valueOf(period.getYears());
         List<CostoLicencia> lcosto= c.getCostoClase().stream().sorted((t1,t2) -> t1.getDuracion().compareTo(t2.getDuracion())).collect(Collectors.toList());
         List<CostoLicencia> or = lcosto.stream().filter(t -> t.getDuracion().compareTo(duracionVigencia)>0).collect(Collectors.toList());
+
         if(or.isEmpty()){
             ret=Float.valueOf(lcosto.get(lcosto.size()-1).getCosto()+lcosto.get(lcosto.size()-1).getCostoAdministrativo());
         }
         else{
-            
             ret = Float.valueOf(or.get(0).getCosto()+or.get(0).getCostoAdministrativo());
-            
         }
-
 
         return ret;
     }
@@ -90,7 +89,7 @@ public class GestorLicencia {
             //Si la fecha de cumpleaños no pasó todavia para este año (o incluso es hoy), se cuenta desde el cumpleaños de este año
             vigenteHasta = titular.getFechaNacimiento().withYear(hoy.getYear() + aniosVigencia);
         }
-        dto.setInicioVigencia(LocalDate.now());
+        dto.setInicioVigencia(hoy);
         dto.setFinVigencia(vigenteHasta);
     }
 
