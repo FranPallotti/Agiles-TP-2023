@@ -38,11 +38,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        //completarUsuario(usuarioLogueado); 
-        //App.poblar();
+        //App.primeraEjecucion();
         loguear(usuarioLogueado);
-        
         launch();
+    }
+
+    private static void primeraEjecucion(){
+        completarUsuario(usuarioLogueado); 
+        App.poblar();
     }
 
     //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION

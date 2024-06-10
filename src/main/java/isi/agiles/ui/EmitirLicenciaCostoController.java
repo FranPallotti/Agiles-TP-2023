@@ -59,7 +59,8 @@ public class EmitirLicenciaCostoController implements Initializable{
 
     private LicenciaDTO licencia;
 
-
+    private GestorLicencia gestorLicencia = new GestorLicencia();
+    
     public LicenciaDTO getLicencia() {
         return licencia;
     }
@@ -82,12 +83,12 @@ public class EmitirLicenciaCostoController implements Initializable{
     public void setearDatos(){
         campoApellido.setText(licencia.getTitular().getApellido());
         campoNombre.setText(licencia.getTitular().getNombre());
-        campoClaseLicencia.setText(licencia.getClase().toString());
+        campoClaseLicencia.setText(licencia.getClaseLic().toString());
         campoFechaNacimiento.setValue(licencia.getTitular().getFechaNacimiento());
         campoVigenteDesde.setValue(licencia.getInicioVigencia());
         campoVigenteHasta.setValue(licencia.getFinVigencia());
         campoTipoDocumento.setText(licencia.getTitular().getTipoDoc().toString());
-        campoNumeroDoc.setText(licencia.getTitular().getDocumento());
+        campoNumeroDoc.setText(licencia.getTitular().getNroDoc());
         campoCostoVigencia.setText(licencia.getCosto().toString());
     }
 
@@ -106,7 +107,7 @@ public class EmitirLicenciaCostoController implements Initializable{
     @FXML
     private void emitirCliqueado(ActionEvent e){
         try{
-            GestorLicencia.altaLicencia(licencia);
+            gestorLicencia.altaLicencia(licencia);
             licenciaDadaDeAlta();
 
         }

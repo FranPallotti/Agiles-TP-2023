@@ -72,7 +72,7 @@ public class GestorLicencia {
         }
 
 
-        return ret; //(!)
+        return ret;
     }
 
     public void calcularVigenciaLicencia(LicenciaDTO dto)
@@ -83,8 +83,8 @@ public class GestorLicencia {
         LocalDate hoy = LocalDate.now();
         LocalDate posibleProxCumpleanios = titular.getFechaNacimiento().withYear(hoy.getYear());
         LocalDate vigenteHasta;
-        if(posibleProxCumpleanios.compareTo(hoy) > 0){
-            //Si la fecha de cumpleaños ya pasó para este año, se cuenta desde el cumpleaños del año que viene
+        if(posibleProxCumpleanios.compareTo(hoy) < 0){
+            //Si la fecha de cumpleaños ya pasó para este año (es "menor" que hoy), se cuenta desde el cumpleaños del año que viene
             vigenteHasta = titular.getFechaNacimiento().withYear(hoy.getYear() + aniosVigencia + 1);
         }else{
             //Si la fecha de cumpleaños no pasó todavia para este año (o incluso es hoy), se cuenta desde el cumpleaños de este año
