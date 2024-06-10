@@ -144,11 +144,17 @@ public class DarAltaTitularController{
     public void accionGuardar(){
         try {
             validarDatos();
+            //Se persiste en la BDD el nuevjo titular
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();
-        } catch (Exception e) {
+            //Se vuelve al menú principal
+            Stage currentStage = (Stage) botonGuardar.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
+        } catch (DatosInvalidosException e) {
             errorDatosInvalidos(e.getMessage());
+        } catch(IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -363,7 +369,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -375,7 +381,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();

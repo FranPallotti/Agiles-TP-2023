@@ -127,16 +127,21 @@ public class AltaDeUsuarioController{
     void accionGuardar(ActionEvent event) {
         try{
             datosValidos();
-            //Logica para guardar cliente
+            //Lógica para guardar cliente
             UsuarioDTO dto = this.getUsuarioDTO();
             GestorUsuario.altaUsuario(dto);
-            
             informacionClienteGuardado();
+            //Vuelta al menú principal
+            Stage currentStage = (Stage) botonGuardar.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
         }catch (DatosInvalidosException e){
             errorDatosInvalidos(e.getMessage());
         }
         catch(UsernameNoUnicoException u){
             errorDatosInvalidos(u.getMessage());
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -171,7 +176,7 @@ public class AltaDeUsuarioController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -183,7 +188,7 @@ public class AltaDeUsuarioController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -214,7 +219,7 @@ public class AltaDeUsuarioController{
             campoNombreUsuario.setText(null);
             invalido = true;
         }else if(campoNombreUsuario.getText().length()>16){
-            labelErrorNombreUsuario.setText("*Máximo 16 caracteres sin\r\n espacios.*");
+            labelErrorNombreUsuario.setText("*Máximo 16 caracteres\r\n sin espacios.*");
             labelErrorNombreUsuario.setVisible(true);
             campoNombreUsuario.setText(null);
             invalido=true;
