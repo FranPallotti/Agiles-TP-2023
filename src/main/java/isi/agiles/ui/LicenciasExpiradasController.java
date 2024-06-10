@@ -1,10 +1,12 @@
 package isi.agiles.ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
@@ -13,6 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class LicenciasExpiradasController implements Initializable {
     @FXML
@@ -89,5 +93,13 @@ public class LicenciasExpiradasController implements Initializable {
         actualizarTabla();
         licenciasNoEncontradasText.visibleProperty().bind(listadoExpiradasTable.visibleProperty().not());
     }
-    
+        @FXML
+    void accionVolver(ActionEvent event) {
+        try{
+            Stage currentStage = (Stage) volverButton.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -13,7 +13,7 @@
    <children>
       <Label fx:id="labelAltaDeUsuario" alignment="CENTER" focusTraversable="false" layoutX="174.0" layoutY="60.0" prefHeight="57.0" prefWidth="679.0" text="Alta de Usuario" textAlignment="CENTER" underline="true">
          <font>
-            <Font name="Times New Roman Bold" size="51.0" />
+            <Font name="Arial Rounded MT Bold" size="51.0" />
          </font>
       </Label>
       <TextField fx:id="campoNombre" layoutX="45.0" layoutY="250.0" prefHeight="25.0" prefWidth="189.0" promptText="Máximo 32 caracteres">
@@ -55,7 +55,7 @@
       </TextField>
       <Button fx:id="botonVolver" layoutX="263.0" layoutY="644.0" mnemonicParsing="false" onAction="#accionVolver" prefHeight="39.0" prefWidth="203.0" text="Volver">
          <font>
-            <Font name="Times New Roman Bold Italic" size="22.0" />
+            <Font name="Arial Rounded MT Bold" size="22.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -63,7 +63,7 @@
       </Button>
       <Button fx:id="botonGuardar" layoutX="553.0" layoutY="644.0" mnemonicParsing="false" onAction="#accionGuardar" prefHeight="39.0" prefWidth="203.0" text="Guardar">
          <font>
-            <Font name="Times New Roman Bold Italic" size="22.0" />
+            <Font name="Arial Rounded MT Bold" size="22.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -71,82 +71,82 @@
       </Button>
       <Label fx:id="labelNombre" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="219.0" prefHeight="25.0" prefWidth="189.0" text="Nombre">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelApellido" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="219.0" prefHeight="25.0" prefWidth="189.0" text="Apellido">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="219.0" prefHeight="25.0" prefWidth="189.0" text="Fecha de Nacimiento">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </Label>
       <Label fx:id="labelMail" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="219.0" prefHeight="25.0" prefWidth="189.0" text="Mail">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelSexo" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="421.0" prefHeight="25.0" prefWidth="189.0" text="Sexo">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelTipoDoc" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="421.0" prefHeight="25.0" prefWidth="189.0" text="Tipo Documento">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelNroDoc" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="421.0" prefHeight="25.0" prefWidth="189.0" text="Nro. de Documento">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelNombreUsuario" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="421.0" prefHeight="25.0" prefWidth="189.0" text="Nombre de Usuario">
          <font>
-            <Font name="Times New Roman" size="20.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorNombre" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorApellido" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorMail" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="282.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorSexo" alignment="CENTER" focusTraversable="false" layoutX="45.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorTipoDoc" alignment="CENTER" focusTraversable="false" layoutX="302.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorNroDoc" alignment="CENTER" focusTraversable="false" layoutX="560.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="labelErrorNombreUsuario" alignment="CENTER" focusTraversable="false" layoutX="812.0" layoutY="490.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
-            <Font name="Times New Roman" size="15.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="14.0" layoutY="677.0" prefHeight="28.0" prefWidth="375.0" text="Municipalidad de Santa Fe.">

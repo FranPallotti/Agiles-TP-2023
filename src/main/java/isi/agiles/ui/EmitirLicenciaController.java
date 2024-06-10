@@ -323,7 +323,7 @@ public class EmitirLicenciaController implements Initializable{
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
@@ -335,7 +335,7 @@ public class EmitirLicenciaController implements Initializable{
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
@@ -347,7 +347,7 @@ public class EmitirLicenciaController implements Initializable{
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
