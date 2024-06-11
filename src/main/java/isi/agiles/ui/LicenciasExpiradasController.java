@@ -53,10 +53,14 @@ public class LicenciasExpiradasController implements Initializable {
     private Text licenciasNoEncontradasText;
     @FXML
     private Pagination listadoExpiradasPagination;
+
     private List<LicenciaDTO> listadoExpiradas;
+
     @SuppressWarnings("unused")
     private TableViewWithPagination<LicenciaDTO> gestorTablaPagination;
+
     private final int FILAS_POR_PAGINA = 15;
+    
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
     public void inicializarTabla(){
@@ -112,7 +116,6 @@ public class LicenciasExpiradasController implements Initializable {
 
     @FXML
     void accionVolver(ActionEvent event) {
-        Pane header = (Pane) listadoExpiradasTable.lookup("TableHeaderRow");
         try{
             Stage currentStage = (Stage) volverButton.getScene().getWindow();
             App.cambiarVentana("MenuPrincipal.fxml", currentStage);
