@@ -131,11 +131,4 @@ public class EmitirLicenciaCostoController implements Initializable{
             alert.setResizable(false);
             alert.showAndWait();
         }
-
-    
-   
-
-
-
-
 }

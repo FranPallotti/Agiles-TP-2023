@@ -35,8 +35,8 @@ public class App extends Application {
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        //App.primeraEjecucion();
-        loguear(usuarioLogueado);
+        App.primeraEjecucion();
+        //loguear(usuarioLogueado);
         launch();
     }
 

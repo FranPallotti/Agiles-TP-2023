@@ -6,16 +6,28 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="frameAltaUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.AltaDeUsuarioController">
    <children>
-      <Label fx:id="labelAltaDeUsuario" alignment="CENTER" focusTraversable="false" layoutX="174.0" layoutY="60.0" prefHeight="57.0" prefWidth="679.0" text="Alta de Usuario" textAlignment="CENTER" underline="true">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="51.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER_RIGHT" prefHeight="142.0" prefWidth="1027.0" style="-fx-background-color: #00c089;">
+         <children>
+            <Label fx:id="labelAltaDeUsuario" alignment="TOP_CENTER" focusTraversable="false" prefHeight="60.0" prefWidth="801.0" text="Alta de Usuario" textAlignment="CENTER" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="51.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imagenMuniStaFe" fitHeight="118.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/santafemuni-white-tiny.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
       <TextField fx:id="campoNombre" layoutX="45.0" layoutY="250.0" prefHeight="25.0" prefWidth="189.0" promptText="Máximo 32 caracteres">
          <font>
             <Font name="Arial" size="12.0" />
