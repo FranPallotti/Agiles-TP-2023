@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -15,63 +17,65 @@
       <ComboBox fx:id="campoTipoDoc" layoutX="49.0" layoutY="168.0" prefWidth="150.0" promptText=" Seleccione Tipo Documento" />
       <TextField fx:id="campoNroDoc" layoutX="224.0" layoutY="168.0" promptText="Ingrese Documento" />
       <Button fx:id="botonBuscar" layoutX="393.0" layoutY="168.0" mnemonicParsing="false" onAction="#buscarCliqueado" text="Buscar" />
-      <Label layoutX="47.0" layoutY="16.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia" textFill="WHITE">
+      <Label layoutX="47.0" layoutY="21.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="50.0" />
          </font>
       </Label>
       <Button fx:id="botonEmitir" layoutX="726.0" layoutY="658.0" mnemonicParsing="false" onAction="#emitirCliqueado" text="Emitir" />
       <Button fx:id="botonVolverAtras" layoutX="620.0" layoutY="658.0" mnemonicParsing="false" onAction="#handleExit" text="Volver Atras" />
-      <TextField fx:id="campoNombre" editable="false" layoutX="49.0" layoutY="278.0" />
-      <TextField fx:id="campoApellido" editable="false" layoutX="224.0" layoutY="278.0" />
-      <Label layoutX="49.0" layoutY="250.0" text="Nombre">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="224.0" layoutY="250.0" text="Apellido">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="49.0" layoutY="138.0" text="Tipo Documento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="campoClaseLicencia" layoutX="566.0" layoutY="278.0" prefHeight="25.0" prefWidth="216.0" promptText="Seleccione Clase de Licencia" />
-      <Label layoutX="566.0" layoutY="250.0" text="Clase de Licencia Pedida">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="campoFecha" editable="false" layoutX="393.0" layoutY="278.0" />
+      <TextField fx:id="campoNombre" editable="false" layoutX="50.0" layoutY="291.0" />
+      <TextField fx:id="campoApellido" editable="false" layoutX="224.0" layoutY="291.0" />
+      <ComboBox fx:id="campoClaseLicencia" layoutX="566.0" layoutY="291.0" prefHeight="25.0" prefWidth="216.0" promptText="Seleccione Clase de Licencia" />
+      <TextField fx:id="campoFecha" editable="false" layoutX="393.0" layoutY="291.0" />
       <TextArea fx:id="campoObservaciones" layoutX="47.0" layoutY="377.0" prefHeight="200.0" prefWidth="736.0" />
-      <Label layoutX="49.0" layoutY="343.0" text="Observaciones">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
       <Label fx:id="errorFormatoObservaciones" layoutX="47.0" layoutY="589.0" prefHeight="35.0" prefWidth="433.0" text="El campo no cumple con el formato requerido" textFill="RED" visible="false" wrapText="true" />
-      <Label fx:id="errorFaltaClaseLicencia" layoutX="567.0" layoutY="307.0" prefHeight="35.0" prefWidth="243.0" text="Seleccione una clase de licencia" textFill="RED" visible="false" wrapText="true" />
-      <Label fx:id="errorFaltaTitular" layoutX="47.0" layoutY="193.0" prefHeight="23.0" prefWidth="325.0" text="Falta Ingresar un Titular" textFill="RED" visible="false" wrapText="true">
-         <font>
-            <Font size="9.0" />
-         </font></Label>
-      <Label layoutX="393.0" layoutY="250.0" text="Fecha de Nacimiento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="224.0" layoutY="138.0" text="Numero de Documento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="49.0" layoutY="216.0" text="Beneficiario">
+      <Label fx:id="errorFaltaClaseLicencia" layoutX="566.0" layoutY="325.0" prefHeight="35.0" prefWidth="243.0" text="Seleccione una clase de licencia" textFill="RED" visible="false" wrapText="true" />
+      <Label fx:id="errorFaltaTitular" layoutX="49.0" layoutY="193.0" prefHeight="23.0" prefWidth="325.0" text="Falta Ingresar un Titular" textFill="RED" visible="false" wrapText="true" />
+      <Label layoutX="47.0" layoutY="230.0" text="Beneficiario">
          <font>
             <Font name="Arial Rounded MT Bold" size="19.0" />
          </font>
       </Label>
+      <Label layoutX="48.0" layoutY="139.0" text="Tipo Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="139.0" text="Numero de Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="266.0" text="Nombre">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="224.0" layoutY="266.0" text="Apellido">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="393.0" layoutY="266.0" text="Fecha de Nacimiento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="567.0" layoutY="266.0" text="Clase de Licencia Pedida">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="352.0" text="Observaciones">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="83.0" fitWidth="67.0" layoutX="717.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/santafemuni-white.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
