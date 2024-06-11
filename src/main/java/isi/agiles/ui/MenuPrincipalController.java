@@ -55,10 +55,7 @@ public class MenuPrincipalController {
     private Label labelMenuPrincipal;
 
     @FXML
-    private ImageView logoStaFeDer;
-
-    @FXML
-    private ImageView logoStaFeIzq;
+    private ImageView logoStaFe;
 
 
     public void informacionFuncionalidadNoDesarrollada(){

@@ -14,6 +14,7 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.excepcion.TitularYaCargadoException;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.fxml.FXML;
@@ -148,13 +149,11 @@ public class DarAltaTitularController{
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();
-            //Se vuelve al menú principal
-            Stage currentStage = (Stage) botonGuardar.getScene().getWindow();
-            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
+            accionVolver();
         } catch (DatosInvalidosException e) {
             errorDatosInvalidos(e.getMessage());
-        } catch(IOException e){
-            e.printStackTrace();
+        } catch (TitularYaCargadoException e){
+            errorDatosInvalidos(e.getMessage());
         }
     }
 

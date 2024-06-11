@@ -6,11 +6,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" stylesheets="@styles/custom-font-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
    <children>
-      <Button fx:id="botonEmitirLicencia" layoutX="174.0" layoutY="119.0" mnemonicParsing="false" onAction="#accionEmitirLicencia" prefHeight="57.0" prefWidth="284.0" text="Emitir Licencia">
+      <Button fx:id="botonEmitirLicencia" contentDisplay="CENTER" layoutX="330.0" layoutY="139.0" mnemonicParsing="false" onAction="#accionEmitirLicencia" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Emitir Licencia" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -18,7 +19,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonDarAltaTitular" layoutX="574.0" layoutY="119.0" mnemonicParsing="false" onAction="#accionDarAltaTitular" prefHeight="57.0" prefWidth="284.0" text="Dar de Alta Titular">
+      <Button fx:id="botonDarAltaTitular" layoutX="679.0" layoutY="138.0" mnemonicParsing="false" onAction="#accionDarAltaTitular" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Dar de Alta Titular" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -26,7 +27,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonImprimirLicencia" layoutX="174.0" layoutY="228.0" mnemonicParsing="false" onAction="#accionImprimirLicencia" prefHeight="57.0" prefWidth="284.0" text="Imprimir Licencia">
+      <Button fx:id="botonImprimirLicencia" layoutX="330.0" layoutY="222.0" mnemonicParsing="false" onAction="#accionImprimirLicencia" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Imprimir Licencia" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -34,7 +35,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonDarAltaUsuario" layoutX="574.0" layoutY="228.0" mnemonicParsing="false" onAction="#accionDarAltaUsuario" prefHeight="57.0" prefWidth="284.0" text="Dar de Alta Usuario">
+      <Button fx:id="botonDarAltaUsuario" layoutX="678.0" layoutY="221.0" mnemonicParsing="false" onAction="#accionDarAltaUsuario" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Dar de Alta Usuario" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -42,7 +43,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonRenovarLicencia" layoutX="174.0" layoutY="338.0" mnemonicParsing="false" onAction="#accionRenovarLicencia" prefHeight="57.0" prefWidth="284.0" text="Renovar Licencia">
+      <Button fx:id="botonRenovarLicencia" layoutX="330.0" layoutY="316.0" mnemonicParsing="false" onAction="#accionRenovarLicencia" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Renovar Licencia" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -50,15 +54,7 @@
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="botonModificarDatosUsuario" layoutX="574.0" layoutY="338.0" mnemonicParsing="false" onAction="#accionModificarDatosUsuario" prefHeight="57.0" prefWidth="284.0" text=" Modificar Datos de Usuario">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="19.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="botonListarLicenciasVigentes" layoutX="174.0" layoutY="445.0" mnemonicParsing="false" onAction="#accionListarLicenciasVigentes" prefHeight="57.0" prefWidth="284.0" text="Listar Licencias Vigentes">
+      <Button fx:id="botonModificarDatosUsuario" layoutX="678.0" layoutY="307.0" mnemonicParsing="false" onAction="#accionModificarDatosUsuario" opacity="0.7" prefHeight="66.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text=" Modificar Datos de Usuario" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -66,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonModificarDatosTitular" layoutX="574.0" layoutY="445.0" mnemonicParsing="false" onAction="#accionModificarDatosTitular" prefHeight="57.0" prefWidth="284.0" text=" Modificar Datos de Titular">
+      <Button fx:id="botonListarLicenciasVigentes" layoutX="330.0" layoutY="408.0" mnemonicParsing="false" onAction="#accionListarLicenciasVigentes" opacity="0.7" prefHeight="66.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Listar Licencias Vigentes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -74,7 +70,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonListarLicenciasExpiradas" layoutX="174.0" layoutY="544.0" mnemonicParsing="false" onAction="#accionListarLicenciasExpiradas" prefHeight="57.0" prefWidth="284.0" text="Listar Licencias Expiradas">
+      <Button fx:id="botonModificarDatosTitular" layoutX="678.0" layoutY="408.0" mnemonicParsing="false" onAction="#accionModificarDatosTitular" opacity="0.7" prefHeight="66.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text=" Modificar Datos de Titular" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -82,32 +78,31 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botonModificarCostorsLicencias" layoutX="574.0" layoutY="544.0" mnemonicParsing="false" onAction="#accionModificarCostosLicencias" prefHeight="57.0" prefWidth="284.0" text="Modificar Costos de Licencias">
+      <Button fx:id="botonListarLicenciasExpiradas" layoutX="330.0" layoutY="510.0" mnemonicParsing="false" onAction="#accionListarLicenciasExpiradas" opacity="0.7" prefHeight="66.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Listar Licencias Expiradas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Arial Rounded MT Bold" size="17.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="labelMenuPrincipal" alignment="CENTER" contentDisplay="RIGHT" layoutX="174.0" layoutY="26.0" prefHeight="57.0" prefWidth="679.0" styleClass="fontProximaMedium" text="Menú Principal" textAlignment="CENTER" underline="true">
+      <Button fx:id="botonModificarCostorsLicencias" layoutX="678.0" layoutY="511.0" mnemonicParsing="false" onAction="#accionModificarCostosLicencias" opacity="0.7" prefHeight="66.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Modificar Costos de Licencias" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Arial Rounded MT Bold" size="51.0" />
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="labelMenuPrincipal" alignment="CENTER" contentDisplay="RIGHT" layoutX="461.0" layoutY="42.0" opacity="0.7" prefHeight="58.0" prefWidth="378.0" text="Menú Principal" textAlignment="CENTER" textFill="#00c089">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="48.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="677.0" prefHeight="28.0" prefWidth="375.0" text="Municipalidad de Santa Fe.">
-         <font>
-            <Font name="Times New Roman Italic" size="18.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="logoStaFeIzq" fitHeight="150.0" fitWidth="167.0" layoutX="31.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+      <HBox layoutX="-3.0" prefHeight="719.0" prefWidth="238.0" style="-fx-background-color: #00c089;" />
+      <ImageView fx:id="logoStaFe" fitHeight="77.0" fitWidth="164.0" layoutX="816.0" layoutY="614.0">
          <image>
-            <Image url="@img/santafemuni-tiny.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="logoStaFeDer" fitHeight="150.0" fitWidth="167.0" layoutX="888.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/santafemuni-tiny.png" />
+            <Image url="@santafe.png" />
          </image>
       </ImageView>
    </children>
