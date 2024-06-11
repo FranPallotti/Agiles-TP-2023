@@ -37,7 +37,8 @@ public class LoginController {
             UsuarioDTO dto= new UsuarioDTO();
             dto.setNombreUsuario(campoNombreUsuario.getText());
             try{
-                dto=GestorUsuario.getUsuarioDTO(GestorUsuario.getUsuario(dto));
+                GestorUsuario gestor= new GestorUsuario();
+                dto= gestor.getUsuarioDTO(gestor.getUsuario(dto));
                 App.setUsuarioLogeado(dto);
                 Stage currentStage = (Stage) botonIngresar.getScene().getWindow();
                 App.cambiarVentana("MenuPrincipal.fxml",currentStage );

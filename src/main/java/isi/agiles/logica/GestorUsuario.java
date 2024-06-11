@@ -43,7 +43,7 @@ public class GestorUsuario {
         
     }
     
-    public void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException{
+    public void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException,DatosInvalidosException{
         
         if(!this.usernameEsUnico(dto)){
             throw new UsernameNoUnicoException();
@@ -94,17 +94,17 @@ public class GestorUsuario {
     }
     public Boolean datosInvalidos(UsuarioDTO u){
         Boolean invalidos = false;
-        invalidos |=nombreInvalido(u);
-        invalidos |=apellidoInvalido(u);
-        invalidos |=fechaNacimientoInvalido(u);
-        invalidos |=mailInvalido(u);
-        invalidos |=sexoInvalido(u);
+        invalidos |=this.nombreInvalido(u);
+        invalidos |=this.apellidoInvalido(u);
+        invalidos |=this.fechaNacimientoInvalido(u);
+        invalidos |=this.mailInvalido(u);
+        invalidos |=this.sexoInvalido(u);
         invalidos |=this.dniInvalido(u);
-        invalidos |=nombreUsuarioInvalido(u);
+        invalidos |=this.nombreUsuarioInvalido(u);
         return invalidos;
     }
 
-    public static Boolean nombreInvalido(UsuarioDTO u){
+    public Boolean nombreInvalido(UsuarioDTO u){
         Boolean invalido = false;
         if(u.getNombre() == null || u.getNombre().matches("^\\s+$") || u.getNombre().isBlank() || u.getNombre().isEmpty()|| u.getNombre().length()>32){
             invalido = true;
@@ -113,7 +113,7 @@ public class GestorUsuario {
         
         return invalido;
     }
-    public static Boolean apellidoInvalido(UsuarioDTO u){
+    public Boolean apellidoInvalido(UsuarioDTO u){
         Boolean invalido =  false;
         if(u.getApellido() == null|| u.getApellido().matches("^\\s+$") || u.getApellido().isEmpty() || u.getApellido().isBlank() || u.getApellido().length()>32){
 
@@ -122,7 +122,7 @@ public class GestorUsuario {
         return invalido;
     }
 
-    public static Boolean fechaNacimientoInvalido(UsuarioDTO u){
+    public Boolean fechaNacimientoInvalido(UsuarioDTO u){
         Boolean invalido =false;
         if(u.getFechaNaciemiento() == null || u.getFechaNaciemiento().isAfter(LocalDate.now().minusYears(18))){
             invalido = true;
@@ -130,7 +130,7 @@ public class GestorUsuario {
         return invalido;
     }
 
-    public static Boolean mailInvalido(UsuarioDTO u){
+    public Boolean mailInvalido(UsuarioDTO u){
         Boolean invalido = false;
         if (u.getMail() == null || u.getMail().isEmpty() || u.getMail().isBlank() || !u.getMail().matches("^[\\w.-]+@(gmail|hotmail)\\.com$")){
             invalido = true;
@@ -139,7 +139,7 @@ public class GestorUsuario {
        return invalido;
     }
 
-    public static Boolean sexoInvalido(UsuarioDTO u){
+    public Boolean sexoInvalido(UsuarioDTO u){
         Boolean invalido = false;
         if(u.getSexo()== null){
             invalido=true;
@@ -147,7 +147,7 @@ public class GestorUsuario {
         return invalido;
     }
 
-    public static Boolean nombreUsuarioInvalido(UsuarioDTO u){
+    public Boolean nombreUsuarioInvalido(UsuarioDTO u){
         Boolean invalido =  false;
         if (u.getNombreUsuario() == null || u.getNombreUsuario().matches("^\\s+$") || u.getNombreUsuario().isEmpty()|| u.getNombreUsuario().length()>16 || u.getNombreUsuario().matches("^(\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+)$")){
             

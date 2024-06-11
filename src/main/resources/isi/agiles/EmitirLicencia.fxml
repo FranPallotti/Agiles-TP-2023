@@ -17,7 +17,7 @@
       <ComboBox fx:id="campoTipoDoc" layoutX="49.0" layoutY="168.0" prefWidth="150.0" promptText=" Seleccione Tipo Documento" />
       <TextField fx:id="campoNroDoc" layoutX="224.0" layoutY="168.0" promptText="Ingrese Documento" />
       <Button fx:id="botonBuscar" layoutX="393.0" layoutY="168.0" mnemonicParsing="false" onAction="#buscarCliqueado" text="Buscar" />
-      <Label layoutX="47.0" layoutY="21.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia" textFill="WHITE">
+      <Label layoutX="214.0" layoutY="21.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="50.0" />
          </font>
