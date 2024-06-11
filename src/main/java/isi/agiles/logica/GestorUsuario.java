@@ -1,9 +1,13 @@
 package isi.agiles.logica;
 
+import java.time.LocalDate;
+
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
+import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.*;
+import isi.agiles.util.DatosInvalidosException;
 
 public class GestorUsuario {
 
@@ -38,10 +42,13 @@ public class GestorUsuario {
         
     }
     
-    public static void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException{
+    public static void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException,DatosInvalidosException{
         
         if(!GestorUsuario.usernameEsUnico(dto)){
             throw new UsernameNoUnicoException();
+        }
+        else if(GestorUsuario.datosInvalidos(dto)){
+            throw new DatosInvalidosException();
         }
         Usuario user= GestorUsuario.crearUsuario(dto);
         UsuarioDAO dao = new UsuarioDAO();
@@ -61,6 +68,96 @@ public class GestorUsuario {
         user.setTipoDoc(dto.getTipoDoc());
         return user;
     }
+
+    public static Boolean dniInvalido(UsuarioDTO u){
+        Boolean invalido = false;
+
+        if(u.getTipoDoc() != null && u.getNumDoc() != null){
+            switch (u.getTipoDoc()) {
+                case DNI:
+                    if(!u.getNumDoc().matches("^\\d{8}$") || u.getNumDoc().isBlank() || u.getNumDoc().isEmpty()){
+                        invalido=true;
+                    }
+                                        
+                break;
+                case PASAPORTE:
+                    if(!u.getNumDoc().matches("^[a-zA-Z]{3}\\d{6}$") || u.getNumDoc().isBlank() || u.getNumDoc().isEmpty() ){
+                        invalido=true;
+                    }
+                break;
+                default:
+                    invalido=true;
+            }
+        }
+        return invalido;
+    }
+    public static Boolean datosInvalidos(UsuarioDTO u){
+        Boolean invalidos = false;
+        invalidos |=nombreInvalido(u);
+        invalidos |=apellidoInvalido(u);
+        invalidos |=fechaNacimientoInvalido(u);
+        invalidos |=mailInvalido(u);
+        invalidos |=sexoInvalido(u);
+        invalidos |=dniInvalido(u);
+        invalidos |=nombreUsuarioInvalido(u);
+        return invalidos;
+    }
+
+    public static Boolean nombreInvalido(UsuarioDTO u){
+        Boolean invalido = false;
+        if(u.getNombre() == null || u.getNombre().matches("^\\s+$") || u.getNombre().isBlank() || u.getNombre().isEmpty()|| u.getNombre().length()>32){
+            invalido = true;
+        }
+        
+        
+        return invalido;
+    }
+    public static Boolean apellidoInvalido(UsuarioDTO u){
+        Boolean invalido =  false;
+        if(u.getApellido() == null|| u.getApellido().matches("^\\s+$") || u.getApellido().isEmpty() || u.getApellido().isBlank() || u.getApellido().length()>32){
+
+            invalido = true;
+        }
+        return invalido;
+    }
+
+    public static Boolean fechaNacimientoInvalido(UsuarioDTO u){
+        Boolean invalido =false;
+        if(u.getFechaNaciemiento() == null || u.getFechaNaciemiento().isAfter(LocalDate.now().minusYears(18))){
+            invalido = true;
+        }
+        return invalido;
+    }
+
+    public static Boolean mailInvalido(UsuarioDTO u){
+        Boolean invalido = false;
+        if (u.getMail() == null || u.getMail().isEmpty() || u.getMail().isBlank() || !u.getMail().matches("^[\\w.-]+@(gmail|hotmail)\\.com$")){
+            invalido = true;
+            
+        }
+       return invalido;
+    }
+
+    public static Boolean sexoInvalido(UsuarioDTO u){
+        Boolean invalido = false;
+        if(u.getSexo()== null){
+            invalido=true;
+        }
+        return invalido;
+    }
+
+    public static Boolean nombreUsuarioInvalido(UsuarioDTO u){
+        Boolean invalido =  false;
+        if (u.getNombreUsuario() == null || u.getNombreUsuario().matches("^\\s+$") || u.getNombreUsuario().isEmpty()|| u.getNombreUsuario().length()>16 || u.getNombreUsuario().matches("^(\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+)$")){
+            
+            invalido=true;
+            
+        } 
+        return invalido;
+    }
+
+
+
 
 
 }
