@@ -2,20 +2,12 @@ package isi.agiles.dao;
 
 import java.util.Optional;
 
-import org.hibernate.Session;
-
-import com.google.protobuf.Option;
-
-
-
 import isi.agiles.entidad.Usuario;
+
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.ParameterExpression;
-import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 public class UsuarioDAO extends AbstractDAO<Usuario> {

@@ -14,6 +14,7 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.excepcion.TitularYaCargadoException;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.fxml.FXML;
@@ -144,10 +145,14 @@ public class DarAltaTitularController{
     public void accionGuardar(){
         try {
             validarDatos();
+            //Se persiste en la BDD el nuevjo titular
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();
-        } catch (Exception e) {
+            accionVolver();
+        } catch (DatosInvalidosException e) {
+            errorDatosInvalidos(e.getMessage());
+        } catch (TitularYaCargadoException e){
             errorDatosInvalidos(e.getMessage());
         }
     }
@@ -363,7 +368,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -375,7 +380,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();

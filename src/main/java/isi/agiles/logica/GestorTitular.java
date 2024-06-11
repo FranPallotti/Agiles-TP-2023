@@ -13,6 +13,7 @@ import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Titular;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
+import isi.agiles.excepcion.TitularYaCargadoException;
 
 public class GestorTitular {
 
@@ -59,7 +60,10 @@ public class GestorTitular {
         return this.getEdad(dto.getFechaNacimiento());
     }
 
-    public void persistir(TitularDTO titular) {
+    public void persistir(TitularDTO titular) throws TitularYaCargadoException{
+        if(!this.dniUnico(titular.getNroDoc(), titular.getTipoDoc())){
+            throw new TitularYaCargadoException();
+        } 
         Titular entidad = new Titular();
         entidad.setApellido(titular.getApellido());
         entidad.setClaseSol(titular.getClaseSol());
@@ -74,6 +78,15 @@ public class GestorTitular {
         entidad.setTipoDoc(titular.getTipoDoc());
         TitularDAO t = new TitularDAO();
         t.saveInstance(entidad);
+    }
+
+    private boolean dniUnico(String documento, TipoDoc tipoDoc) {
+        Boolean esUnico = false;
+        TitularDAO t = new TitularDAO();
+        if(t.getByDocumento(documento, tipoDoc).isEmpty()){
+            esUnico = true;
+        }
+        return esUnico;
     }
 
     public Integer getEdadTitular(Titular titular){

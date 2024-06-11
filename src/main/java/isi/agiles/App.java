@@ -22,8 +22,6 @@ import isi.agiles.entidad.CostoLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
-import isi.agiles.entidad.Titular;
-import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.EntityManagerUtil;
@@ -45,7 +43,7 @@ public class App extends Application {
 
     private static void primeraEjecucion(){
         completarUsuario(usuarioLogueado); 
-        App.poblar();
+        //App.poblar();
     }
 
     //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION
@@ -100,9 +98,10 @@ public class App extends Application {
     public static void loguear(UsuarioDTO dto){
 
         //UsuarioDTO dto= new UsuarioDTO();
+        GestorUsuario gestorUsuario = new GestorUsuario();
         dto.setNombreUsuario("franpallotti");
         try{
-            dto=GestorUsuario.getUsuarioDTO(GestorUsuario.getUsuario(dto));
+            dto=gestorUsuario.getUsuarioDTO(gestorUsuario.getUsuario(dto));
         }
         catch(ObjetoNoEncontradoException e){
             System.out.println(e.getMessage());

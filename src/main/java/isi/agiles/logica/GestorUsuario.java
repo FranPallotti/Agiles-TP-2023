@@ -11,7 +11,9 @@ import isi.agiles.util.DatosInvalidosException;
 
 public class GestorUsuario {
 
-    public static UsuarioDTO getUsuarioDTO(Usuario usuario){
+    private UsuarioDAO usuarioDao = new UsuarioDAO();
+
+    public UsuarioDTO getUsuarioDTO(Usuario usuario){
         UsuarioDTO dto= new UsuarioDTO();
         dto.setApellido(usuario.getApellido());
         dto.setFechaNacimiento(usuario.getFechaNacimiento());
@@ -26,13 +28,12 @@ public class GestorUsuario {
 
     }
 
-    public static Usuario getUsuario(UsuarioDTO u) throws ObjetoNoEncontradoException{
-        UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuario = dao.getByUsername(u.getNombreUsuario()).orElseThrow(()-> new ObjetoNoEncontradoException());
+    public Usuario getUsuario(UsuarioDTO u) throws ObjetoNoEncontradoException{
+        Usuario usuario = usuarioDao.getByUsername(u.getNombreUsuario()).orElseThrow(()-> new ObjetoNoEncontradoException());
         return usuario;
     }
 
-    public static Boolean usernameEsUnico(UsuarioDTO dto){
+    public Boolean usernameEsUnico(UsuarioDTO dto){
         Boolean ret =false;
         UsuarioDAO dao = new UsuarioDAO();
         if(dao.getByUsername(dto.getNombreUsuario()).isEmpty()){
@@ -42,20 +43,20 @@ public class GestorUsuario {
         
     }
     
-    public static void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException,DatosInvalidosException{
+    public void altaUsuario(UsuarioDTO dto)throws UsernameNoUnicoException{
         
-        if(!GestorUsuario.usernameEsUnico(dto)){
+        if(!this.usernameEsUnico(dto)){
             throw new UsernameNoUnicoException();
         }
-        else if(GestorUsuario.datosInvalidos(dto)){
+        else if(this.datosInvalidos(dto)){
             throw new DatosInvalidosException();
         }
-        Usuario user= GestorUsuario.crearUsuario(dto);
+        Usuario user= this.crearUsuario(dto);
         UsuarioDAO dao = new UsuarioDAO();
         dao.saveInstance(user);
     }
 
-    public static Usuario crearUsuario(UsuarioDTO dto){
+    public Usuario crearUsuario(UsuarioDTO dto){
         Usuario user= new Usuario();
         user.setApellido(dto.getApellido());
         user.setFechaNacimiento(dto.getFechaNaciemiento());
@@ -69,7 +70,7 @@ public class GestorUsuario {
         return user;
     }
 
-    public static Boolean dniInvalido(UsuarioDTO u){
+    public  Boolean dniInvalido(UsuarioDTO u){
         Boolean invalido = false;
 
         if(u.getTipoDoc() != null && u.getNumDoc() != null){
@@ -91,14 +92,14 @@ public class GestorUsuario {
         }
         return invalido;
     }
-    public static Boolean datosInvalidos(UsuarioDTO u){
+    public Boolean datosInvalidos(UsuarioDTO u){
         Boolean invalidos = false;
         invalidos |=nombreInvalido(u);
         invalidos |=apellidoInvalido(u);
         invalidos |=fechaNacimientoInvalido(u);
         invalidos |=mailInvalido(u);
         invalidos |=sexoInvalido(u);
-        invalidos |=dniInvalido(u);
+        invalidos |=this.dniInvalido(u);
         invalidos |=nombreUsuarioInvalido(u);
         return invalidos;
     }
