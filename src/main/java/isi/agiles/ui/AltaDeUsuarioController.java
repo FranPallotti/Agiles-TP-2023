@@ -113,6 +113,8 @@ public class AltaDeUsuarioController{
     @FXML
     private ChoiceBox<TipoSexo> listaTipoSexo;
 
+    private GestorUsuario gestorUsuario = new GestorUsuario();
+
     @FXML
     void accionVolver(ActionEvent event) {
         try{
@@ -129,7 +131,7 @@ public class AltaDeUsuarioController{
             datosValidos();
             //Lógica para guardar cliente
             UsuarioDTO dto = this.getUsuarioDTO();
-            GestorUsuario.altaUsuario(dto);
+            gestorUsuario.altaUsuario(dto);
             informacionClienteGuardado();
             //Vuelta al menú principal
             Stage currentStage = (Stage) botonGuardar.getScene().getWindow();

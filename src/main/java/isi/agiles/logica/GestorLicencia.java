@@ -17,6 +17,7 @@ public class GestorLicencia {
     private LicenciaDAO licenciaDao = new LicenciaDAO();
     private GestorTitular gestorTitular = new GestorTitular();
     private GestorClaseLicencia gestorClaseLic = new GestorClaseLicencia();
+    private GestorUsuario gestorUsuario = new GestorUsuario();
 
     public Licencia getLicencia(LicenciaDTO dto)
     throws ObjetoNoEncontradoException{
@@ -49,8 +50,8 @@ public class GestorLicencia {
         /*Asociaciones */
         licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClaseLic()));
         licencia.setTitular(gestorTitular.getTitular(dto.getTitular()));
-        //TODO: Setear Usuario con el usuario que este logeado en la sesion
-        licencia.setRealizoTramite(GestorUsuario.getUsuario(App.getUsuarioLogueado()));
+        //Setear Usuario con el usuario que este logeado en la sesion
+        licencia.setRealizoTramite(gestorUsuario.getUsuario(App.getUsuarioLogueado()));
         return licencia;
     }
 
