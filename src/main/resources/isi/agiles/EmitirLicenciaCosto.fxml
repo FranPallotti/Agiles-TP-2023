@@ -4,81 +4,90 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.EmitirLicenciaCostoController">
    <children>
-      <Label layoutX="57.0" layoutY="31.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="114.0" strokeType="INSIDE" width="819.0" />
+      <Label layoutX="47.0" layoutY="21.0" prefHeight="73.0" prefWidth="532.0" text="Emitir Licencia" textFill="WHITE">
          <font>
-            <Font name="Times New Roman" size="50.0" />
+            <Font name="Arial Rounded MT Bold" size="50.0" />
          </font>
       </Label>
-      <TextField fx:id="campoNombre" editable="false" layoutX="59.0" layoutY="195.0" />
-      <TextField fx:id="campoApellido" editable="false" layoutX="249.0" layoutY="195.0" />
-      <Label layoutX="59.0" layoutY="167.0" text="Nombre">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="251.0" layoutY="167.0" text="Apellido">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="57.0" layoutY="130.0" text="Beneficiario">
-         <font>
-            <Font name="Times New Roman" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="426.0" layoutY="167.0" text="Fecha de Nacimiento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="campoClaseLicencia" editable="false" layoutX="619.0" layoutY="195.0" prefHeight="25.0" prefWidth="159.0" />
-      <Label layoutX="630.0" layoutY="167.0" text="Clase Licencia">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="campoTipoDocumento" editable="false" layoutX="59.0" layoutY="267.0" />
-      <TextField fx:id="campoNumeroDoc" editable="false" layoutX="249.0" layoutY="267.0" />
-      <Label layoutX="59.0" layoutY="240.0" text="Tipo Documento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="251.0" layoutY="240.0" text="Numero Documento">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="campoCostoVigencia" editable="false" layoutX="619.0" layoutY="408.0" prefHeight="25.0" prefWidth="159.0" />
-      <Label layoutX="436.0" layoutY="409.0" text="Costo de la Licencia:">
-         <font>
-            <Font name="Times New Roman" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="57.0" layoutY="337.0" text="Licencia">
-         <font>
-            <Font name="Times New Roman" size="20.0" />
-         </font>
-      </Label>
+      <TextField fx:id="campoNombre" editable="false" layoutX="45.0" layoutY="195.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="campoApellido" editable="false" layoutX="228.0" layoutY="195.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="campoClaseLicencia" editable="false" layoutX="608.0" layoutY="195.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="campoTipoDocumento" editable="false" layoutX="45.0" layoutY="292.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="campoNumeroDoc" editable="false" layoutX="229.0" layoutY="292.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="campoCostoVigencia" editable="false" layoutX="608.0" layoutY="433.0" prefHeight="25.0" prefWidth="170.0" />
       <Button fx:id="botonEmitir" layoutX="731.0" layoutY="555.0" mnemonicParsing="false" onAction="#emitirCliqueado" text="Emitir" />
       <Button fx:id="botonVolverAtras" layoutX="619.0" layoutY="555.0" mnemonicParsing="false" onAction="#handleExit" text="Volver Atras" />
-      <Label layoutX="57.0" layoutY="377.0" text="Vigente desde:">
+      <DatePicker fx:id="campoVigenteDesde" editable="false" layoutX="45.0" layoutY="432.0" prefHeight="25.0" prefWidth="159.0" />
+      <DatePicker fx:id="campoVigenteHasta" layoutX="228.0" layoutY="432.0" prefHeight="25.0" prefWidth="159.0" />
+      <DatePicker fx:id="campoFechaNacimiento" layoutX="410.0" layoutY="195.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="45.0" layoutY="134.0" text="Beneficiario">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Rounded MT Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="251.0" layoutY="377.0" text="Vigente hasta:">
+      <Label layoutX="406.0" layoutY="434.0" text="Costo de la Licencia:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Label>
-      <DatePicker fx:id="campoVigenteDesde" editable="false" layoutX="53.0" layoutY="408.0" />
-      <DatePicker fx:id="campoVigenteHasta" layoutX="245.0" layoutY="408.0" />
-      <DatePicker fx:id="campoFechaNacimiento" layoutX="426.0" layoutY="195.0" />
+      <Label layoutX="45.0" layoutY="368.0" text="Licencia">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="168.0" text="Nombre">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="228.0" layoutY="168.0" text="Apellido">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="410.0" layoutY="168.0" text="Fecha de Nacimiento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="608.0" layoutY="168.0" text="Clase de Licencia">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="260.0" text="Tipo Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="229.0" layoutY="260.0" text="Numero de Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="404.0" text="Vigente desde:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="229.0" layoutY="404.0" text="Vigente hasta:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="83.0" fitWidth="67.0" layoutX="717.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/santafemuni-white.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

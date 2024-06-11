@@ -55,8 +55,6 @@ public class Page<T> {
         this.rowDataList = rowDataList;
         this.pageSize = new SimpleIntegerProperty(pageSize);
         initialize();
-
-
     }
 
     private void initialize() {
@@ -87,7 +85,6 @@ public class Page<T> {
         int fromIndex = pageSize.get() * currentPage;
         int tmp = pageSize.get() * currentPage + pageSize.get() - 1;
         int endIndex = tmp >= totalRecord.get() ? totalRecord.get() - 1 : tmp;
-
         // subList(fromIndex, toIndex) -> [fromIndex, toIndex)
         return rowDataList.subList(fromIndex, endIndex + 1);
     }

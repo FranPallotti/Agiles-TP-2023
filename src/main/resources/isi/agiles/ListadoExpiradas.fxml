@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.LicenciasExpiradasController">
    <children>
-      <Pagination fx:id="tablaPagination" prefHeight="489.0" prefWidth="987.0" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0" />
+      <Pagination fx:id="listadoExpiradasPagination" prefHeight="489.0" prefWidth="987.0" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1027.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fx:id="muniImageView" fitHeight="110.0" fitWidth="85.0" layoutX="930.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,7 +26,7 @@
             <Font name="Arial Rounded MT Bold" size="35.0" />
          </font>
       </Text>
-      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" style="-fx-font-family: 'Arial Rounded MT Bold';" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
+      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" style="-fx-font-family: 'Arial Rounded MT Bold';" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
          <columns>
             <TableColumn fx:id="fechaVencimientoColumn" editable="false" prefWidth="158.33333587646484" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Fecha de Vencimiento" />
             <TableColumn fx:id="claseLicColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Tipo de Licencia" />

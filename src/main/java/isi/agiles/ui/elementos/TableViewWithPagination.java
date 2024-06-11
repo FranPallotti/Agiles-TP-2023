@@ -7,13 +7,13 @@ import javafx.scene.control.TableView;
 public class TableViewWithPagination<T> {
     private Page<T> page;
     private TableView<T> tableView;
-    private Pagination tableViewWithPaginationPane;
+    private Pagination paginationPane;
 
-    public TableViewWithPagination(Page<T> page, TableView<T> tableView) {
+    public TableViewWithPagination(Page<T> page, TableView<T> tableView, Pagination paginationPane) {
         this.page = page;
         this.tableView = tableView;
-        tableViewWithPaginationPane = new Pagination();
-        tableViewWithPaginationPane.pageCountProperty().bindBidirectional(page.totalPageProperty());
+        this.paginationPane = paginationPane;
+        paginationPane.pageCountProperty().bindBidirectional(page.totalPageProperty());
         updatePagination();
     }
 
@@ -25,12 +25,12 @@ public class TableViewWithPagination<T> {
         return tableView;
     }
 
-    public Pagination getTableViewWithPaginationPane() {
-        return tableViewWithPaginationPane;
+    public Pagination getPaginationPane() {
+        return paginationPane;
     }
 
     private void updatePagination() {
-        tableViewWithPaginationPane.setPageFactory(pageIndex -> {
+        paginationPane.setPageFactory(pageIndex -> {
             tableView.setItems(FXCollections.observableList(page.getCurrentPageDataList(pageIndex)));
             return tableView;
         });

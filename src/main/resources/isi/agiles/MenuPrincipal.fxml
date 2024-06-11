@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" stylesheets="@styles/custom-font-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
+<AnchorPane fx:id="frameMenuPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.MenuPrincipalController">
    <children>
       <Button fx:id="botonEmitirLicencia" contentDisplay="CENTER" layoutX="330.0" layoutY="139.0" mnemonicParsing="false" onAction="#accionEmitirLicencia" opacity="0.7" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #00c089;" text="Emitir Licencia" textFill="WHITE">
          <font>
