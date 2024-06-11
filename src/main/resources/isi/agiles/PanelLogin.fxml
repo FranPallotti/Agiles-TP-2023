@@ -18,11 +18,16 @@
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="botonIngresar" layoutX="484.0" layoutY="406.0" mnemonicParsing="false" onAction="#ingresarCliqueado" text="Ingresar" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="454.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="botonIngresar" layoutX="484.0" layoutY="405.0" mnemonicParsing="false" onAction="#ingresarCliqueado" text="Ingresar" />
+      <ImageView fitHeight="201.0" fitWidth="152.0" layoutX="438.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/santafemuni-white.png" />
          </image>
       </ImageView>
+      <Label fx:id="errorFaltaNombreUsuario" layoutX="438.0" layoutY="325.0" prefHeight="35.0" prefWidth="152.0" text="Ingrese un nombre de usuario" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

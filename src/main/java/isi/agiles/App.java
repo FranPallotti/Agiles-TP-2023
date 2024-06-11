@@ -141,12 +141,22 @@ public class App extends Application {
             user.setSexo(TipoSexo.MASCULINO);
             user.setTipoDoc(TipoDoc.DNI);
             userDAO.saveInstance(user);
+            poblarLicenciaClaseA();
+            poblarLicenciaClaseB();
+            poblarLicenciaClaseC();
+            poblarLicenciaClaseD();
+            poblarLicenciaClaseE();
+            poblarLicenciaClaseG();
+           
+    
+        }
 
-           ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+        private static void poblarLicenciaClaseA(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
            ClaseLicencia a= new ClaseLicencia();
            a.setClase('A');
            a.setDescripcion("Licencia de clase A");
-           a.setEdadMinima(18);
+           a.setEdadMinima(17);
            a.setEsProfesional(false);
            List<CostoLicencia> c = new ArrayList<CostoLicencia>();
            CostoLicencia costoA1= new CostoLicencia();
@@ -175,7 +185,182 @@ public class App extends Application {
            c.add(costoA4);
            a.setCostoClase(c);
            d.saveInstance(a);
-    
+        }
+        private static void poblarLicenciaClaseB(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('B');
+           a.setDescripcion("Licencia de clase B");
+           a.setEdadMinima(17);
+           a.setEsProfesional(false);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("20.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           costoA1.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("25.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           costoA2.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("30.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           costoA3.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("40.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           costoA4.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA4);
+           a.setCostoClase(c);
+           d.saveInstance(a);
+        }
+        private static void poblarLicenciaClaseC(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('C');
+           a.setDescripcion("Licencia de clase C");
+           a.setEdadMinima(21);
+           a.setEsProfesional(true);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("23.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           costoA1.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("30.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           costoA2.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("35.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           costoA3.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("47.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           costoA4.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA4);
+           a.setCostoClase(c);
+           d.saveInstance(a);
+        }
+        private static void poblarLicenciaClaseE(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('E');
+           a.setDescripcion("Licencia de clase E");
+           a.setEdadMinima(21);
+           a.setEsProfesional(true);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("29.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           costoA1.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("39.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           costoA2.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("44.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           costoA3.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("59.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           costoA4.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA4);
+           a.setCostoClase(c);
+           d.saveInstance(a);
+        }
+
+        private static void poblarLicenciaClaseD(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('D');
+           a.setDescripcion("Licencia de clase D");
+           a.setEdadMinima(21);
+           a.setEsProfesional(true);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("23.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           costoA1.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("30.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           costoA2.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("35.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           costoA3.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("47.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           costoA4.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA4);
+           a.setCostoClase(c);
+           d.saveInstance(a);
+        }
+        private static void poblarLicenciaClaseG(){
+            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
+           ClaseLicencia a= new ClaseLicencia();
+           a.setClase('G');
+           a.setDescripcion("Licencia de clase G");
+           a.setEdadMinima(17);
+           a.setEsProfesional(false);
+           List<CostoLicencia> c = new ArrayList<CostoLicencia>();
+           CostoLicencia costoA1= new CostoLicencia();
+           costoA1.setClase(a);
+           costoA1.setCosto(Float.parseFloat("20.0"));
+           costoA1.setDuracion(Integer.parseInt("1"));
+           costoA1.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA1);
+           CostoLicencia costoA2 = new CostoLicencia();
+           costoA2.setClase(a);
+           costoA2.setCosto(Float.parseFloat("25.0"));
+           costoA2.setDuracion(Integer.parseInt("3"));
+           costoA2.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA2);
+           CostoLicencia costoA3 = new CostoLicencia();
+           costoA3.setClase(a);
+           costoA3.setCosto(Float.parseFloat("30.0"));
+           costoA3.setDuracion(Integer.parseInt("4"));
+           costoA3.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA3);
+           CostoLicencia costoA4 = new CostoLicencia();
+           costoA4.setClase(a);
+           costoA4.setCosto(Float.parseFloat("40.0"));
+           costoA4.setDuracion(Integer.parseInt("5"));
+           costoA4.setCostoAdministrativo(Float.parseFloat("8.0"));
+           c.add(costoA4);
+           a.setCostoClase(c);
+           d.saveInstance(a);
         }
     
 }
