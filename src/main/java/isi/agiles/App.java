@@ -42,7 +42,7 @@ public class App extends Application {
 
     private static void primeraEjecucion(){
         completarUsuario(usuarioLogueado); 
-        App.poblar();
+        //App.poblar();
     }
 
     //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION
