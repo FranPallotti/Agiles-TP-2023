@@ -40,8 +40,7 @@ import javafx.scene.Parent;
 public class EmitirLicenciaController implements Initializable{
     private TitularDTO titular;
 
-    @FXML
-    private TableColumn<TitularDTO,String> apellidosColumn;
+    
 
     @FXML
     private Button botonBuscar;
@@ -53,10 +52,10 @@ public class EmitirLicenciaController implements Initializable{
     private Button botonEmitir;
 
     @FXML
-    private TextField nroDoc;
+    private TextField campoNroDoc;
 
     @FXML
-    private ComboBox<TipoDoc> tipoDoc;
+    private ComboBox<TipoDoc> campoTipoDoc;
  
     @FXML
     private TextField campoApellido;
@@ -104,9 +103,12 @@ public class EmitirLicenciaController implements Initializable{
         campoApellido.setText("");
         campoFecha.setText("");
         campoNombre.setText("");
-        
+        botonEmitir.setVisible(false);
         campoClaseLicencia.setItems(FXCollections.observableArrayList(gestorClaseLic.getAllDTOs()));
-       // campoClaseLicencia.getItems().addAll(opClaseLicencia);
+        campoNombre.setVisible(false);
+        campoApellido.setVisible(false);
+        campoFecha.setVisible(false);
+       
     }
 
     public void actualizarTabla(){
@@ -115,30 +117,26 @@ public class EmitirLicenciaController implements Initializable{
             campoApellido.setVisible(false);
             campoFecha.setVisible(false);
             campoNombre.setVisible(false);
-            //campoClaseLicencia.setVisible(false);
-            //no encontrados msg true
-            return;
+            botonEmitir.setVisible(false);
+            
         }
-
-        
-        campoApellido.setText(titular.getApellido());
-        campoFecha.setText(titular.getFechaNacimiento().toString());
-        campoNombre.setText(titular.getNombre());
-
-        campoApellido.setVisible(true);
-        campoFecha.setVisible(true);
-        campoNombre.setVisible(true);
-        //campoClaseLicencia.setVisible(true);
-        
-        
-        // no encontrados msg false
-        
-        return;
+        else{
+            campoApellido.setText(titular.getApellido());
+            campoFecha.setText(titular.getFechaNacimiento().toString());
+            campoNombre.setText(titular.getNombre());
+    
+            campoApellido.setVisible(true);
+            campoFecha.setVisible(true);
+            campoNombre.setVisible(true);
+            botonEmitir.setVisible(true);
+        }
+ 
     }
+
     public TitularDTO getTitularDTO(){
         TitularDTO dto = new TitularDTO();
-        dto.setNroDoc(this.nroDoc.getText());
-        dto.setTipoDoc(this.tipoDoc.getValue());
+        dto.setNroDoc(this.campoNroDoc.getText());
+        dto.setTipoDoc(this.campoTipoDoc.getValue());
         return dto;
 
     }
@@ -146,7 +144,14 @@ public class EmitirLicenciaController implements Initializable{
     public void buscarCliqueado(){
         
     try{
-        titular = gestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getNroDoc(), this.getTitularDTO().getTipoDoc());
+        if(campoTipoDoc.getValue()==null || campoNroDoc.getText().isEmpty()){
+            errorFaltaTitular.setVisible(true);
+        }
+        else{
+            titular = gestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getNroDoc(), this.getTitularDTO().getTipoDoc());
+        }
+
+        
 
         this.actualizarTabla();
     }
@@ -158,11 +163,9 @@ public class EmitirLicenciaController implements Initializable{
     }
 
     public void poblarTipoDoc() {
-        tipoDoc.setItems(FXCollections.observableArrayList(TipoDoc.values()));
+        campoTipoDoc.setItems(FXCollections.observableArrayList(TipoDoc.values()));
     }
-    private void poblarTipoLicencia(){
-        //campoClaseLicencia.setItems(FXCollections.observableArrayList(TipoClasesLicencia.values()));
-    }
+    
    
     @FXML
     private void emitirCliqueado(ActionEvent event) throws IOException{
@@ -170,8 +173,7 @@ public class EmitirLicenciaController implements Initializable{
             LicenciaDTO l = getLicenciaDTO(titular, campoObservaciones.getText(), campoClaseLicencia.getSelectionModel().getSelectedItem());
             try{
                 if(gestorTitular.puedeTenerLicencia(titular,l.getClaseLic())){
-                    try{
-                        FXMLLoader loader = new FXMLLoader();
+                    FXMLLoader loader = new FXMLLoader();
                        
                         loader.setLocation(App.class.getResource("EmitirLicenciaCosto.fxml"));
                         
@@ -195,83 +197,51 @@ public class EmitirLicenciaController implements Initializable{
 
                         Stage currentStage = (Stage) this.botonEmitir.getScene().getWindow();
                         currentStage.close();
-                    }
-                    catch(IOException e){
-                        e.printStackTrace();
-                    }
                 }
                 else{
                     noCumpleCondicionesLicencia();
+                    // TODO resetear datos
                 }
             }
             catch(ObjetoNoEncontradoException e){
                 // Si no encuentra el objeto a la hora de validar si puede tener licencia o no
+                errorEmitirLicencia();
+                // TODO resetear datos
                 e.printStackTrace();
-            }
-
-            /* 
-            try{
-                
-
 
             }
-            catch(ObjetoNoEncontradoException e){
-                e.printStackTrace();
-                faltanDatos();
-
+            catch(IOException io){
+                io.printStackTrace();
+                errorEnBaseDeDatos();
+                //TODO resetear datos
             }
-            catch(NoCumpleCondicionesLicenciaException n){
-                n.printStackTrace();
-                noCumpleCondicionesLicencia();
 
-            }
-            */
+           
 
         }
         else{
             /// poner un popup de datos invalidos
-            titularNoEncontrado();
+            datosInvalidos();
         }
         
 
-        /*
-        //popup y volver al menu principal hacer
-        try{
-            Stage currentStage = (Stage) botonEmitir.getScene().getWindow();
-            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        */
+        
     }
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
             poblarTipoDoc();
-            //poblarTipoLicencia();
-
+            
             try{
 
                 inicializarTabla();
 			
-			    
             }
             catch(ObjetoNoEncontradoException e){
-                this.faltanDatos();
-                e.printStackTrace();
+                this.faltanDatosLicencias();
+                
             }
             
-			
-            campoApellido.setVisible(true);
-            campoFecha.setVisible(true);
-            campoNombre.setVisible(true);
-            //campoClaseLicencia.setVisible(true);
-
-			//tablaTitulares.setVisible(false);
-			//noEncontradosMsg.setVisible(false);
-			//botonConfirmar.disableProperty().bind(tablaTitulares.getSelectionModel().selectedItemProperty().isNull());
-			//confirmarMsg.visibleProperty().bind(clientesTable.visibleProperty());
         }
 
 
@@ -318,36 +288,36 @@ public class EmitirLicenciaController implements Initializable{
 
         private void titularNoEncontrado(){
 
-            Alert alert = new Alert(AlertType.ERROR, "Advertencia: Titular no encontrado", ButtonType.OK);
-            alert.setTitle("Error");
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Titular no encontrado", ButtonType.OK);
+            alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
         }
 
-        private void faltanDatos(){
-            Alert alert = new Alert(AlertType.ERROR, "Advertencia: Faltan datos ", ButtonType.OK);
-            alert.setTitle("Error");
+        private void faltanDatosLicencias(){
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: No existen clases de licencia que se puedan emitir ", ButtonType.OK);
+            alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
         }
 
         private void noCumpleCondicionesLicencia(){
-            Alert alert = new Alert(AlertType.ERROR, "Advertencia: El titular no cumple con las condiciones para la licencia", ButtonType.OK);
-            alert.setTitle("Error");
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: El titular no cumple con las condiciones para la licencia", ButtonType.OK);
+            alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
@@ -367,6 +337,41 @@ public class EmitirLicenciaController implements Initializable{
                 return false;
             }
             return true;
+        }
+        private void errorEmitirLicencia(){
+            Alert alert = new Alert(AlertType.ERROR, "Error: Ocurrio un inconveniente al dar de alta su licencia", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+            alert.setResizable(false);
+            alert.showAndWait();
+        }
+
+        private void errorEnBaseDeDatos(){
+            Alert alert = new Alert(AlertType.ERROR, "Error: Ocurrio un error relacionado a la base datos. Consulte a su administrador", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+            alert.setResizable(false);
+            alert.showAndWait();
+        }
+
+        private void datosInvalidos(){
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Alguno de los campos ingresados no tiene el formato correcto o faltan datos", ButtonType.OK);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+            alert.setResizable(false);
+            alert.showAndWait();
         }
         
 

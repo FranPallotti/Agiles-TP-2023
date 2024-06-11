@@ -15,6 +15,7 @@ import java.util.List;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
 import isi.agiles.dao.TitularDAO;
+import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.CostoLicencia;
@@ -38,8 +39,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        //App.primeraEjecucion();
-        loguear(usuarioLogueado);
+        //App.poblar();
         launch();
     }
 
@@ -64,7 +64,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Image icono =  new Image("isi/agiles/logoStaFe.png");
-        scene = new Scene(loadFXML("MenuPrincipal"));
+        scene = new Scene(loadFXML("PanelLogin"));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.getIcons().add(icono);
@@ -82,6 +82,9 @@ public class App extends Application {
 
     public static UsuarioDTO getUsuarioLogueado(){
         return usuarioLogueado;
+    }
+    public static void setUsuarioLogeado(UsuarioDTO u){
+        usuarioLogueado=u;
     }
     public static void cambiarVentana(String fxml, Stage ventActual) throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
@@ -126,6 +129,18 @@ public class App extends Application {
 
            t.saveInstance(titular2);
         */
+            UsuarioDAO userDAO= new UsuarioDAO();
+            Usuario user= new Usuario();
+            user.setApellido("Pallotti");
+            user.setFechaNacimiento(LocalDate.of(2000, 9, 28));
+            user.setMail("franpallotti@gmail.com");
+            user.setNombre("Francisco");
+            user.setNombreUsuario("franpallotti");
+            user.setNumDoc("42925453");
+            user.setRol(TipoRol.ADMINISTRADOR);
+            user.setSexo(TipoSexo.MASCULINO);
+            user.setTipoDoc(TipoDoc.DNI);
+            userDAO.saveInstance(user);
 
            ClaseLicenciaDAO d = new ClaseLicenciaDAO();
            ClaseLicencia a= new ClaseLicencia();
