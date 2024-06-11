@@ -11,6 +11,9 @@ import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorLicencia;
+import isi.agiles.ui.elementos.Page;
+import isi.agiles.ui.elementos.TableViewWithPagination;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
@@ -48,6 +52,14 @@ public class LicenciasExpiradasController implements Initializable {
     private Button volverButton;
     @FXML
     private Text licenciasNoEncontradasText;
+    @FXML
+    private Pagination tablaPagination;
+    
+    private List<LicenciaDTO> listadoExpiradas;
+
+    private TableViewWithPagination<LicenciaDTO> gestorTablaPagination;
+
+    private final int FILAS_POR_PAGINA = 15;
 
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
@@ -72,28 +84,23 @@ public class LicenciasExpiradasController implements Initializable {
         );
     }
 
-    public void actualizarTabla(){
-        try{
-            listadoExpiradasTable.getItems().clear();
-            List<LicenciaDTO> listadoExpiradas = gestorLicencia.getLicenciasExpiradasDTO();
-            ObservableList<LicenciaDTO> datosTabla = FXCollections.observableArrayList(listadoExpiradas);
-            listadoExpiradasTable.setItems(datosTabla);
-            listadoExpiradasTable.setVisible(true);
-        }catch(ObjetoNoEncontradoException e){
-            listadoExpiradasTable.setVisible(false);
-        }
-        return;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        inicializarTabla();
-        listadoExpiradasTable.setVisible(false);
-        licenciasNoEncontradasText.setVisible(false);
-        actualizarTabla();
-        licenciasNoEncontradasText.visibleProperty().bind(listadoExpiradasTable.visibleProperty().not());
+        try{
+            listadoExpiradas = gestorLicencia.getLicenciasExpiradasDTO();
+            inicializarTabla();
+            gestorTablaPagination = new TableViewWithPagination<LicenciaDTO>(
+                new Page<>(listadoExpiradas,FILAS_POR_PAGINA), listadoExpiradasTable
+            );
+            tablaPagination = gestorTablaPagination.getTableViewWithPaginationPane();
+            listadoExpiradasTable.visibleProperty().bind(tablaPagination.visibleProperty());
+            tablaPagination.setVisible(true);
+        }catch(ObjetoNoEncontradoException e){
+            licenciasNoEncontradasText.setVisible(true);
+        }
     }
-        @FXML
+
+    @FXML
     void accionVolver(ActionEvent event) {
         try{
             Stage currentStage = (Stage) volverButton.getScene().getWindow();
