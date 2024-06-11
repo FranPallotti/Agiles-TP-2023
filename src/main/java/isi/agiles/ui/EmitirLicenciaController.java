@@ -149,6 +149,7 @@ public class EmitirLicenciaController implements Initializable{
         }
         else{
             titular = gestorTitular.getTitularDTOByDocumento(this.getTitularDTO().getNroDoc(), this.getTitularDTO().getTipoDoc());
+            errorFaltaTitular.setVisible(false);
         }
 
         

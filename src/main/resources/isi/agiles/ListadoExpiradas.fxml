@@ -43,9 +43,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="volverButton" layoutX="947.0" layoutY="661.0" mnemonicParsing="false" onAction="#accionVolver" prefHeight="32.0" prefWidth="101.0" text="Volver" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="25.0">
+      <Button fx:id="volverButton" layoutX="434.0" layoutY="669.0" mnemonicParsing="false" onAction="#accionVolver" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Volver" textFill="WHITE" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="434.0">
          <font>
-            <Font name="Arial Rounded MT Bold" size="13.0" />
+            <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
