@@ -24,6 +24,7 @@ import isi.agiles.entidad.CostoLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.EntityManagerUtil;
@@ -44,8 +45,8 @@ public class App extends Application {
     }
 
     private static void primeraEjecucion(){
-        completarUsuario(usuarioLogueado); 
-        //App.poblar();
+        App.poblar();
+        completarUsuario(usuarioLogueado);
     }
 
     //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION

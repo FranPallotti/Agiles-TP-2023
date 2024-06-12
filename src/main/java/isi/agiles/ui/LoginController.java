@@ -24,11 +24,12 @@ public class LoginController {
 
     @FXML
     private Button botonIngresar;
-
     @FXML
     private TextField campoNombreUsuario;
     @FXML
     private Label errorFaltaNombreUsuario;
+
+    private GestorUsuario gestorUsuario = new GestorUsuario();
 
     @FXML
     public void ingresarCliqueado(ActionEvent e){
@@ -37,8 +38,7 @@ public class LoginController {
             UsuarioDTO dto= new UsuarioDTO();
             dto.setNombreUsuario(campoNombreUsuario.getText());
             try{
-                GestorUsuario gestor= new GestorUsuario();
-                dto= gestor.getUsuarioDTO(gestor.getUsuario(dto));
+                dto=gestorUsuario.getUsuarioDTO(gestorUsuario.getUsuario(dto));
                 App.setUsuarioLogeado(dto);
                 Stage currentStage = (Stage) botonIngresar.getScene().getWindow();
                 App.cambiarVentana("MenuPrincipal.fxml",currentStage );

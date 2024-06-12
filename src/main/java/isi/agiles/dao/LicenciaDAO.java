@@ -27,7 +27,7 @@ public class LicenciaDAO extends AbstractDAO<Licencia> {
         Root<Licencia> root = cq.from(Licencia.class);
         Path<LocalDate> fechaVencimientoAtrib = root.<LocalDate>get("finVigencia");
         LocalDate today = LocalDate.now();
-        Predicate pasoFinVigencia = cb.greaterThanOrEqualTo(fechaVencimientoAtrib,today);
+        Predicate pasoFinVigencia = cb.lessThan(fechaVencimientoAtrib,today);
         Order masRecientePrimero = cb.desc(fechaVencimientoAtrib);
 
         cq.select(root).where(pasoFinVigencia);

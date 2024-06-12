@@ -25,7 +25,6 @@ public class GestorUsuario {
         dto.setNombreUsuario(usuario.getNombreUsuario());
         dto.setRol(usuario.getRol());
         return dto;
-
     }
 
     public Usuario getUsuario(UsuarioDTO u) throws ObjetoNoEncontradoException{

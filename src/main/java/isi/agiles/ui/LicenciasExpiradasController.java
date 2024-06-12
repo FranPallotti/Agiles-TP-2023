@@ -16,8 +16,6 @@ import isi.agiles.ui.elementos.TableViewWithPagination;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +24,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -53,14 +52,15 @@ public class LicenciasExpiradasController implements Initializable {
     @FXML
     private Text licenciasNoEncontradasText;
     @FXML
-    private Pagination tablaPagination;
-    
+    private Pagination listadoExpiradasPagination;
+
     private List<LicenciaDTO> listadoExpiradas;
 
+    @SuppressWarnings("unused")
     private TableViewWithPagination<LicenciaDTO> gestorTablaPagination;
 
     private final int FILAS_POR_PAGINA = 15;
-
+    
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
     public void inicializarTabla(){
@@ -82,6 +82,20 @@ public class LicenciasExpiradasController implements Initializable {
         nroDocColumn.setCellValueFactory(
             cellData -> new SimpleStringProperty(cellData.getValue().getTitular().getNroDoc())
         );
+        /*Tengo que agregar el listener porque si pido el Header de la TableView antes de que se aplique
+         * la Skin, listadoExpiradasTable.lookup("TableHeaderRow") retorna null.
+         * Una vez tengo el Header, puedo anlcar el tamaño de celda para que llene todo el espacio disponible
+         * (para los datos) en la tabla.
+         */
+        listadoExpiradasTable.skinProperty().addListener((obs, ol, ne) -> {
+            Pane header = (Pane) listadoExpiradasTable.lookup("TableHeaderRow");
+            listadoExpiradasTable.fixedCellSizeProperty().bind(
+                listadoExpiradasTable.heightProperty().
+                subtract(header.heightProperty()).
+                divide(FILAS_POR_PAGINA)
+            );
+        });
+        listadoExpiradasTable.visibleProperty().bind(listadoExpiradasPagination.visibleProperty());
     }
 
     @Override
@@ -89,12 +103,12 @@ public class LicenciasExpiradasController implements Initializable {
         try{
             listadoExpiradas = gestorLicencia.getLicenciasExpiradasDTO();
             inicializarTabla();
-            gestorTablaPagination = new TableViewWithPagination<LicenciaDTO>(
-                new Page<>(listadoExpiradas,FILAS_POR_PAGINA), listadoExpiradasTable
+            gestorTablaPagination = new TableViewWithPagination<>(
+                new Page<>(listadoExpiradas,FILAS_POR_PAGINA),
+                listadoExpiradasTable,
+                listadoExpiradasPagination
             );
-            tablaPagination = gestorTablaPagination.getTableViewWithPaginationPane();
-            listadoExpiradasTable.visibleProperty().bind(tablaPagination.visibleProperty());
-            tablaPagination.setVisible(true);
+            listadoExpiradasPagination.setVisible(true);
         }catch(ObjetoNoEncontradoException e){
             licenciasNoEncontradasText.setVisible(true);
         }
