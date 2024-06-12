@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
-import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

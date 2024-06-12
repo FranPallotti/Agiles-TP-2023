@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
-import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.*;
 import isi.agiles.util.DatosInvalidosException;

@@ -8,7 +8,6 @@ import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
-import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.UsernameNoUnicoException;
 import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.DatosInvalidosException;

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.EmitirLicenciaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="819.0" stylesheets="@styles/disabled-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.EmitirLicenciaController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="114.0" strokeType="INSIDE" width="819.0" />
       <ComboBox fx:id="campoTipoDoc" layoutX="49.0" layoutY="168.0" prefWidth="150.0" promptText=" Seleccione Tipo Documento" />
@@ -29,7 +29,7 @@
             <Font name="Arial Rounded MT Bold" size="50.0" />
          </font>
       </Label>
-      <Button fx:id="botonEmitir" layoutX="463.0" layoutY="658.0" mnemonicParsing="false" onAction="#emitirCliqueado" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Emitir" textFill="WHITE">
+      <Button fx:id="botonEmitir" disable="true" layoutX="463.0" layoutY="658.0" mnemonicParsing="false" onAction="#emitirCliqueado" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Emitir" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

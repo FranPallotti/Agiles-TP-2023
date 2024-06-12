@@ -36,6 +36,7 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll() {
 		String stringquery = "FROM "+this.clase.getName();
