@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+
+
 import isi.agiles.App;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.TipoClasesLicencia;
@@ -11,9 +14,9 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.excepcion.TitularYaCargadoException;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
-import jakarta.persistence.EntityManager;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
@@ -128,8 +131,7 @@ public class DarAltaTitularController{
     @FXML
     private Button botonGuardar;
 
-    private EntityManager entityManager;
-
+    private GestorTitular gestorTitular = new GestorTitular();
 
     public void accionVolver(){
         try{
@@ -141,13 +143,16 @@ public class DarAltaTitularController{
     }
 
     public void accionGuardar(){
-        GestorTitular gestorTitular = new GestorTitular(entityManager);
         try {
             validarDatos();
+            //Se persiste en la BDD el nuevjo titular
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();
-        } catch (Exception e) {
+            accionVolver();
+        } catch (DatosInvalidosException e) {
+            errorDatosInvalidos(e.getMessage());
+        } catch (TitularYaCargadoException e){
             errorDatosInvalidos(e.getMessage());
         }
     }
@@ -156,9 +161,9 @@ public class DarAltaTitularController{
         TitularDTO titularDTO = new TitularDTO();
         titularDTO.setNombre(textNombre.getText());
         titularDTO.setApellido(textApellido.getText());
-        titularDTO.setClaseSol(generarListaClases());
+        //TODO: titularDTO.setClaseSol(generarListaClases());
         titularDTO.setDireccion(textDireccion.getText());
-        titularDTO.setDocumento(nroDocumento.getText());
+        titularDTO.setNroDoc(nroDocumento.getText());
         Boolean esDonante = false;
         if(comboDonante.getValue() == "SI"){
             esDonante = true;}
@@ -172,6 +177,7 @@ public class DarAltaTitularController{
         return titularDTO;
     }
 
+    //TODO: Hablar con quien hizo esta parte para charlarlo.
     private ArrayList<TipoClasesLicencia> generarListaClases() {
         ArrayList<TipoClasesLicencia> claseSolicitadas = new ArrayList<>();
         if(choiceClaseA.isSelected()){
@@ -362,7 +368,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -374,7 +380,7 @@ public class DarAltaTitularController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();

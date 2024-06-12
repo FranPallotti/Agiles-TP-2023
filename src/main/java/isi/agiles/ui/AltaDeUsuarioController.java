@@ -2,13 +2,15 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.function.UnaryOperator;
 
 import isi.agiles.App;
+import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.entidad.Usuario;
+import isi.agiles.excepcion.UsernameNoUnicoException;
+import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,12 +23,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.LocalDateStringConverter;
 
 public class AltaDeUsuarioController{
 
@@ -115,6 +115,11 @@ public class AltaDeUsuarioController{
     private ChoiceBox<TipoSexo> listaTipoSexo;
 
     @FXML
+    private ImageView imagenMuniStaFe;
+
+    private GestorUsuario gestorUsuario = new GestorUsuario();
+
+    @FXML
     void accionVolver(ActionEvent event) {
         try{
             Stage currentStage = (Stage) botonVolver.getScene().getWindow();
@@ -128,10 +133,21 @@ public class AltaDeUsuarioController{
     void accionGuardar(ActionEvent event) {
         try{
             datosValidos();
-            //Logica para guardar cliente
+            //Lógica para guardar cliente
+            UsuarioDTO dto = this.getUsuarioDTO();
+            gestorUsuario.altaUsuario(dto);
             informacionClienteGuardado();
+            //Vuelta al menú principal
+            Stage currentStage = (Stage) botonGuardar.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
         }catch (DatosInvalidosException e){
             errorDatosInvalidos(e.getMessage());
+        }
+        catch(UsernameNoUnicoException u){
+            errorDatosInvalidos(u.getMessage());
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -166,7 +182,7 @@ public class AltaDeUsuarioController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -178,7 +194,7 @@ public class AltaDeUsuarioController{
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -209,7 +225,7 @@ public class AltaDeUsuarioController{
             campoNombreUsuario.setText(null);
             invalido = true;
         }else if(campoNombreUsuario.getText().length()>16){
-            labelErrorNombreUsuario.setText("*Máximo 16 caracteres sin\r\n espacios.*");
+            labelErrorNombreUsuario.setText("*Máximo 16 caracteres\r\n sin espacios.*");
             labelErrorNombreUsuario.setVisible(true);
             campoNombreUsuario.setText(null);
             invalido=true;
@@ -369,6 +385,21 @@ public class AltaDeUsuarioController{
             labelErrorNombre.setVisible(false);
         }
         return invalido;
+    }
+
+
+    private UsuarioDTO getUsuarioDTO(){
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setApellido(this.campoApellido.getText());
+        dto.setFechaNacimiento(this.campoFechaNacimiento.getValue());
+        dto.setMail(this.campoMail.getText());
+        dto.setNombre(this.campoNombre.getText());
+        dto.setNombreUsuario(this.campoNombreUsuario.getText());
+        dto.setNumDoc(this.campoNroDoc.getText());
+        dto.setRol(TipoRol.OPERADOR);
+        dto.setSexo(this.listaTipoSexo.getValue());
+        dto.setTipoDoc(this.listaTipoDoc.getValue());
+        return dto;
     }
     
     /* DEJO ESTO POR SI SE QUIERE INGRESAR LA FECHA MANUAL Y NO USAR EL ICONITO, IGUAL HAY Q VERLO Y VALIDAR PQ SI SE SALE

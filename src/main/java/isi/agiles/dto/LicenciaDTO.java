@@ -2,21 +2,31 @@ package isi.agiles.dto;
 
 import java.time.LocalDate;
 
+import isi.agiles.entidad.EstadoLicencia;
+
 public class LicenciaDTO {
 
-    private ClaseLicenciaDTO clase;
+    private Long idLicencia;
+    private ClaseLicenciaDTO claseLic;
     private String observaciones;
     private TitularDTO titular;
     private LocalDate inicioVigencia;
     private LocalDate finVigencia;
-
-    /*Getters y setters */
+    private EstadoLicencia estado;
+    private Float costo;
     
-    public ClaseLicenciaDTO getClase() {
-        return clase;
+    /*Getters y setters */
+    public EstadoLicencia getEstado() {
+        return estado;
     }
-    public void setClase(ClaseLicenciaDTO clase) {
-        this.clase = clase;
+    public void setEstado(EstadoLicencia estado) {
+        this.estado = estado;
+    }
+    public ClaseLicenciaDTO getClaseLic() {
+        return claseLic;
+    }
+    public void setClaseLic(ClaseLicenciaDTO clase) {
+        this.claseLic = clase;
     }
     public String getObservaciones() {
         return observaciones;
@@ -41,6 +51,18 @@ public class LicenciaDTO {
     }
     public void setFinVigencia(LocalDate finVigencia) {
         this.finVigencia = finVigencia;
-    }  
+    }
+    public Float getCosto() {
+        return costo;
+    }
+    public void setCosto(Float costo) {
+        this.costo = costo;
+    }
+    public Long getIdLicencia() {
+        return idLicencia;
+    }
+    public void setIdLicencia(Long idLicencia) {
+        this.idLicencia = idLicencia;
+    }
     
 }

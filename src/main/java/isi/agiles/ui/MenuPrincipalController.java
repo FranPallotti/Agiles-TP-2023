@@ -55,10 +55,7 @@ public class MenuPrincipalController {
     private Label labelMenuPrincipal;
 
     @FXML
-    private ImageView logoStaFeDer;
-
-    @FXML
-    private ImageView logoStaFeIzq;
+    private ImageView logoStaFe;
 
 
     public void informacionFuncionalidadNoDesarrollada(){
@@ -67,7 +64,7 @@ public class MenuPrincipalController {
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -79,7 +76,7 @@ public class MenuPrincipalController {
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()
                 .filter(node -> node instanceof Label)
-                .forEach(node -> ((Label) node).setFont(Font.font("Times New Roman", 14)));
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
@@ -112,7 +109,14 @@ public class MenuPrincipalController {
 
     @FXML
     void accionEmitirLicencia(ActionEvent event) {
-
+        try{
+            Stage currentStage = (Stage) botonEmitirLicencia.getScene().getWindow();
+            App.cambiarVentana("EmitirLicencia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
     }
 
     @FXML
@@ -122,7 +126,13 @@ public class MenuPrincipalController {
 
     @FXML
     void accionListarLicenciasExpiradas(ActionEvent event) {
-        //Codigo para ir a esa pantalla
+        try{
+            Stage currentStage = (Stage) botonListarLicenciasExpiradas.getScene().getWindow();
+            App.cambiarVentana("ListadoExpiradas.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

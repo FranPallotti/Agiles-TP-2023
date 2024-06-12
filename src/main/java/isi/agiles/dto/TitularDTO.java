@@ -1,33 +1,33 @@
 package isi.agiles.dto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
-import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
 
 public class TitularDTO {
+
+    private Long idTitular;
     private String nombre;
     private String apellido;
-    private String documento;
+    private String nroDoc;
     private LocalDate fechaNacimiento;
     private TipoDoc tipoDoc;
     private String direccion;
-    private ArrayList<TipoClasesLicencia> claseSol;
+    private List<Character> claseSol;
     private TipoGrupoS grupoSanguineo;
     private TipoFactorRH factorRH;
     private Boolean esDonante;
     private TipoSexo sexo;
     
-    
-    public TipoSexo getSexo() {
-        return sexo;
+    public Long getIdTitular() {
+        return idTitular;
     }
-    public void setSexo(TipoSexo sexo) {
-        this.sexo = sexo;
+    public void setIdTitular(Long idTitular) {
+        this.idTitular = idTitular;
     }
     public String getNombre() {
         return nombre;
@@ -41,11 +41,11 @@ public class TitularDTO {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public String getDocumento() {
-        return documento;
+    public String getNroDoc() {
+        return nroDoc;
     }
-    public void setDocumento(String documento) {
-        this.documento = documento;
+    public void setNroDoc(String nroDoc) {
+        this.nroDoc = nroDoc;
     }
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
@@ -65,10 +65,10 @@ public class TitularDTO {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    public ArrayList<TipoClasesLicencia> getClaseSol() {
+    public List<Character> getClaseSol() {
         return claseSol;
     }
-    public void setClaseSol(ArrayList<TipoClasesLicencia> claseSol) {
+    public void setClaseSol(List<Character> claseSol) {
         this.claseSol = claseSol;
     }
     public TipoGrupoS getGrupoSanguineo() {
@@ -88,6 +88,12 @@ public class TitularDTO {
     }
     public void setEsDonante(Boolean esDonante) {
         this.esDonante = esDonante;
+    }
+    public TipoSexo getSexo() {
+        return sexo;
+    }
+    public void setSexo(TipoSexo sexo) {
+        this.sexo = sexo;
     }
 
     
