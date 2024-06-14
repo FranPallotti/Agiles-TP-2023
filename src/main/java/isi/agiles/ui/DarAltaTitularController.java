@@ -1,11 +1,8 @@
 package isi.agiles.ui;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-
 
 import isi.agiles.App;
 import isi.agiles.dto.TitularDTO;

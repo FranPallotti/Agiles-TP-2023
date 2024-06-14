@@ -52,7 +52,7 @@
          </cursor></Button>
       <Text fx:id="licenciasNoEncontradasText" fill="#01ae7a" layoutX="79.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVISO: No se han encontrado licencias expiradas" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="160.0">
          <font>
-            <Font name="Tahoma Bold" size="16.0" />
+            <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Text>
    </children>

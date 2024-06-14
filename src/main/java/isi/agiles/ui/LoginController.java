@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -32,7 +34,18 @@ public class LoginController {
     private GestorUsuario gestorUsuario = new GestorUsuario();
 
     @FXML
+    public void enterPressed(KeyEvent ke){
+        if(ke.getCode().equals(KeyCode.ENTER)){
+            this.ingresar();
+        }
+    }
+
+    @FXML
     public void ingresarCliqueado(ActionEvent e){
+        this.ingresar();
+    }
+
+    private void ingresar(){
         errorFaltaNombreUsuario.setVisible(false);
         if(validarDatos()){
             UsuarioDTO dto= new UsuarioDTO();
@@ -53,9 +66,6 @@ public class LoginController {
         else{
             datosInvalidos();
         }
-        
-        
-
     }
 
 
