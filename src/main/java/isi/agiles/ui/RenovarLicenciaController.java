@@ -25,8 +25,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -36,6 +39,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -107,6 +111,44 @@ public class RenovarLicenciaController implements Initializable {
 
     @FXML
     void continuarCliqueado(ActionEvent event) {
+        if(listadoLicenciasTable.getSelectionModel().isEmpty()){
+            seleccioneUnaLicencia();
+        }
+        else{
+            try{
+                FXMLLoader loader = new FXMLLoader();
+                
+                loader.setLocation(App.class.getResource("ModificarDatosRenovacion.fxml"));
+                
+                
+                Stage stage = new Stage();
+                stage.setTitle("Confirme los datos y el Costo");
+                
+                    
+                Parent root = loader.load();
+                //aca recien me carga el controlador
+                ModificarDatosRenovacionController formularioDatos = loader.getController();
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
+                stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
+                stage.show();
+                LicenciaDTO l= listadoLicenciasTable.getSelectionModel().getSelectedItem();
+                //gestorLicencia.calcularVigenciaLicencia(l);
+                l.setCosto(gestorLicencia.getCostoLicencia(l));
+                formularioDatos.setLicencia(l);
+                formularioDatos.setearDatos();
+
+                Stage currentStage = (Stage) this.botonContinuar.getScene().getWindow();
+                currentStage.close();
+            }
+            catch(ObjetoNoEncontradoException e){
+                System.out.println("no encontramos la licencia");
+            }
+            catch(IOException o){
+                o.printStackTrace();
+            }
+            
+        }
         
     }
 
@@ -136,7 +178,7 @@ public class RenovarLicenciaController implements Initializable {
                 
             }
             else{
-                licencias= gestorTitular.getTitular(titular).getLicencias().stream().map(t-> gestorLicencia.getLicenciaDTO(t)).collect(Collectors.toList());
+                licencias= gestorTitular.getTitular(titular).getLicencias().stream().map(t-> gestorLicencia.getLicenciaDTO(t)).filter(t-> t.getEstado()==EstadoLicencia.VIGENTE).collect(Collectors.toList());
                 ObservableList<LicenciaDTO> datosTabla = FXCollections.observableArrayList(licencias);
 
 
@@ -178,6 +220,18 @@ public class RenovarLicenciaController implements Initializable {
     private void titularNoEncontrado(){
 
             Alert alert = new Alert(AlertType.WARNING, "Advertencia: Titular no encontrado", ButtonType.OK);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+            alert.setResizable(false);
+            alert.showAndWait();
+        }
+        private void seleccioneUnaLicencia(){
+
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Seleccione una licencia", ButtonType.OK);
             alert.setTitle("Advertencia");
             alert.setHeaderText(null);
             alert.getDialogPane().getChildren().stream()
