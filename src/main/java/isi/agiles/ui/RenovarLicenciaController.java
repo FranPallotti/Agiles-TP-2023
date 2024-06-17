@@ -134,16 +134,14 @@ public class RenovarLicenciaController implements Initializable {
                 stage.show();
                 LicenciaDTO l= listadoLicenciasTable.getSelectionModel().getSelectedItem();
                 //gestorLicencia.calcularVigenciaLicencia(l);
-                l.setCosto(gestorLicencia.getCostoLicencia(l));
+                //l.setCosto(gestorLicencia.getCostoLicencia(l));
                 formularioDatos.setLicencia(l);
                 formularioDatos.setearDatos();
 
                 Stage currentStage = (Stage) this.botonContinuar.getScene().getWindow();
                 currentStage.close();
             }
-            catch(ObjetoNoEncontradoException e){
-                System.out.println("no encontramos la licencia");
-            }
+            
             catch(IOException o){
                 o.printStackTrace();
             }
@@ -178,7 +176,7 @@ public class RenovarLicenciaController implements Initializable {
                 
             }
             else{
-                licencias= gestorTitular.getTitular(titular).getLicencias().stream().map(t-> gestorLicencia.getLicenciaDTO(t)).filter(t-> t.getEstado()==EstadoLicencia.VIGENTE).collect(Collectors.toList());
+                licencias= gestorTitular.getTitular(titular).getLicencias().stream().map(t-> gestorLicencia.getLicenciaDTO(t)).collect(Collectors.toList());
                 ObservableList<LicenciaDTO> datosTabla = FXCollections.observableArrayList(licencias);
 
 

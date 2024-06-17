@@ -28,7 +28,7 @@
             <Font name="Arial Rounded MT Bold" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="botonContinuar" layoutX="899.0" layoutY="662.0" mnemonicParsing="false" onAction="#renovarCliqueado" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Renovar" textFill="WHITE">
+      <Button fx:id="botonContinuar" layoutX="899.0" layoutY="662.0" mnemonicParsing="false" onAction="#confirmarCliqueado" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Confirmar" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -44,7 +44,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ComboBox fx:id="campoClaseLicencia" layoutX="20.0" layoutY="213.0" prefWidth="150.0" promptText="Clase de licencia" />
+      <ComboBox fx:id="campoClaseLicencia" layoutX="20.0" layoutY="213.0" onAction="#claseLicenciaSeleccionada" prefWidth="150.0" promptText="Clase de licencia" />
       <TextField fx:id="campoNombre" layoutX="206.0" layoutY="213.0" />
       <TextField fx:id="campoApellido" layoutX="389.0" layoutY="213.0" prefHeight="25.0" prefWidth="176.0" />
       <TextField fx:id="campoNroDoc" layoutX="599.0" layoutY="213.0" />
