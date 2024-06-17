@@ -165,7 +165,13 @@ public class MenuPrincipalController {
 
     @FXML
     void accionRenovarLicencia(ActionEvent event) {
-        informacionFuncionalidadNoDesarrollada();
+        try{
+            Stage currentStage = (Stage) botonRenovarLicencia.getScene().getWindow();
+            App.cambiarVentana("RenovarLicencia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

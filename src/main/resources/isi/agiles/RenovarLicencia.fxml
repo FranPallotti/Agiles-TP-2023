@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.RenovarLicenciaController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" strokeType="INSIDE" width="1027.0" />
+      <ImageView fitHeight="110.0" fitWidth="85.0" layoutX="930.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/santafemuni-white.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Renovar Licencia">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="20.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titular">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="21.0" />
+         </font>
+      </Text>
+      <Text layoutX="20.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="198.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="13.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="campoTipoDocumento" layoutX="20.0" layoutY="222.0" prefWidth="150.0" promptText="Seleccione Tipo de Documento" />
+      <TextField fx:id="campoNroDoc" layoutX="198.0" layoutY="222.0" promptText="Ingrese Documento" />
+      <Button fx:id="botonBuscar" layoutX="378.0" layoutY="221.0" mnemonicParsing="false" onAction="#buscarCliqueado" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView layoutX="23.0" layoutY="315.0" prefHeight="200.0" prefWidth="978.0">
+        <columns>
+          <TableColumn prefWidth="142.0" text="Clase" />
+          <TableColumn minWidth="0.0" prefWidth="173.0" text="Fecha de Vencimiento" />
+            <TableColumn prefWidth="102.0" text="Estado" />
+            <TableColumn prefWidth="327.0" text="Nombre" />
+            <TableColumn prefWidth="233.0" text="Apellido" />
+        </columns>
+      </TableView>
+      <Button fx:id="botonContinuar" layoutX="889.0" layoutY="652.0" mnemonicParsing="false" onAction="#continuarCliqueado" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Continuar" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="botonVolverAtras" layoutX="751.0" layoutY="652.0" mnemonicParsing="false" onAction="#volverAtrasCliqueado" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Volver Atras" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text layoutX="23.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Licencias asociadas">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="21.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
