@@ -2,6 +2,7 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,5 +118,13 @@ public class GestorLicencia {
     throws ObjetoNoEncontradoException{
         List<Licencia> listaExpiradas = this.getLicenciasExpiradas();
         return listaExpiradas.stream().map(l -> this.getLicenciaDTO(l)).toList();
+    }
+
+    public void marcarRenovada(LicenciaDTO licencia) throws ObjetoNoEncontradoException{
+        if(licencia.getEstado().equals(EstadoLicencia.VIGENTE)){
+            Licencia aux = (Licencia) licenciaDao.getById(licencia.getIdLicencia()).orElseThrow(()-> new ObjetoNoEncontradoException());
+            aux.setEstado(EstadoLicencia.EXPIRADA);
+            licenciaDao.updateInstance(aux);
+        }
     }
 }

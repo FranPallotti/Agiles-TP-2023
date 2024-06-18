@@ -48,8 +48,8 @@
       <TextField fx:id="campoApellido" layoutX="389.0" layoutY="213.0" prefHeight="25.0" prefWidth="176.0" />
       <TextField fx:id="campoNroDoc" layoutX="599.0" layoutY="213.0" />
       <CheckBox fx:id="checkboxRenovarVigencia" layoutX="792.0" layoutY="217.0" mnemonicParsing="false" onAction="#renovarCliqueado" text="Renovar vigencia" />
-      <DatePicker fx:id="campoVigenteDesde" layoutX="20.0" layoutY="302.0" prefHeight="25.0" prefWidth="150.0" />
-      <DatePicker fx:id="campoVIgenteHasta" layoutX="206.0" layoutY="302.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="campoVigenteDesde" layoutX="20.0" layoutY="302.0" mouseTransparent="true" prefHeight="25.0" prefWidth="150.0" />
+      <DatePicker fx:id="campoVIgenteHasta" layoutX="206.0" layoutY="302.0" mouseTransparent="true" prefHeight="25.0" prefWidth="149.0" />
       <Text layoutX="20.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clase de licencia">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />

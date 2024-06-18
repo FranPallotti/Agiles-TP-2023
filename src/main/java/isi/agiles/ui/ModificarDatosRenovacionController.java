@@ -14,6 +14,7 @@ import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
@@ -102,10 +103,6 @@ public class ModificarDatosRenovacionController implements Initializable {
                 campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
                 campoVIgenteHasta.setValue(licencia.getFinVigencia());
                 campoVigenteDesde.setValue(licencia.getInicioVigencia());
-                
-                
-    
-    
                 campoVIgenteHasta.setVisible(true);
                 campoVigenteDesde.setVisible(true);
     
@@ -154,6 +151,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         campoNroDoc.setText(licencia.getTitular().getNroDoc());
         campoCostoVigencia.setText(licencia.getCosto().toString());
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         campoVIgenteHasta.setVisible(false);
@@ -164,10 +162,6 @@ public class ModificarDatosRenovacionController implements Initializable {
         catch(ObjetoNoEncontradoException e){
             faltanDatosLicencias();
         }
-        
-        
-        
-        
     }
 
     private void faltanDatosLicencias(){
@@ -180,76 +174,81 @@ public class ModificarDatosRenovacionController implements Initializable {
             alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
             alert.setResizable(false);
             alert.showAndWait();
-        }
-        private void errorRenovarLicencia(){
-            Alert alert = new Alert(AlertType.ERROR, "Error: Ocurrio un inconveniente al renovar su licencia", ButtonType.OK);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.getDialogPane().getChildren().stream()
-                    .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
-            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
-            alert.setResizable(false);
-            alert.showAndWait();
-        }
-        @FXML
-        void claseLicenciaSeleccionada(ActionEvent event) {
-            try{
-                if(checkboxRenovarVigencia.isSelected()){
-                    //TODO validar campos de texto
-                    campoVIgenteHasta.setVisible(false);
-                    campoVIgenteHasta.setVisible(false);
-                    campoCostoVigencia.setVisible(false);
+    }
 
-                    licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
-                    
-                    gestorLicencia.calcularVigenciaLicencia(licencia);
-                    licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
-                    campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
-                    campoVIgenteHasta.setValue(licencia.getFinVigencia());
-                    campoVigenteDesde.setValue(licencia.getInicioVigencia());
-                    campoVIgenteHasta.setVisible(true);
-                    campoVIgenteHasta.setVisible(true);
-                    campoCostoVigencia.setVisible(true);
-                    
         
-                }
-                else{
-                    
-                    campoCostoVigencia.setVisible(false);
+    private void errorRenovarLicencia(){
+        Alert alert = new Alert(AlertType.ERROR, "Error: Ocurrio un inconveniente al renovar su licencia", ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
 
-                    licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
+    @FXML
+    void claseLicenciaSeleccionada(ActionEvent event) {
+        try{
+            if(checkboxRenovarVigencia.isSelected()){
+                //TODO validar campos de texto
+                campoVIgenteHasta.setVisible(false);
+                campoVIgenteHasta.setVisible(false);
+                campoCostoVigencia.setVisible(false);
+
+                licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
                     
-                    gestorLicencia.calcularVigenciaLicencia(licencia);
-                    licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
-                    campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
-                    
-                    
-                    campoCostoVigencia.setVisible(true);
-                }
-                
-                    
+                gestorLicencia.calcularVigenciaLicencia(licencia);
+                licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
+                campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
+                campoVIgenteHasta.setValue(licencia.getFinVigencia());
+                campoVigenteDesde.setValue(licencia.getInicioVigencia());
+                campoVIgenteHasta.setVisible(true);
+                campoVIgenteHasta.setVisible(true);
+                campoCostoVigencia.setVisible(true);  
             }
-            catch(ObjetoNoEncontradoException e){
-                errorRenovarLicencia();
-            }
+            else{   
+                campoCostoVigencia.setVisible(false);
+                licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
+                gestorLicencia.calcularVigenciaLicencia(licencia);
+                licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
+                campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
+                campoCostoVigencia.setVisible(true);
+            }    
+        }catch(ObjetoNoEncontradoException e){
+            errorRenovarLicencia();
         }
-        @FXML
+    }
+
+    @FXML
     void confirmarCliqueado(ActionEvent event) {
+        try{
         if(!datosInvalidos(this.licencia)){
+            
             licencia.getTitular().setNombre(campoNombre.getText());
             licencia.getTitular().setApellido(campoApellido.getText());
             licencia.getTitular().setNroDoc(campoNroDoc.getText());
             licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
-            
-            //TODO backend de renovar licencia
+            //En el caso de que sea una renovación temprana se marcará como Expirada la licencia vieja.
+            gestorLicencia.altaLicencia(licencia);
+            gestorLicencia.marcarRenovada(licencia);
             //TODO que tire una excepcion si no califica para el tipo de licencia
             System.out.println("HOLA");
+            renovacionExitosa();
+            volverMenuPrincipal();
         }
         else{
             datosInvalidosWarning();
         }
+        }catch(NoCumpleCondicionesLicenciaException e){
+            e.printStackTrace();
+        }catch(ObjetoNoEncontradoException a){
+            a.printStackTrace();
+        }
     }
+
     public Boolean datosInvalidos(LicenciaDTO l){
         Boolean invalidos = false;
         invalidos |=this.nombreInvalido(campoNombre.getText());
@@ -270,6 +269,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         }
         return invalido;
     }
+
     public Boolean apellidoInvalido(String apellido){
         Boolean invalido =  false;
         if(apellido == null|| apellido.matches("^\\s+$") || apellido.isEmpty() || apellido.isBlank() || apellido.length()>32){
@@ -281,6 +281,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         }
         return invalido;
     }
+
     public Boolean claseNoSeleccionada(ClaseLicenciaDTO c){
         Boolean invalido =  false;
         if(c == null){
@@ -325,15 +326,36 @@ public class ModificarDatosRenovacionController implements Initializable {
     }
 
     private void datosInvalidosWarning(){
-            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Revise el formato de los datos ingresados ", ButtonType.OK);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText(null);
-            alert.getDialogPane().getChildren().stream()
-                    .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
-            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
-            alert.setResizable(false);
-            alert.showAndWait();
-        }
+        Alert alert = new Alert(AlertType.WARNING, "Advertencia: Revise el formato de los datos ingresados.", ButtonType.OK);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
 
+    private void renovacionExitosa() {
+        Alert alert = new Alert(AlertType.INFORMATION, "¡Información: Licencia renovada con éxito.!", ButtonType.OK);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
+
+    private void volverMenuPrincipal() {
+        try{
+            Stage currentStage = (Stage) botonContinuar.getScene().getWindow();
+            App.cambiarVentana("MenuPrincipal.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }
