@@ -101,5 +101,10 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
+      <Label fx:id="errorClaseLicencia" alignment="CENTER" layoutX="20.0" layoutY="250.0" prefHeight="23.0" prefWidth="150.0" text="Formato invalido" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
