@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="rectanguloVerde" arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1027.0" />
+      <Label fx:id="labelModificarDatosTitular" layoutX="239.0" layoutY="39.0" text="Modificar Datos de Titular" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMunicipalidadStaFe" layoutX="418.0" layoutY="100.0" text="Municipalidad de Santa Fe" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagenMunicipalidadStaFe" fitHeight="131.0" fitWidth="99.0" layoutX="914.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/santafemuni-white-tiny.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="botonBuscar" layoutX="478.0" layoutY="198.0" mnemonicParsing="false" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Buscar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonVolver" layoutX="339.0" layoutY="659.0" mnemonicParsing="false" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Vovler" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonModificarTitular" disable="true" layoutX="546.0" layoutY="659.0" mnemonicParsing="false" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Modificar Titular" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="labelBuscarTitular" layoutX="22.0" layoutY="139.0" prefHeight="17.0" prefWidth="159.0" text="Buscar Titular" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTipoDoc" alignment="CENTER" layoutX="22.0" layoutY="173.0" prefHeight="17.0" prefWidth="179.0" text="Tipo Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNroDoc" layoutX="239.0" layoutY="173.0" prefHeight="17.0" prefWidth="179.0" text="Número de Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="239.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" />
+      <ComboBox layoutX="22.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Label fx:id="labelErrorTipoYNroDoc" alignment="CENTER" layoutX="22.0" layoutY="232.0" prefHeight="17.0" prefWidth="400.0" text="*Campos Obligatorios.*" textFill="RED" visible="false">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
