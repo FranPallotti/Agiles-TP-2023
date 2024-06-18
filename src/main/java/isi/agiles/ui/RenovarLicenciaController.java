@@ -78,6 +78,7 @@ public class RenovarLicenciaController implements Initializable {
 
     @FXML
     private TableColumn<LicenciaDTO, String> nombreColumn;
+    
 
     //Atributos internos
 
@@ -105,7 +106,7 @@ public class RenovarLicenciaController implements Initializable {
     }
     catch(ObjetoNoEncontradoException e){
         titularNoEncontrado();
-        e.printStackTrace();
+        //e.printStackTrace();
     }
     }
 

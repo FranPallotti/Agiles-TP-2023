@@ -9,6 +9,7 @@ import isi.agiles.App;
 import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
+import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.TipoClasesLicencia;
@@ -16,6 +17,7 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
+import isi.agiles.util.DatosInvalidosException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -69,8 +71,22 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     @FXML
     private Label labelCostoLicencia;
+    // errores
+    @FXML
+    private Label errorFormatoApellido;
+
+    @FXML
+    private Label errorFormatoDni;
+
+    @FXML
+    private Label errorFormatoNombre;
+    @FXML
+    private Label errorClaseLicencia;
+    // atributos internos
 
     private LicenciaDTO licencia;
+    
+    
     private GestorClaseLicencia gestorClase= new GestorClaseLicencia();
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
@@ -220,6 +236,104 @@ public class ModificarDatosRenovacionController implements Initializable {
         }
         @FXML
     void confirmarCliqueado(ActionEvent event) {
-
+        if(!datosInvalidos(this.licencia)){
+            licencia.getTitular().setNombre(campoNombre.getText());
+            licencia.getTitular().setApellido(campoApellido.getText());
+            licencia.getTitular().setNroDoc(campoNroDoc.getText());
+            licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
+            
+            //TODO backend de renovar licencia
+            //TODO que tire una excepcion si no califica para el tipo de licencia
+            System.out.println("HOLA");
+        }
+        else{
+            datosInvalidosWarning();
+        }
     }
+    public Boolean datosInvalidos(LicenciaDTO l){
+        Boolean invalidos = false;
+        invalidos |=this.nombreInvalido(campoNombre.getText());
+        invalidos |=this.apellidoInvalido(campoApellido.getText());
+        invalidos |=this.dniInvalido(campoNroDoc.getText(),l.getTitular().getTipoDoc());
+        invalidos |= this.claseNoSeleccionada(campoClaseLicencia.getSelectionModel().getSelectedItem());
+        return invalidos;
+    }
+
+    public Boolean nombreInvalido(String nombre){
+        Boolean invalido = false;
+        if(nombre == null || nombre.matches("^\\s+$") || nombre.isBlank() || nombre.isEmpty()|| nombre.length()>32){
+            invalido = true;
+            errorFormatoNombre.setVisible(true);
+        }
+        else{
+            errorFormatoNombre.setVisible(false);
+        }
+        return invalido;
+    }
+    public Boolean apellidoInvalido(String apellido){
+        Boolean invalido =  false;
+        if(apellido == null|| apellido.matches("^\\s+$") || apellido.isEmpty() || apellido.isBlank() || apellido.length()>32){
+            invalido = true;
+            errorFormatoApellido.setVisible(true);
+        }
+        else{
+            errorFormatoApellido.setVisible(false);
+        }
+        return invalido;
+    }
+    public Boolean claseNoSeleccionada(ClaseLicenciaDTO c){
+        Boolean invalido =  false;
+        if(c == null){
+            invalido = true;
+            errorClaseLicencia.setVisible(true);
+        }
+        else{
+            errorClaseLicencia.setVisible(false);
+        }
+        return invalido;
+    }
+
+    public  Boolean dniInvalido(String num, TipoDoc tipo){
+        Boolean invalido = false;
+
+        if(tipo != null && num != null){
+            switch (tipo) {
+                case DNI:
+                    if(!num.matches("^\\d{8}$") || num.isBlank() || num.isEmpty()){
+                        invalido=true;
+                        errorFormatoDni.setVisible(true);
+                    }
+                    else{
+                        errorFormatoDni.setVisible(false);
+                    }
+                                        
+                break;
+                case PASAPORTE:
+                    if(!num.matches("^[a-zA-Z]{3}\\d{6}$") || num.isBlank() || num.isEmpty() ){
+                        invalido=true;
+                        errorFormatoDni.setVisible(true);
+                    }
+                    else{
+                        errorFormatoDni.setVisible(false);
+                    }
+                break;
+                default:
+                    invalido=true;
+            }
+        }
+        return invalido;
+    }
+
+    private void datosInvalidosWarning(){
+            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Revise el formato de los datos ingresados ", ButtonType.OK);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+            alert.setResizable(false);
+            alert.showAndWait();
+        }
+
 }

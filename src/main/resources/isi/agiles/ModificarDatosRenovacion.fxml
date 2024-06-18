@@ -14,7 +14,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.ModificarDatosRenovacionController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" strokeType="INSIDE" width="1027.0" />
@@ -85,6 +84,21 @@
       <Label fx:id="labelCostoLicencia" layoutX="389.0" layoutY="303.0" text="Costo de la Licencia:">
          <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorFormatoNombre" alignment="CENTER" layoutX="206.0" layoutY="250.0" prefHeight="23.0" prefWidth="150.0" text="Formato invalido" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorFormatoApellido" alignment="CENTER" layoutX="389.0" layoutY="250.0" prefHeight="23.0" prefWidth="150.0" text="Formato invalido" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorFormatoDni" alignment="CENTER" layoutX="599.0" layoutY="250.0" prefHeight="23.0" prefWidth="150.0" text="Formato invalido" textFill="RED" visible="false" wrapText="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
    </children>
