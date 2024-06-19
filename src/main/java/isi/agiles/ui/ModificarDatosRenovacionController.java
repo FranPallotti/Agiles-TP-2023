@@ -18,6 +18,7 @@ import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
+import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -81,16 +82,18 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     @FXML
     private Label errorFormatoNombre;
+
     @FXML
     private Label errorClaseLicencia;
     // atributos internos
 
     private LicenciaDTO licencia;
-    
-    
+
     private GestorClaseLicencia gestorClase= new GestorClaseLicencia();
+
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
+    private GestorTitular gestorTitular = new GestorTitular();
 
     @FXML
     void renovarCliqueado(ActionEvent event) {
@@ -232,6 +235,7 @@ public class ModificarDatosRenovacionController implements Initializable {
             licencia.getTitular().setNroDoc(campoNroDoc.getText());
             licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
             //En el caso de que sea una renovación temprana se marcará como Expirada la licencia vieja.
+            gestorTitular.actualizarTitular(licencia.getTitular());
             gestorLicencia.altaLicencia(licencia);
             gestorLicencia.marcarRenovada(licencia);
             //TODO que tire una excepcion si no califica para el tipo de licencia

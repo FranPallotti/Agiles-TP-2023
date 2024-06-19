@@ -186,4 +186,19 @@ public class GestorTitular {
         //Si mayor de 70 años:
         return 1;
     }
+
+    public void actualizarTitular(TitularDTO titular) throws ObjetoNoEncontradoException{
+        Titular titularBD = titularDao.getById(titular.getIdTitular()).orElseThrow(() -> new ObjetoNoEncontradoException());
+
+        if(!titular.getNombre().equals(titularBD.getNombre())){
+            titularBD.setNombre(titular.getNombre());
+        }
+        if(!titular.getApellido().equals(titularBD.getApellido())){
+            titularBD.setApellido((titular.getApellido()));
+        }
+        if(!titular.getNroDoc().equals(titularBD.getNroDoc())){
+            titularBD.setNroDoc((titular.getNroDoc()));
+        }
+        titularDao.updateInstance(titularBD);
+    }
 }
