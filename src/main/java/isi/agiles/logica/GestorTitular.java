@@ -28,7 +28,12 @@ public class GestorTitular {
         dto.setNroDoc(titular.getNroDoc());
         dto.setTipoDoc(titular.getTipoDoc());
         dto.setFechaNacimiento(titular.getFechaNacimiento());
-        /*Incompleto */
+        dto.setFactorRH(titular.getFactorRH());
+        dto.setEsDonante(titular.getEsDonante());
+        dto.setGrupoSanguineo(titular.getGrupoSanguineo());
+        dto.setSexo(titular.getSexo());
+        dto.setDireccion(titular.getDireccion());
+        dto.setClaseSol(titular.getClaseSol());
         return dto;
     }
 
@@ -198,6 +203,30 @@ public class GestorTitular {
         }
         if(!titular.getNroDoc().equals(titularBD.getNroDoc())){
             titularBD.setNroDoc((titular.getNroDoc()));
+        }
+        if(!titular.getTipoDoc().equals(titularBD.getTipoDoc())){
+            titularBD.setTipoDoc((titular.getTipoDoc()));
+        }
+        if(!titular.getFechaNacimiento().equals(titularBD.getFechaNacimiento())){
+            titularBD.setFechaNacimiento((titular.getFechaNacimiento()));
+        }
+        if(!titular.getFactorRH().equals(titularBD.getFactorRH())){
+            titularBD.setFactorRH((titular.getFactorRH()));
+        }
+        if(!titular.getEsDonante().equals(titularBD.getEsDonante())){
+            titularBD.setEsDonante((titular.getEsDonante()));
+        }
+        if(!titular.getGrupoSanguineo().equals(titularBD.getGrupoSanguineo())){
+            titularBD.setGrupoSanguineo((titular.getGrupoSanguineo()));
+        }
+        if(!titular.getSexo().equals(titularBD.getSexo())){
+            titularBD.setSexo((titular.getSexo()));
+        }
+        if(!titular.getDireccion().equals(titularBD.getDireccion())){
+            titularBD.setDireccion((titular.getDireccion()));
+        }
+        if(!titular.getClaseSol().equals(titularBD.getClaseSol())){
+            titularBD.setClaseSol((titular.getClaseSol()));
         }
         titularDao.updateInstance(titularBD);
     }

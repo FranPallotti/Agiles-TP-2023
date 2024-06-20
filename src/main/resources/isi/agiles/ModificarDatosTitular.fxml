@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.ModificarDatosTitularController">
    <children>
       <ComboBox fx:id="listaTipoDoc" layoutX="22.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0">
          <cursor>
@@ -24,7 +24,7 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font></TextField>
-      <Button fx:id="botonBuscar" layoutX="478.0" layoutY="198.0" mnemonicParsing="false" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Buscar" textFill="WHITE">
+      <Button fx:id="botonBuscar" layoutX="478.0" layoutY="198.0" mnemonicParsing="false" onAction="#accionBotonBuscar" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Buscar" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -134,7 +134,7 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="botonVolver" layoutX="339.0" layoutY="659.0" mnemonicParsing="false" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Vovler" textFill="WHITE">
+      <Button fx:id="botonVolver" layoutX="339.0" layoutY="659.0" mnemonicParsing="false" onAction="#accionBotonVolver" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Volver" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -142,7 +142,7 @@
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="botonModificarTitular" disable="true" layoutX="546.0" layoutY="659.0" mnemonicParsing="false" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Modificar Titular" textFill="WHITE">
+      <Button fx:id="botonModificarTitular" disable="true" layoutX="546.0" layoutY="659.0" mnemonicParsing="false" onAction="#accionBotonModificarTitular" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Modificar Titular" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -150,7 +150,7 @@
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="labelBuscarTitular1" focusTraversable="false" layoutX="22.0" layoutY="249.0" prefHeight="17.0" prefWidth="179.0" text="Modificar Titular" underline="true">
+      <Label fx:id="labelModificarTitular" focusTraversable="false" layoutX="22.0" layoutY="249.0" prefHeight="17.0" prefWidth="179.0" text="Modificar Titular" underline="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>

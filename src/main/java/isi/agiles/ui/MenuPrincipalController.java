@@ -151,7 +151,13 @@ public class MenuPrincipalController {
 
     @FXML
     void accionModificarDatosTitular(ActionEvent event) {
-        informacionFuncionalidadNoDesarrollada();
+        try{
+            Stage currentStage = (Stage) botonListarLicenciasExpiradas.getScene().getWindow();
+            App.cambiarVentana("ModificarDatosTitular.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
