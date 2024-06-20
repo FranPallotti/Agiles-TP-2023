@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" strokeType="INSIDE" width="1027.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="753.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
