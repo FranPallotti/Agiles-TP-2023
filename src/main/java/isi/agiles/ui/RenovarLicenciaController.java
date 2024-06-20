@@ -3,6 +3,7 @@ package isi.agiles.ui;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.excepcion.NoPuedeRenovarVigenciaTemprana;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
@@ -116,7 +118,8 @@ public class RenovarLicenciaController implements Initializable {
             seleccioneUnaLicencia();
         }
         else{
-            try{
+            try{ //ESTO PUEDE SER PARA REFACTORIZAR Y PONER EL CAMBIO DE PANTALLA EN OTRA FUNCION
+                puedeSerRenovada(listadoLicenciasTable.getSelectionModel().getSelectedItem());
                 FXMLLoader loader = new FXMLLoader();
                 
                 loader.setLocation(App.class.getResource("ModificarDatosRenovacion.fxml"));
@@ -142,11 +145,12 @@ public class RenovarLicenciaController implements Initializable {
                 Stage currentStage = (Stage) this.botonContinuar.getScene().getWindow();
                 currentStage.close();
             }
-            
+            catch(NoPuedeRenovarVigenciaTemprana e){
+                errorNoPuedeRenovar(e.getMessage());
+            }
             catch(IOException o){
                 o.printStackTrace();
             }
-            
         }
         
     }
@@ -228,20 +232,34 @@ public class RenovarLicenciaController implements Initializable {
             alert.setResizable(false);
             alert.showAndWait();
         }
-        private void seleccioneUnaLicencia(){
+    private void seleccioneUnaLicencia(){
 
-            Alert alert = new Alert(AlertType.WARNING, "Advertencia: Seleccione una licencia", ButtonType.OK);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText(null);
-            alert.getDialogPane().getChildren().stream()
+        Alert alert = new Alert(AlertType.WARNING, "Advertencia: Seleccione una licencia", ButtonType.OK);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
                     .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
-            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
-            alert.setResizable(false);
-            alert.showAndWait();
-        }
-    
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
 
+    private void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana{
+      if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
+        throw new NoPuedeRenovarVigenciaTemprana();
+      }
+    }
 
-
+    private void errorNoPuedeRenovar(String message) {
+        Alert alert = new Alert(AlertType.WARNING, message, ButtonType.OK);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                    .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        alert.showAndWait();
+    }
 }

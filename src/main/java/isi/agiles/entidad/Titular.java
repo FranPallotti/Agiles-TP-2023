@@ -30,8 +30,8 @@ public class Titular {
     @Column(name = "fecha_nacimiento", nullable = true)
     private LocalDate fechaNacimiento;
 
-    @NaturalId
-    @Column(name="nro_doc", nullable = false)
+    @NaturalId(mutable = true)
+    @Column(name="nro_doc", nullable = false, unique = true)
     private String nroDoc;
     
     @NaturalId
