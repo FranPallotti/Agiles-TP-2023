@@ -47,6 +47,8 @@ public class MenuPrincipalController {
 
     @FXML
     private Button botonRenovarLicencia;
+    @FXML
+    private Button botonEmitirCopia;
 
     @FXML
     private AnchorPane frameMenuPrincipal;
@@ -174,6 +176,16 @@ public class MenuPrincipalController {
         try{
             Stage currentStage = (Stage) botonRenovarLicencia.getScene().getWindow();
             App.cambiarVentana("RenovarLicencia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void accionEmitirCopia(ActionEvent event) {
+        try{
+            Stage currentStage = (Stage) botonEmitirCopia.getScene().getWindow();
+            App.cambiarVentana("EmitirCopia.fxml", currentStage);
         }
         catch(IOException e){
             e.printStackTrace();

@@ -36,6 +36,7 @@ public class GestorLicencia {
         dto.setInicioVigencia(licencia.getInicioVigencia());
         dto.setObservaciones(licencia.getObservaciones());
         dto.setTitular(gestorTitular.getTitularDTO(licencia.getTitular()));
+        dto.setCantCopias(licencia.getCopias().size());
         return dto;
     }
 
@@ -46,7 +47,6 @@ public class GestorLicencia {
         licencia.setInicioVigencia(LocalDate.now());
         licencia.setFinVigencia(dto.getFinVigencia());
         licencia.setEstado(EstadoLicencia.VIGENTE);
-        licencia.setCantDeCopias(0);
         licencia.setCosto(dto.getCosto());
         /*Asociaciones */
         licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClaseLic()));
@@ -126,5 +126,17 @@ public class GestorLicencia {
             aux.setEstado(EstadoLicencia.EXPIRADA);
             licenciaDao.updateInstance(aux);
         }
+    }
+    public void emitirCopia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
+        Licencia l=this.getLicencia(dto);
+        CopiaLicencia copia = new CopiaLicencia();
+
+        copia.setEmisor(gestorUsuario.getUsuario(App.getUsuarioLogueado()));
+        copia.setFechaEmision(LocalDate.now());
+        copia.setLicencia(l);
+        l.agregarCopia(copia);
+        licenciaDao.saveInstance(l);
+        
+
     }
 }
