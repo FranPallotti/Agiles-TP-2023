@@ -175,7 +175,6 @@ public class ModificarDatosTitularController {
             errorDatosInvalidos(e.getMessage());
         }catch(ObjetoNoEncontradoException a){
             titularNoEncontrado();
-            a.printStackTrace();
         }
     }
 
@@ -184,8 +183,9 @@ public class ModificarDatosTitularController {
         try {
             validarDatos();
             //Se modifica el titular existente
+            actualizarDTO();
             gestorTitular.actualizarTitular(titular);
-            informacionClienteGuardado();
+            informacionTitularModificado();
             accionBotonVolver(event);
         } catch (DatosInvalidosException e) {
             errorDatosInvalidos(e.getMessage());
@@ -417,6 +417,21 @@ public class ModificarDatosTitularController {
         return esInvalido;
     }
 
+    private void actualizarDTO() {
+        titular.setNombre(campoNombre.getText());
+        titular.setApellido(campoApellido.getText());
+        titular.setFechaNacimiento(campoFechaNacimiento.getValue());
+        titular.setDireccion(campoDireccion.getText());
+        titular.setGrupoSanguineo(listaGrupoSanguineo.getSelectionModel().getSelectedItem());
+        titular.setFactorRH(listaFactorRH.getSelectionModel().getSelectedItem());
+        //titular.setClaseSol(null);
+        if(listaDonante.getSelectionModel().getSelectedItem().equals("SI")){
+            titular.setEsDonante(true);
+        }else{
+            titular.setEsDonante(false);
+        }
+    }
+
     private void errorDatosInvalidos(String message) {
         Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
         alert.setTitle("Error");
@@ -441,8 +456,8 @@ public class ModificarDatosTitularController {
         alert.showAndWait();
     }
 
-    private void informacionClienteGuardado() {
-        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El titular ha sido dado de alta.", ButtonType.OK);
+    private void informacionTitularModificado() {
+        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El titular ha sido modificado con éxito.", ButtonType.OK);
         alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()

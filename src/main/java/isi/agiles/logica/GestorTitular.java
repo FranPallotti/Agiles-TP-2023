@@ -225,7 +225,7 @@ public class GestorTitular {
         if(!titular.getDireccion().equals(titularBD.getDireccion())){
             titularBD.setDireccion((titular.getDireccion()));
         }
-        if(!titular.getClaseSol().equals(titularBD.getClaseSol())){
+        if(titularBD.getClaseSol() == null ||!titular.getClaseSol().equals(titularBD.getClaseSol())){
             titularBD.setClaseSol((titular.getClaseSol()));
         }
         titularDao.updateInstance(titularBD);
