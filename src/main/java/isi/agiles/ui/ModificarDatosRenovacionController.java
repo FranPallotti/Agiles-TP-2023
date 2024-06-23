@@ -51,7 +51,7 @@ public class ModificarDatosRenovacionController implements Initializable {
     private TextField campoApellido;
 
     @FXML
-    private ComboBox<ClaseLicenciaDTO> campoClaseLicencia;
+    private TextField campoClaseLicencia;
 
     @FXML
     private TextField campoCostoVigencia;
@@ -95,34 +95,7 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     private GestorTitular gestorTitular = new GestorTitular();
 
-    @FXML
-    void renovarCliqueado(ActionEvent event) {
-        //Calculamos vigencia y costo
-        try{
-            if(checkboxRenovarVigencia.isSelected()){
-                licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
-                gestorLicencia.calcularVigenciaLicencia(licencia);
-                licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
-                campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
-                campoVIgenteHasta.setValue(licencia.getFinVigencia());
-                campoVigenteDesde.setValue(licencia.getInicioVigencia());
-                campoVIgenteHasta.setVisible(true);
-                campoVigenteDesde.setVisible(true);
     
-            }
-            else{
-                campoVIgenteHasta.setVisible(false);
-                campoVigenteDesde.setVisible(false);
-            }
-                
-        }
-        catch(ObjetoNoEncontradoException e){
-            errorRenovarLicencia();
-        }
-        
-        
-        
-    }
 
     @FXML
     void volverAtrasCliqueado(ActionEvent event) {
@@ -143,28 +116,56 @@ public class ModificarDatosRenovacionController implements Initializable {
     }
 
     public void setearDatos(){
+        /*
         campoApellido.setText(licencia.getTitular().getApellido());
         campoNombre.setText(licencia.getTitular().getNombre());
         
-        campoClaseLicencia.setValue(licencia.getClaseLic());
+        campoClaseLicencia.setText(licencia.getClaseLic().toString());
         
         //campoVigenteDesde.setValue(licencia.getInicioVigencia());
         //campoVIgenteHasta.setValue(licencia.getFinVigencia());
         
         campoNroDoc.setText(licencia.getTitular().getNroDoc());
         campoCostoVigencia.setText(licencia.getCosto().toString());
+        */
+        try{
+            campoVIgenteHasta.setVisible(false);
+            campoVIgenteHasta.setVisible(false);
+            campoCostoVigencia.setVisible(false);
+            campoClaseLicencia.setVisible(false);
+            campoApellido.setVisible(false);
+            campoNombre.setVisible(false);
+            campoNroDoc.setVisible(false);
+            
+            gestorLicencia.calcularVigenciaLicencia(licencia);
+            licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
+            campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
+            campoVIgenteHasta.setValue(licencia.getFinVigencia());
+            campoVigenteDesde.setValue(licencia.getInicioVigencia());
+            campoClaseLicencia.setText(licencia.getClaseLic().toString());
+            campoApellido.setText(licencia.getTitular().getApellido());
+            campoNombre.setText(licencia.getTitular().getNombre());
+            campoNroDoc.setText(licencia.getTitular().getNroDoc());
+
+            campoApellido.setVisible(true);
+            campoNombre.setVisible(true);
+            campoNroDoc.setVisible(true);
+            campoVIgenteHasta.setVisible(true);
+            campoVIgenteHasta.setVisible(true);
+            campoCostoVigencia.setVisible(true);
+            campoClaseLicencia.setVisible(true);
+        }
+        catch(ObjetoNoEncontradoException e){
+            errorRenovarLicencia();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        campoVIgenteHasta.setVisible(false);
-        campoVigenteDesde.setVisible(false);
-        try{
-            campoClaseLicencia.setItems(FXCollections.observableArrayList(gestorClase.getAllDTOs()));
-        }
-        catch(ObjetoNoEncontradoException e){
-            faltanDatosLicencias();
-        }
+        
+        
+        
+        
     }
 
     private void faltanDatosLicencias(){
@@ -192,38 +193,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
-    void claseLicenciaSeleccionada(ActionEvent event) {
-        try{
-            if(checkboxRenovarVigencia.isSelected()){
-                //TODO validar campos de texto
-                campoVIgenteHasta.setVisible(false);
-                campoVIgenteHasta.setVisible(false);
-                campoCostoVigencia.setVisible(false);
-
-                licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
-                    
-                gestorLicencia.calcularVigenciaLicencia(licencia);
-                licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
-                campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
-                campoVIgenteHasta.setValue(licencia.getFinVigencia());
-                campoVigenteDesde.setValue(licencia.getInicioVigencia());
-                campoVIgenteHasta.setVisible(true);
-                campoVIgenteHasta.setVisible(true);
-                campoCostoVigencia.setVisible(true);  
-            }
-            else{   
-                campoCostoVigencia.setVisible(false);
-                licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
-                gestorLicencia.calcularVigenciaLicencia(licencia);
-                licencia.setCosto(gestorLicencia.getCostoLicencia(licencia));
-                campoCostoVigencia.setText(String.valueOf(licencia.getCosto()));
-                campoCostoVigencia.setVisible(true);
-            }    
-        }catch(ObjetoNoEncontradoException e){
-            errorRenovarLicencia();
-        }
-    }
+    
 
     @FXML
     void confirmarCliqueado(ActionEvent event) {
@@ -233,13 +203,10 @@ public class ModificarDatosRenovacionController implements Initializable {
             licencia.getTitular().setNombre(campoNombre.getText());
             licencia.getTitular().setApellido(campoApellido.getText());
             licencia.getTitular().setNroDoc(campoNroDoc.getText());
-            licencia.setClaseLic(campoClaseLicencia.getSelectionModel().getSelectedItem());
             //En el caso de que sea una renovación temprana se marcará como Expirada la licencia vieja.
             gestorTitular.actualizarTitular(licencia.getTitular());
             gestorLicencia.altaLicencia(licencia);
             gestorLicencia.marcarRenovada(licencia);
-            //TODO que tire una excepcion si no califica para el tipo de licencia
-            System.out.println("HOLA");
             renovacionExitosa();
             volverMenuPrincipal();
         }
@@ -248,6 +215,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         }
         }catch(NoCumpleCondicionesLicenciaException e){
             e.printStackTrace();
+            //TODOque tire una excepcion si no califica para el tipo de licencia
         }catch(ObjetoNoEncontradoException a){
             a.printStackTrace();
         }
@@ -258,7 +226,6 @@ public class ModificarDatosRenovacionController implements Initializable {
         invalidos |=this.nombreInvalido(campoNombre.getText());
         invalidos |=this.apellidoInvalido(campoApellido.getText());
         invalidos |=this.dniInvalido(campoNroDoc.getText(),l.getTitular().getTipoDoc());
-        invalidos |= this.claseNoSeleccionada(campoClaseLicencia.getSelectionModel().getSelectedItem());
         return invalidos;
     }
 
@@ -286,17 +253,7 @@ public class ModificarDatosRenovacionController implements Initializable {
         return invalido;
     }
 
-    public Boolean claseNoSeleccionada(ClaseLicenciaDTO c){
-        Boolean invalido =  false;
-        if(c == null){
-            invalido = true;
-            errorClaseLicencia.setVisible(true);
-        }
-        else{
-            errorClaseLicencia.setVisible(false);
-        }
-        return invalido;
-    }
+    
 
     public  Boolean dniInvalido(String num, TipoDoc tipo){
         Boolean invalido = false;
