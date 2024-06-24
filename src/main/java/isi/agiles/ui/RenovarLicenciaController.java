@@ -13,12 +13,10 @@ import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.EstadoLicencia;
-import isi.agiles.entidad.Licencia;
-import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.excepcion.NoPuedeRenovarExisteLicencia;
 import isi.agiles.excepcion.NoPuedeRenovarVigenciaTemprana;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
-import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
 import javafx.beans.property.SimpleObjectProperty;
@@ -148,6 +146,9 @@ public class RenovarLicenciaController implements Initializable {
             catch(NoPuedeRenovarVigenciaTemprana e){
                 errorNoPuedeRenovar(e.getMessage());
             }
+            catch(NoPuedeRenovarExisteLicencia a){
+                errorNoPuedeRenovar(a.getMessage());
+            }
             catch(IOException o){
                 o.printStackTrace();
             }
@@ -245,10 +246,27 @@ public class RenovarLicenciaController implements Initializable {
         alert.showAndWait();
     }
 
-    private void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana{
-      if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
-        throw new NoPuedeRenovarVigenciaTemprana();
-      }
+    private void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
+        if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
+                                                                    .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
+                                                                    .count() >=1 ){
+            throw new NoPuedeRenovarExisteLicencia();
+        }
+        if(muchasLicenciasVigentes()){
+            throw new NoPuedeRenovarExisteLicencia();
+        }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
+            throw new NoPuedeRenovarVigenciaTemprana();
+        }
+    }
+
+    private boolean muchasLicenciasVigentes() {
+        Long contador = licencias.stream()
+                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
+                        .count();
+        if(contador>=2)
+        return true;
+        else
+        return false;
     }
 
     private void errorNoPuedeRenovar(String message) {
