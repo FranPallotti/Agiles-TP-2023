@@ -2,6 +2,10 @@ package isi.agiles.dao;
 
 import java.util.Optional;
 
+import org.hibernate.Session;
+
+import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.Titular;
 import isi.agiles.entidad.Usuario;
 
 import jakarta.persistence.NoResultException;
@@ -34,5 +38,14 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         return ret;
 
        
+    }
+
+    public Optional<Usuario> getbyDocumento(TipoDoc tipoDoc, String numero) {
+        Session session = entityManager.unwrap(Session.class);
+        Optional<Usuario> optional = session.byNaturalId(Usuario.class).
+                                             using("nroDoc", numero).
+                                             using("tipoDoc",tipoDoc).
+                                             loadOptional();
+        return optional;
     }
 }

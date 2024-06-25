@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
+import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.*;
 import isi.agiles.util.DatosInvalidosException;
@@ -155,8 +156,9 @@ public class GestorUsuario {
         return invalido;
     }
 
-
-
-
+    public UsuarioDTO getbyDocumento(TipoDoc tipoDoc, String numero) throws ObjetoNoEncontradoException{
+        Usuario user = usuarioDao.getbyDocumento(tipoDoc, numero).orElseThrow(()-> new ObjetoNoEncontradoException()) ;
+        return getUsuarioDTO(user);
+    }
 
 }
