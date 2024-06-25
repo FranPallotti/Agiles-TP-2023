@@ -1,9 +1,6 @@
 package isi.agiles.entidad;
 
-
 import java.time.LocalDate;
-
-import org.hibernate.annotations.CollectionId;
 
 
 import jakarta.persistence.*;

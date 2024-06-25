@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.ModificarDatosTitularController">
+   <children>
+      <ComboBox fx:id="listaTipoDoc" layoutX="22.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="campoNroDoc" layoutX="239.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font></TextField>
+      <Button fx:id="botonBuscar" layoutX="478.0" layoutY="198.0" mnemonicParsing="false" onAction="#accionBotonBuscar" opacity="0.7" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #00c089;" text="Buscar" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="campoNombre" layoutX="22.0" layoutY="318.0" prefHeight="25.0" prefWidth="179.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="campoApellido" layoutX="273.0" layoutY="318.0" prefHeight="25.0" prefWidth="179.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="campoFechaNacimiento" editable="false" layoutX="539.0" layoutY="318.0" prefHeight="25.0" prefWidth="179.0" />
+      <TextField fx:id="campoDireccion" layoutX="816.0" layoutY="318.0" prefHeight="25.0" prefWidth="179.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="listaGrupoSanguineo" layoutX="22.0" layoutY="488.0" prefHeight="25.0" prefWidth="179.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="listaFactorRH" layoutX="273.0" layoutY="488.0" prefHeight="25.0" prefWidth="179.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="listaDonante" layoutX="536.0" layoutY="488.0" prefHeight="25.0" prefWidth="179.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <CheckBox fx:id="choiceClaseA" layoutX="828.0" layoutY="501.0" mnemonicParsing="false" text="A">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseB" layoutX="828.0" layoutY="549.0" mnemonicParsing="false" text="B">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseC" layoutX="828.0" layoutY="595.0" mnemonicParsing="false" text="C">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseD" layoutX="897.0" layoutY="501.0" mnemonicParsing="false" text="D">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseE" layoutX="897.0" layoutY="549.0" mnemonicParsing="false" text="E">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseF" layoutX="897.0" layoutY="595.0" mnemonicParsing="false" text="F">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="choiceClaseG" layoutX="964.0" layoutY="501.0" mnemonicParsing="false" text="G">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <Rectangle fx:id="rectanguloVerde" arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1027.0" />
+      <Label fx:id="labelModificarDatosTitular" focusTraversable="false" layoutX="239.0" layoutY="39.0" text="Modificar Datos de Titular" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMunicipalidadStaFe" focusTraversable="false" layoutX="418.0" layoutY="100.0" text="Municipalidad de Santa Fe" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imagenMunicipalidadStaFe" fitHeight="131.0" fitWidth="99.0" layoutX="914.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/santafemuni-white-tiny.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelBuscarTitular" focusTraversable="false" layoutX="22.0" layoutY="139.0" prefHeight="17.0" prefWidth="159.0" text="Buscar Titular" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTipoDoc" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="173.0" prefHeight="17.0" prefWidth="179.0" text="Tipo Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNroDoc" focusTraversable="false" layoutX="239.0" layoutY="173.0" prefHeight="17.0" prefWidth="179.0" text="Número de Documento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorTipoYNroDoc" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="232.0" prefHeight="17.0" prefWidth="400.0" text="*Campos Obligatorios.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="botonVolver" layoutX="339.0" layoutY="659.0" mnemonicParsing="false" onAction="#accionBotonVolver" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Volver" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="botonModificarTitular" disable="true" layoutX="546.0" layoutY="659.0" mnemonicParsing="false" onAction="#accionBotonModificarTitular" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Modificar Titular" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="labelModificarTitular" focusTraversable="false" layoutX="22.0" layoutY="249.0" prefHeight="17.0" prefWidth="179.0" text="Modificar Titular" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNombre" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="295.0" prefHeight="17.0" prefWidth="179.0" text="Nombre">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelApellido" alignment="CENTER" focusTraversable="false" layoutX="273.0" layoutY="295.0" prefHeight="17.0" prefWidth="179.0" text="Apellido">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="536.0" layoutY="295.0" prefHeight="17.0" prefWidth="179.0" text="Fecha de Nacimiento">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelDireccion" alignment="CENTER" focusTraversable="false" layoutX="816.0" layoutY="295.0" prefHeight="17.0" prefWidth="179.0" text="Dirección">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelClasesSolicitadas" alignment="CENTER" focusTraversable="false" layoutX="816.0" layoutY="463.0" prefHeight="17.0" prefWidth="179.0" text="Clases Solicitadas">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelGrupoSanguineo" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="464.0" prefHeight="17.0" prefWidth="179.0" text="Grupo Sanguíneo">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelFactorRH" alignment="CENTER" focusTraversable="false" layoutX="273.0" layoutY="464.0" prefHeight="17.0" prefWidth="179.0" text="Factor RH">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelDonante" alignment="CENTER" focusTraversable="false" layoutX="536.0" layoutY="463.0" prefHeight="17.0" prefWidth="179.0" text="Es Donante">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorNombre" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="351.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorApellido" alignment="CENTER" focusTraversable="false" layoutX="273.0" layoutY="351.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorFechaNacimiento" alignment="CENTER" focusTraversable="false" layoutX="539.0" layoutY="351.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorDireccion" alignment="CENTER" focusTraversable="false" layoutX="816.0" layoutY="351.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorGrupoSanguineo" alignment="CENTER" focusTraversable="false" layoutX="22.0" layoutY="526.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorFactorRH" alignment="CENTER" focusTraversable="false" layoutX="273.0" layoutY="526.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorDonante" alignment="CENTER" focusTraversable="false" layoutX="536.0" layoutY="526.0" prefHeight="17.0" prefWidth="179.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

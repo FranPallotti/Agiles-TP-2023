@@ -2,6 +2,7 @@ package isi.agiles.logica;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class GestorLicencia {
         dto.setInicioVigencia(licencia.getInicioVigencia());
         dto.setObservaciones(licencia.getObservaciones());
         dto.setTitular(gestorTitular.getTitularDTO(licencia.getTitular()));
+        dto.setCantCopias(licencia.getCopias().size());
         return dto;
     }
 
@@ -45,7 +47,6 @@ public class GestorLicencia {
         licencia.setInicioVigencia(LocalDate.now());
         licencia.setFinVigencia(dto.getFinVigencia());
         licencia.setEstado(EstadoLicencia.VIGENTE);
-        licencia.setCantDeCopias(0);
         licencia.setCosto(dto.getCosto());
         /*Asociaciones */
         licencia.setClaseLicencia(gestorClaseLic.getClaseLicencia(dto.getClaseLic()));
@@ -117,5 +118,25 @@ public class GestorLicencia {
     throws ObjetoNoEncontradoException{
         List<Licencia> listaExpiradas = this.getLicenciasExpiradas();
         return listaExpiradas.stream().map(l -> this.getLicenciaDTO(l)).toList();
+    }
+
+    public void marcarRenovada(LicenciaDTO licencia) throws ObjetoNoEncontradoException{
+        if(licencia.getEstado().equals(EstadoLicencia.VIGENTE)){
+            Licencia aux = (Licencia) licenciaDao.getById(licencia.getIdLicencia()).orElseThrow(()-> new ObjetoNoEncontradoException());
+            aux.setEstado(EstadoLicencia.EXPIRADA);
+            licenciaDao.updateInstance(aux);
+        }
+    }
+    public void emitirCopia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
+        Licencia l=this.getLicencia(dto);
+        CopiaLicencia copia = new CopiaLicencia();
+
+        copia.setEmisor(gestorUsuario.getUsuario(App.getUsuarioLogueado()));
+        copia.setFechaEmision(LocalDate.now());
+        copia.setLicencia(l);
+        l.agregarCopia(copia);
+        licenciaDao.saveInstance(l);
+        
+
     }
 }

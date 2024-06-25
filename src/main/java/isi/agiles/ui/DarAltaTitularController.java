@@ -1,11 +1,8 @@
 package isi.agiles.ui;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-
 
 import isi.agiles.App;
 import isi.agiles.dto.TitularDTO;
@@ -145,7 +142,7 @@ public class DarAltaTitularController{
     public void accionGuardar(){
         try {
             validarDatos();
-            //Se persiste en la BDD el nuevjo titular
+            //Se persiste en la BDD el nuevo titular
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();

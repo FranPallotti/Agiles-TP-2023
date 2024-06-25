@@ -14,6 +14,7 @@ public class LicenciaDTO {
     private LocalDate finVigencia;
     private EstadoLicencia estado;
     private Float costo;
+    private Integer cantCopias;
     
     /*Getters y setters */
     public EstadoLicencia getEstado() {
@@ -64,5 +65,12 @@ public class LicenciaDTO {
     public void setIdLicencia(Long idLicencia) {
         this.idLicencia = idLicencia;
     }
+    public Integer getCantCopias() {
+        return cantCopias;
+    }
+    public void setCantCopias(Integer cantCopias) {
+        this.cantCopias = cantCopias;
+    }
+    
     
 }

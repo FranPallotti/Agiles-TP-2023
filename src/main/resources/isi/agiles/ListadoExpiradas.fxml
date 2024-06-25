@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -13,6 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isi.agiles.ui.LicenciasExpiradasController">
    <children>
+      <Pagination fx:id="listadoExpiradasPagination" prefHeight="489.0" prefWidth="987.0" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00c089" height="131.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1027.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fx:id="muniImageView" fitHeight="110.0" fitWidth="85.0" layoutX="930.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +26,7 @@
             <Font name="Arial Rounded MT Bold" size="35.0" />
          </font>
       </Text>
-      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" prefHeight="475.0" prefWidth="987.0" style="-fx-font-family: 'Arial Rounded MT Bold';" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
+      <TableView fx:id="listadoExpiradasTable" layoutX="10.0" layoutY="172.0" style="-fx-font-family: 'Arial Rounded MT Bold';" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
          <columns>
             <TableColumn fx:id="fechaVencimientoColumn" editable="false" prefWidth="158.33333587646484" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Fecha de Vencimiento" />
             <TableColumn fx:id="claseLicColumn" editable="false" prefWidth="75.0" style="-fx-font-family: 'Arial Rounded MT Bold';" text="Tipo de Licencia" />
@@ -41,16 +43,16 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="volverButton" layoutX="947.0" layoutY="661.0" mnemonicParsing="false" onAction="#accionVolver" prefHeight="32.0" prefWidth="101.0" text="Volver" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="25.0">
+      <Button fx:id="volverButton" layoutX="434.0" layoutY="669.0" mnemonicParsing="false" onAction="#accionVolver" opacity="0.7" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00c089;" text="Volver" textFill="WHITE" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="434.0">
          <font>
-            <Font name="Arial Rounded MT Bold" size="13.0" />
+            <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <Text fx:id="licenciasNoEncontradasText" fill="#01ae7a" layoutX="79.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVISO: No se han encontrado licencias expiradas" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="160.0">
          <font>
-            <Font name="Tahoma Bold" size="16.0" />
+            <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </Text>
    </children>
