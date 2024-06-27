@@ -247,21 +247,55 @@ public class RenovarLicenciaController implements Initializable {
     }
 
     private void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
-        if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
-                                                                    .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
-                                                                    .count() >=1 ){
-            throw new NoPuedeRenovarExisteLicencia();
-        }
-        if(muchasLicenciasVigentes()){
-            throw new NoPuedeRenovarExisteLicencia();
-        }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
-            throw new NoPuedeRenovarVigenciaTemprana();
-        }
+        Character claselic = licencia.getClaseLic().getClase();
+        switch (claselic) {
+            case 'G':
+                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
+                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE)
+                                            && (lic.getClaseLic().getClase() == claselic))
+                                        .count() >=1 ){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }
+                if(muchasLicenciasVigentes(claselic)){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
+                    throw new NoPuedeRenovarVigenciaTemprana();
+                }
+            break;
+
+            case 'F':
+                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
+                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE)
+                                            && (lic.getClaseLic().getClase() == claselic))
+                                        .count() >=1 ){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }
+                if(muchasLicenciasVigentes(claselic)){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
+                    throw new NoPuedeRenovarVigenciaTemprana();
+                }
+            break;
+
+            default:
+                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
+                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
+                                        .count() >=1 ){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }
+                if(muchasLicenciasVigentes(claselic)){
+                    throw new NoPuedeRenovarExisteLicencia();
+                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
+                    throw new NoPuedeRenovarVigenciaTemprana();
+                }
+                break;
+        }    
     }
 
-    private boolean muchasLicenciasVigentes() {
+    private boolean muchasLicenciasVigentes(Character clase) {
         Long contador = licencias.stream()
-                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
+                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE) 
+                            && (lic.getClaseLic().getClase() == clase))
                         .count();
         if(contador>=2)
         return true;
