@@ -1,9 +1,11 @@
 package isi.agiles.logica;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
+import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.*;
 import isi.agiles.util.DatosInvalidosException;
@@ -155,8 +157,36 @@ public class GestorUsuario {
         return invalido;
     }
 
+    public UsuarioDTO getbyDocumento(TipoDoc tipoDoc, String numero) throws ObjetoNoEncontradoException{
+        Usuario user = usuarioDao.getbyDocumento(tipoDoc, numero).orElseThrow(()-> new ObjetoNoEncontradoException()) ;
+        return getUsuarioDTO(user);
+    }
 
-
-
+    public void modificarUsuario(UsuarioDTO dto) throws ObjetoNoEncontradoException {
+        Usuario usuario;
+        usuario = usuarioDao.getbyDocumento(dto.getTipoDoc(), dto.getNumDoc()).orElseThrow(() -> new ObjetoNoEncontradoException());
+        if(!usuario.getNombre().equals(dto.getNombre())){
+            usuario.setNombre(dto.getNombre());
+        }
+        if(!usuario.getApellido().equals(dto.getApellido())){
+            usuario.setApellido(dto.getApellido());
+        }
+        if(!usuario.getFechaNacimiento().equals(dto.getFechaNaciemiento())){
+            usuario.setFechaNacimiento(dto.getFechaNaciemiento());
+        }
+        if(!usuario.getMail().equals(dto.getMail())){
+            usuario.setMail(dto.getMail());
+        }
+        if(!usuario.getSexo().equals(dto.getSexo())){
+            usuario.setSexo(dto.getSexo());
+        }
+        if(!usuario.getNombreUsuario().equals(dto.getNombreUsuario())){
+            usuario.setNombreUsuario(dto.getNombreUsuario());
+        }
+        if (!usuario.getRol().equals(dto.getRol())) {
+            usuario.setRol(dto.getRol());
+        }
+        usuarioDao.updateInstance(usuario);
+    }
 
 }

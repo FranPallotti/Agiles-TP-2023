@@ -2,6 +2,12 @@ package isi.agiles.dao;
 
 import java.util.Optional;
 
+import org.hibernate.Session;
+
+import com.google.protobuf.Option;
+
+import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.Titular;
 import isi.agiles.entidad.Usuario;
 
 import jakarta.persistence.NoResultException;
@@ -34,5 +40,26 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
         return ret;
 
        
+    }
+
+    public Optional<Usuario> getbyDocumento(TipoDoc tipoDoc, String numero) {
+        Optional<Usuario> user;
+        CriteriaBuilder cBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Usuario> cQuery = cBuilder.createQuery(Usuario.class);
+        Root<Usuario> root = cQuery.from(Usuario.class);
+        cQuery.select(root)
+          .where(cBuilder.and(
+              cBuilder.equal(root.get("numDoc"), numero),
+              cBuilder.equal(root.get("tipoDoc"), tipoDoc)
+          ));
+        TypedQuery<Usuario> query = this.getEntityManager().createQuery(cQuery);
+        try {
+            user = Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e) {
+            user = Optional.empty();
+        }
+
+        return user;
+
     }
 }
