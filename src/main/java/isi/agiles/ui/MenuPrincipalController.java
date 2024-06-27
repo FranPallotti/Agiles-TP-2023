@@ -165,7 +165,13 @@ public class MenuPrincipalController {
     @FXML
     void accionModificarDatosUsuario(ActionEvent event) {
         if(App.getUsuarioLogueado().getRol().equals(TipoRol.ADMINISTRADOR)){
-            informacionFuncionalidadNoDesarrollada();
+            try{
+                Stage currentStage = (Stage) botonListarLicenciasExpiradas.getScene().getWindow();
+                App.cambiarVentana("ModificarUsuario.fxml", currentStage);
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
         }else{
             errorCredencialesIncorrectas();
         }

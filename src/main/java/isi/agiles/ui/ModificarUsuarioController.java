@@ -2,12 +2,14 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import isi.agiles.App;
 import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
+import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.excepcion.UsernameNoUnicoException;
 import isi.agiles.logica.GestorUsuario;
@@ -17,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -26,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ModificarUsuarioController {
@@ -61,10 +65,31 @@ public class ModificarUsuarioController {
     private AnchorPane frameModificarUsuario;
 
     @FXML
-    private Label labelModifUsuario;
+    private Text labelModifUsuario;
 
     @FXML
     private Label labelApellido;
+
+    @FXML
+    private Label labelFechaNacimiento;
+
+    @FXML
+    private Label labelMail;
+
+    @FXML
+    private Label labelNombre;
+
+    @FXML
+    private Label labelNombreUsuario;
+
+    @FXML
+    private Label labelNroDoc;
+
+    @FXML
+    private Label labelSexo;
+
+    @FXML
+    private Label labelTipoDoc;
 
     @FXML
     private Label labelErrorApellido;
@@ -90,27 +115,7 @@ public class ModificarUsuarioController {
     @FXML
     private Label labelErrorTipoDoc;
 
-    @FXML
-    private Label labelFechaNacimiento;
-
-    @FXML
-    private Label labelMail;
-
-    @FXML
-    private Label labelNombre;
-
-    @FXML
-    private Label labelNombreUsuario;
-
-    @FXML
-    private Label labelNroDoc;
-
-    @FXML
-    private Label labelSexo;
-
-    @FXML
-    private Label labelTipoDoc;
-
+    
     @FXML
     private ChoiceBox<TipoDoc> listaTipoDoc;
 
@@ -120,7 +125,21 @@ public class ModificarUsuarioController {
     @FXML
     private ImageView imagenMuniStaFe;
 
+    @FXML
+    private Label labelBuscar;
+
+    @FXML
+    private Label labelTipoRol;
+
+    @FXML
+    private Label labelErrorTipoRol;
+    
+    @FXML
+    private ChoiceBox<TipoRol> listaTipoRol;
+
     private GestorUsuario gestorUsuario = new GestorUsuario();
+
+    private UsuarioDTO usuario;
 
     @FXML
     void accionVolver(ActionEvent event) {
@@ -137,19 +156,41 @@ public class ModificarUsuarioController {
         try{
             datosValidos();
             UsuarioDTO dto = this.generarUsuarioDTO();
-            gestorUsuario.altaUsuario(dto);
+            gestorUsuario.modificarUsuario(dto);
             informacionClienteGuardado();
-            //Vuelta al menú principal
             Stage currentStage = (Stage) botonGuardar.getScene().getWindow();
             App.cambiarVentana("MenuPrincipal.fxml", currentStage);
         }catch (DatosInvalidosException e){
             errorDatosInvalidos(e.getMessage());
-        }
-        catch(UsernameNoUnicoException u){
-            errorDatosInvalidos(u.getMessage());
-        }
-        catch(IOException e){
+        }catch(ObjetoNoEncontradoException e){
+            errorDatosInvalidos(e.getMessage());
+        }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    private void deseaCrear(String message) {
+        ButtonType ButtonSi = new ButtonType("Si", ButtonData.YES);
+        ButtonType ButtonNo = new ButtonType("No", ButtonData.NO);
+        Alert alert = new Alert(AlertType.ERROR, message, ButtonSi, ButtonNo);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.getDialogPane().getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
+        
+        Optional<ButtonType> resultado = alert.showAndWait();
+        alert.getDialogPane().lookupButton(ButtonSi).setCursor(Cursor.HAND);
+        alert.getDialogPane().lookupButton(ButtonNo).setCursor(Cursor.HAND);
+        alert.setResizable(false);
+        
+        if(resultado.isPresent() && resultado.get() == ButtonSi){
+            try{
+                Stage currentStage = (Stage) botonVolver.getScene().getWindow();
+                App.cambiarVentana("AltaDeUsuario.fxml", currentStage);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -161,7 +202,7 @@ public class ModificarUsuarioController {
         dto.setNombre(this.campoNombre.getText());
         dto.setNombreUsuario(this.campoNombreUsuario.getText());
         dto.setNumDoc(this.campoNroDoc.getText());
-        dto.setRol(TipoRol.OPERADOR);
+        dto.setRol(listaTipoRol.getValue());
         dto.setSexo(this.listaTipoSexo.getValue());
         dto.setTipoDoc(this.listaTipoDoc.getValue());
         return dto;
@@ -182,11 +223,13 @@ public class ModificarUsuarioController {
         campoMail.setEditable(false);
         listaTipoSexo.setDisable(true);   
         campoNombreUsuario.setEditable(false);
+        botonGuardar.setDisable(true);
     }
 
     private void iniciarlistas() {
         listaTipoDoc.getItems().addAll(TipoDoc.values());
-        listaTipoSexo.getItems().addAll(TipoSexo.values());    
+        listaTipoSexo.getItems().addAll(TipoSexo.values());  
+        listaTipoRol.getItems().addAll(TipoRol.values());  
     }
 
     private void ocultarlabelErrores() {
@@ -198,28 +241,37 @@ public class ModificarUsuarioController {
         labelErrorNombreUsuario.setVisible(false);
         labelErrorTipoDoc.setVisible(false);    
         labelErrorNroDoc.setVisible(false);
+        labelErrorTipoRol.setVisible(false);
     }
 
     @FXML
     public void accionBuscar(){
         try {
             validarDatosBuscar();
-            UsuarioDTO usuario = gestorUsuario.getbyDocumento(listaTipoDoc.getValue(), campoNroDoc.getText());
+            usuario = gestorUsuario.getbyDocumento(listaTipoDoc.getValue(), campoNroDoc.getText());
             rellenarCampos(usuario);
+            botonGuardar.setDisable(false);
         } catch (DatosInvalidosException e) {
             errorDatosInvalidos(e.getMessage());
         } catch (ObjetoNoEncontradoException o){
-            errorDatosInvalidos("Advertencia: el usuario no se encuentra en la base de datos");
+            deseaCrear("Atención: el usuario no se encuentra en la base de datos. ¿Desea darlo de alta?");
         } 
     }
 
     private void rellenarCampos(UsuarioDTO usuario) {
+        campoNombre.setEditable(true);
+        campoApellido.setEditable(true);
+        campoFechaNacimiento.setEditable(true);
+        campoMail.setEditable(true);
+        campoNombreUsuario.setEditable(true);
+        listaTipoSexo.setDisable(false);
         campoNombre.setText(usuario.getNombre());
         campoApellido.setText(usuario.getApellido());
         campoFechaNacimiento.setValue(usuario.getFechaNaciemiento()); //revisar si es esto lo que quiero
         campoMail.setText(usuario.getMail());
         campoNombreUsuario.setText(usuario.getNombreUsuario());
         listaTipoSexo.setValue(usuario.getSexo());
+        listaTipoRol.setValue(usuario.getRol());
     }
 
     private void validarDatosBuscar() throws DatosInvalidosException {
@@ -227,7 +279,7 @@ public class ModificarUsuarioController {
         
         if(listaTipoDoc.getValue() != null){
             labelErrorTipoDoc.setVisible(false);
-            if(!campoNroDoc.getText().isEmpty()){
+            if(!campoNroDoc.getText().isEmpty() || campoNroDoc.getText() == null){
                 labelErrorNroDoc.setText("*Campo Obligatorio*");
                 labelErrorNroDoc.setVisible(false);
                 if(listaTipoDoc.getValue().equals(TipoDoc.DNI)){
@@ -259,36 +311,33 @@ public class ModificarUsuarioController {
     }
 
     private void datosValidos() throws DatosInvalidosException{
-        Boolean invalidos = false;
-        invalidos |=nombreInvalido();
-        invalidos |=apellidoInvalido();
-        invalidos |=fechaNacimientoInvalido();
-        invalidos |=mailInvalido();
-        invalidos |=sexoInvalido();
+        Boolean datosInvalidos = false;
+        datosInvalidos |=nombreInvalido();
+        datosInvalidos |=apellidoInvalido();
+        datosInvalidos |=fechaNacimientoInvalido();
+        datosInvalidos |=mailInvalido();
+        datosInvalidos |=sexoInvalido();
        // invalidos |=tipoDocNroDocInvalido();
-        invalidos =nombreUsuarioInvalido();
-        if(invalidos){
+        datosInvalidos |= rolInvalido();
+        datosInvalidos |= nombreUsuarioInvalido();
+        if(datosInvalidos){
             throw new DatosInvalidosException("Advertencia: Por favor, revise los campos ingresados y vuelva a intentarlo.");
         }
     }
 
     private boolean nombreUsuarioInvalido() {
         Boolean invalido =  false;
-        if (campoNombreUsuario.getText() == null){
+        if (campoNombreUsuario.getText() == null || campoNombreUsuario.getText().isEmpty()){
             labelErrorNombreUsuario.setVisible(true);
             invalido=true;
             campoNombreUsuario.setText(null);
-        } else if(campoNombreUsuario.getText().matches("^\\s+$") || campoNombreUsuario.getText().isEmpty()){
-            labelErrorNombreUsuario.setVisible(true);
-            campoNombreUsuario.setText(null);
-            invalido = true;
-        }else if(campoNombreUsuario.getText().length()>16){
+        } else if(campoNombreUsuario.getText().length()>16){
             labelErrorNombreUsuario.setText("*Máximo 16 caracteres\r\n sin espacios.*");
             labelErrorNombreUsuario.setVisible(true);
             campoNombreUsuario.setText(null);
             invalido=true;
-        }else if(campoNombreUsuario.getText().matches("^(\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+[a-zA-Z0-9]+|[a-zA-Z0-9]+\\s+)$")){
-            labelErrorNombreUsuario.setText("*Sólo letras y/o números sin\r\n espacios.*");
+        }else if(!campoNombreUsuario.getText().matches("^[a-zA-Z0-9_]+$")){
+            labelErrorNombreUsuario.setText("*Sólo letras y/o números sin\r\n espacios ni simbolos.*");
             labelErrorNombreUsuario.setVisible(true);
             campoNombreUsuario.setText(null);
             invalido=true;
@@ -393,6 +442,15 @@ public class ModificarUsuarioController {
         return invalido;
     }
 
+    private Boolean rolInvalido(){
+        if(listaTipoRol.getValue() == null){
+            labelErrorTipoRol.setVisible(true);
+            return true;
+        } else {
+            labelErrorTipoRol.setVisible(false);
+            return false;
+        }
+    }
 
      private void errorDatosInvalidos(String message) {
         Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
@@ -407,7 +465,7 @@ public class ModificarUsuarioController {
     }
 
     private void informacionClienteGuardado() {
-        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El usuario ha sido se creó correctamente.", ButtonType.OK);
+        Alert alert = new Alert(AlertType.INFORMATION, "Importante: El usuario ha sido modificado correctamente.", ButtonType.OK);
         alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.getDialogPane().getChildren().stream()

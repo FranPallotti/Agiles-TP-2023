@@ -50,7 +50,7 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ChoiceBox fx:id="listaTipoSexo" layoutX="38.0" layoutY="545.0" prefHeight="35.0" prefWidth="190.0">
+      <ChoiceBox fx:id="listaTipoSexo" layoutX="38.0" layoutY="543.0" prefHeight="35.0" prefWidth="190.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -96,7 +96,7 @@
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="labelSexo" alignment="CENTER" focusTraversable="false" layoutX="38.0" layoutY="513.0" prefHeight="25.0" prefWidth="189.0" text="Sexo">
+      <Label fx:id="labelSexo" alignment="CENTER" focusTraversable="false" layoutX="38.0" layoutY="511.0" prefHeight="25.0" prefWidth="189.0" text="Sexo">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -126,7 +126,7 @@
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelErrorSexo" alignment="CENTER" focusTraversable="false" layoutX="38.0" layoutY="582.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
+      <Label fx:id="labelErrorSexo" alignment="CENTER" focusTraversable="false" layoutX="38.0" layoutY="580.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
          <font>
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
@@ -174,5 +174,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="labelBuscar" alignment="CENTER" focusTraversable="false" layoutX="40.0" layoutY="176.0" prefHeight="26.0" prefWidth="87.0" text="Buscar" underline="true">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelRol" alignment="CENTER" focusTraversable="false" layoutX="548.0" layoutY="511.0" prefHeight="25.0" prefWidth="189.0" text="Rol">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelErrorTipoRol" alignment="CENTER" focusTraversable="false" layoutX="553.0" layoutY="580.0" prefHeight="25.0" prefWidth="189.0" text="*Campo Obligatorio.*" textFill="RED">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="listaTipoRol" layoutX="553.0" layoutY="543.0" prefHeight="35.0" prefWidth="190.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ChoiceBox>
    </children>
 </AnchorPane>
