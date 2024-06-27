@@ -47,6 +47,8 @@ public class MenuPrincipalController {
 
     @FXML
     private Button botonRenovarLicencia;
+    @FXML
+    private Button botonEmitirCopia;
 
     @FXML
     private AnchorPane frameMenuPrincipal;
@@ -151,7 +153,13 @@ public class MenuPrincipalController {
 
     @FXML
     void accionModificarDatosTitular(ActionEvent event) {
-        informacionFuncionalidadNoDesarrollada();
+        try{
+            Stage currentStage = (Stage) botonListarLicenciasExpiradas.getScene().getWindow();
+            App.cambiarVentana("ModificarDatosTitular.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -165,7 +173,23 @@ public class MenuPrincipalController {
 
     @FXML
     void accionRenovarLicencia(ActionEvent event) {
-        informacionFuncionalidadNoDesarrollada();
+        try{
+            Stage currentStage = (Stage) botonRenovarLicencia.getScene().getWindow();
+            App.cambiarVentana("RenovarLicencia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void accionEmitirCopia(ActionEvent event) {
+        try{
+            Stage currentStage = (Stage) botonEmitirCopia.getScene().getWindow();
+            App.cambiarVentana("EmitirCopia.fxml", currentStage);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

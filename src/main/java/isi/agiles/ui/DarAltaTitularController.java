@@ -142,7 +142,7 @@ public class DarAltaTitularController{
     public void accionGuardar(){
         try {
             validarDatos();
-            //Se persiste en la BDD el nuevjo titular
+            //Se persiste en la BDD el nuevo titular
             TitularDTO titular = crearTitularDTO();
             gestorTitular.persistir(titular);
             informacionClienteGuardado();

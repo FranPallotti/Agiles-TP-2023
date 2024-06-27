@@ -154,7 +154,6 @@ public class AltaDeUsuarioController{
     public void initialize(){
         ocultarlabelErrores();
         iniciarlistas();
-       //reguladorCampoFechaNacimiento();
        campoFechaNacimiento.setEditable(false);
        campoNroDoc.setText(null);
     }
@@ -400,52 +399,4 @@ public class AltaDeUsuarioController{
         dto.setTipoDoc(this.listaTipoDoc.getValue());
         return dto;
     }
-    
-    /* DEJO ESTO POR SI SE QUIERE INGRESAR LA FECHA MANUAL Y NO USAR EL ICONITO, IGUAL HAY Q VERLO Y VALIDAR PQ SI SE SALE
-        EL FOCO Y LA FECHA ES INVALIDA TIRA EXCEPCION
-    private void reguladorCampoFechaNacimiento() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        StringConverter<LocalDate> converter = new LocalDateStringConverter(formatter, null);
-
-        // Configurar el TextFormatter
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("\\d{0,2}(/\\d{0,2}){0,1}(/\\d{0,4}){0,1}")) {
-                return change;
-            }
-            return null;
-        };
-
-        TextFormatter<LocalDate> textFormatter = new TextFormatter<>(converter, null, filter);
-        campoFechaNacimiento.getEditor().setTextFormatter(textFormatter);
-
-        // Listener para actualizar el valor del DatePicker cuando se pierde el enfoque
-        campoFechaNacimiento.getEditor().focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) { // Cuando pierde el enfoque
-                try {
-                    String text = campoFechaNacimiento.getEditor().getText();
-                    if (!text.isEmpty()) {
-                        LocalDate date = LocalDate.parse(text, formatter);
-                        campoFechaNacimiento.setValue(date);
-                    }
-                } catch (DateTimeParseException e) {
-                    campoFechaNacimiento.getEditor().setText("");
-                }
-            }
-        });
-
-        // Actualizar el editor cuando cambia el valor del DatePicker
-        campoFechaNacimiento.valueProperty().addListener((obs, oldDate, newDate) -> {
-            if (newDate != null) {
-                campoFechaNacimiento.getEditor().setText(formatter.format(newDate));
-            }
-        });
-
-        // Actualizar el editor cuando cambia el valor del DatePicker
-        campoFechaNacimiento.valueProperty().addListener((obs, oldDate, newDate) -> {
-            if (newDate != null) {
-                campoFechaNacimiento.getEditor().setText(formatter.format(newDate));
-            }
-        });
-    }*/
 }

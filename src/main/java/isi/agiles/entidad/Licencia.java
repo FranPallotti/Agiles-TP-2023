@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,7 +16,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.*;
+
 
 @Entity
 @Table(name = "licencia")
@@ -39,9 +43,7 @@ public class Licencia {
     @Column(name = "estado", nullable = false)
     private EstadoLicencia estado;
 
-    @Column(name = "cant_de_copias", nullable = false)
-    @ColumnDefault("0")
-    private Integer cantDeCopias = 0;
+    
 
     @Column(name = "costo", nullable = false)
     private Float costo;
@@ -68,6 +70,11 @@ public class Licencia {
                 referencedColumnName = "id_usuario",
                 foreignKey = @ForeignKey(name = "fk_licencia_usuario"))
     private Usuario realizoTramite;
+
+    @OneToMany(fetch = FetchType.LAZY,
+               cascade = {CascadeType.REMOVE, CascadeType.PERSIST},
+               mappedBy = "licencia")
+    private List<CopiaLicencia> copias;
 
     /*Getters y setters */
 
@@ -135,13 +142,9 @@ public class Licencia {
         this.estado = estado;
     }
 
-    public Integer getCantDeCopias() {
-        return cantDeCopias;
-    }
+    
 
-    public void setCantDeCopias(Integer cantDeCopias) {
-        this.cantDeCopias = cantDeCopias;
-    }
+  
 
     public Float getCosto() {
         return costo;
@@ -150,11 +153,23 @@ public class Licencia {
     public void setCosto(Float costo) {
         this.costo = costo;
     }
+    
 
 
     /*Lei que no se recomienda usar IDs auto generados para equals() y hashCode()
      * por ahora lo dejo asi, pero buscar alguna mejor alternativa como una @NaturalId
      */
+
+    public List<CopiaLicencia> getCopias() {
+        return copias;
+    }
+
+    public void setCopias(List<CopiaLicencia> copias) {
+        this.copias = copias;
+    }
+    public void agregarCopia(CopiaLicencia c){
+        this.copias.add(c);
+    }
 
     @Override
     public int hashCode() {
