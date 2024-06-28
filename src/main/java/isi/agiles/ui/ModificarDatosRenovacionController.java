@@ -1,6 +1,9 @@
 package isi.agiles.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,6 +13,8 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
+import isi.agiles.logica.GestorImpresionFactura;
+import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
 import javafx.event.ActionEvent;
@@ -83,8 +88,11 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     private GestorTitular gestorTitular = new GestorTitular();
 
-    
+    private GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
 
+    private GestorImpresionFactura gestorImpresionFactura = new GestorImpresionFactura();
+    
+    private PDFDisplayerController pdfDisplayerController = new PDFDisplayerController();
     @FXML
     void volverAtrasCliqueado(ActionEvent event) {
          try{
@@ -191,6 +199,10 @@ public class ModificarDatosRenovacionController implements Initializable {
             gestorLicencia.altaLicencia(licencia);
             gestorLicencia.marcarRenovada(licencia);
             renovacionExitosa();
+            File licenciaPdf = gestorImpresionLicencia.imprimirLicencia(licencia);
+            pdfDisplayerController.mostrarPdf(licenciaPdf);
+            File facturaPdf = gestorImpresionFactura.imprimirFactura(licencia);
+            pdfDisplayerController.mostrarPdf(facturaPdf);
             volverMenuPrincipal();
         }
         else{
@@ -201,6 +213,12 @@ public class ModificarDatosRenovacionController implements Initializable {
             //TODOque tire una excepcion si no califica para el tipo de licencia
         }catch(ObjetoNoEncontradoException a){
             a.printStackTrace();
+        }catch(FileNotFoundException f){
+            f.printStackTrace();
+        }catch(IOException i){
+            i.printStackTrace();
+        }catch(URISyntaxException u){
+            u.printStackTrace();
         }
     }
 

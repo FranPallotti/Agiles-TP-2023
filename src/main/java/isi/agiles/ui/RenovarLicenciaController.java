@@ -115,7 +115,7 @@ public class RenovarLicenciaController implements Initializable {
             seleccioneUnaLicencia();
         }
         else{
-            try{ //ESTO PUEDE SER PARA REFACTORIZAR Y PONER EL CAMBIO DE PANTALLA EN OTRA FUNCION
+            try{ //TODO:ESTO PUEDE SER PARA REFACTORIZAR Y PONER EL CAMBIO DE PANTALLA EN OTRA FUNCION
                 gestorLicencia.puedeSerRenovada(listadoLicenciasTable.getSelectionModel().getSelectedItem(), licencias);
                 FXMLLoader loader = new FXMLLoader();
                 
