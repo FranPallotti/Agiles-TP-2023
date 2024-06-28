@@ -32,7 +32,7 @@ import jakarta.persistence.EntityManager;
 
 
 public class RenovarLicenciaTest {
-
+   
     private GestorLicencia gestor;
     //private LicenciaDAO licenciaDao;
     private GestorTitular gestorTitular;
