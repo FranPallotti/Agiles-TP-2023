@@ -43,7 +43,8 @@ public class ClaseLicencia {
     private List<ClaseLicencia> incluye = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER,
-               cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "clase")
+               cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST},
+               mappedBy = "clase")
     private List<CostoLicencia> costoClase;
 
     public static Integer getEdadMaxPrimeraLicenciaProf() {

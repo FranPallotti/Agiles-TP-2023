@@ -11,6 +11,9 @@ import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
+import isi.agiles.entidad.TipoFactorRH;
+import isi.agiles.entidad.TipoGrupoS;
+import isi.agiles.entidad.TipoSexo;
 import isi.agiles.entidad.Titular;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.excepcion.TitularYaCargadoException;
@@ -28,7 +31,11 @@ public class GestorTitular {
         dto.setNroDoc(titular.getNroDoc());
         dto.setTipoDoc(titular.getTipoDoc());
         dto.setFechaNacimiento(titular.getFechaNacimiento());
-        /*Incompleto */
+        dto.setDireccion(titular.getDireccion());
+        dto.setGrupoSanguineo(titular.getGrupoSanguineo());
+        dto.setFactorRH(titular.getFactorRH());
+        dto.setEsDonante(titular.getEsDonante());
+        dto.setSexo(titular.getSexo());    
         return dto;
     }
 
