@@ -1,9 +1,12 @@
 package isi.agiles.ui;
 
+import java.io.File;
 import java.io.IOException;
 
 import isi.agiles.App;
+import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoRol;
+import isi.agiles.logica.GestorImpresionLicencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -58,6 +61,10 @@ public class MenuPrincipalController {
 
     @FXML
     private ImageView logoStaFe;
+
+    private PDFDisplayerController pdfDisplayerController = new PDFDisplayerController();
+    
+    GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
 
 
     public void informacionFuncionalidadNoDesarrollada(){
@@ -116,6 +123,8 @@ public class MenuPrincipalController {
             App.cambiarVentana("EmitirLicencia.fxml", currentStage);
         }
         catch(IOException e){
+            e.printStackTrace();
+        }catch(Exception e){
             e.printStackTrace();
         }
         
