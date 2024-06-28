@@ -18,6 +18,7 @@ import isi.agiles.logica.GestorImpresionFactura;
 import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
+import isi.agiles.ui.elementos.ErrorLicenciaAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -212,18 +213,24 @@ public class ModificarDatosRenovacionController implements Initializable {
         }catch(NoCumpleCondicionesLicenciaException e){
             e.printStackTrace();
             //TODO que tire una excepcion si no califica para el tipo de licencia
-        }catch(ObjetoNoEncontradoException a){
-            a.printStackTrace();
-        }catch(NoPuedeEmitirExisteLicenciaException n){
-            //TODO: Popup que avise que no se puede.
-            n.printStackTrace();
-        }catch(FileNotFoundException f){
-            f.printStackTrace();
-        }catch(IOException i){
-            i.printStackTrace();
-        }catch(URISyntaxException u){
-            //TODO: Popup que avise que no se puede.
-            u.printStackTrace();
+        }catch(ObjetoNoEncontradoException ex){
+            String msg = "El titular buscado no fue encontrado.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(NoPuedeEmitirExisteLicenciaException ex){
+            String msg = "Si el titular tiene una licencia vigente, no pueden emitirse otras con la misma clase.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(FileNotFoundException | URISyntaxException ex){
+            ex.printStackTrace();
+            String msg = "Hubo un error imprimiendo su .pdf. Intentelo nuevamente mas tarde.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            String msg = "Hubo un problema. Intentelo más tarde";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
         }
     }
 

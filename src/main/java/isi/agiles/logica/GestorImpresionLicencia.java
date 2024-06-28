@@ -81,11 +81,9 @@ public class GestorImpresionLicencia extends GestorImpresion {
     private HashMap<Rectangle,String> mapearDatosReversoLicencia(LicenciaDTO l){
         HashMap<Rectangle,String> map = new HashMap<>();
         TitularDTO t = l.getTitular();
-        String observ = l.getObservaciones();
-        Integer observLen = observ.length();
         map.put(esDonanteRectPx,t.getEsDonante() ? "SI" : "NO");
         map.put(grupoFactorRectPx,t.getGrupoSanguineo().toString());
-        map.put(observacionesRectangle, l.getObservaciones().substring(0, observLen > 64 ? 64 : observLen));
+        map.put(observacionesRectangle, l.getObservaciones().substring(0, 64));
         return map;
     }
     
