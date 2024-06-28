@@ -9,7 +9,6 @@ import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
-import isi.agiles.excepcion.TitularYaCargadoException;
 import isi.agiles.logica.GestorTitular;
 import isi.agiles.util.DatosInvalidosException;
 import javafx.event.ActionEvent;

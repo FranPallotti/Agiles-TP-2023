@@ -95,6 +95,5 @@ public class TitularDTO {
     public void setSexo(TipoSexo sexo) {
         this.sexo = sexo;
     }
-
     
 }

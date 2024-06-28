@@ -2,12 +2,7 @@ package isi.agiles.dao;
 
 import java.util.Optional;
 
-import org.hibernate.Session;
-
-import com.google.protobuf.Option;
-
 import isi.agiles.entidad.TipoDoc;
-import isi.agiles.entidad.Titular;
 import isi.agiles.entidad.Usuario;
 
 import jakarta.persistence.NoResultException;

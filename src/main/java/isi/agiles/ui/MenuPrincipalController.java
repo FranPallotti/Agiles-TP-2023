@@ -59,7 +59,6 @@ public class MenuPrincipalController {
     @FXML
     private ImageView logoStaFe;
 
-
     public void informacionFuncionalidadNoDesarrollada(){
         Alert alert = new Alert(AlertType.INFORMATION, "Importante: La implementación de esta funcionalidad todavía no está desarrollada.", ButtonType.OK);
         alert.setTitle("Información");
@@ -116,6 +115,8 @@ public class MenuPrincipalController {
             App.cambiarVentana("EmitirLicencia.fxml", currentStage);
         }
         catch(IOException e){
+            e.printStackTrace();
+        }catch(Exception e){
             e.printStackTrace();
         }
         

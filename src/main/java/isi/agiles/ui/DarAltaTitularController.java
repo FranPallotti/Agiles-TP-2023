@@ -296,12 +296,12 @@ public class DarAltaTitularController{
             } else {
                 nombreObligatorio.setVisible(false);
                 apellidoObligatorio.setVisible(false);
-                if(!textNombre.getText().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+")){
+                if(!textNombre.getText().matches("[ a-zA-ZáéíóúÁÉÍÓÚñÑ-]+")){
                     nombreObligatorio.setText("Caracteres inválidos");
                     nombreObligatorio.setVisible(true);
                     esInvalido = true;
                 } 
-                if(!textApellido.getText().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+")){
+                if(!textApellido.getText().matches("[ a-zA-ZáéíóúÁÉÍÓÚñÑ-]+")){
                     apellidoObligatorio.setText("Caracteres inválidos");
                     apellidoObligatorio.setVisible(true);
                     esInvalido = true;

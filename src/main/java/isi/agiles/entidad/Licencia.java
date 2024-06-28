@@ -2,8 +2,6 @@ package isi.agiles.entidad;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

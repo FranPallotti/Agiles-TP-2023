@@ -1,8 +1,6 @@
 package isi.agiles.logica;
 
 import java.time.LocalDate;
-import java.util.Optional;
-
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.TipoDoc;
