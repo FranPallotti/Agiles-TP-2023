@@ -14,6 +14,7 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Canvas;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
 
 import javafx.util.Pair;
 
@@ -38,9 +39,9 @@ public class GestorImpresion {
         return new Pair<>(new PdfDocument(reader,writer),outputFile);
     }
 
-    public Rectangle convertToUserUnits(Rectangle rectanglePx){
-        float x = rectanglePx.getX() * (A4_WIDTH_UU/A4_WIDTH_PX) - 1;
-        float y = (1 - rectanglePx.getY()/A4_HEIGHT_PX) * A4_HEIGHT_UU - 10;
+    public Rectangle convertToUserUnits(Rectangle rectanglePx, float offsetX, float offsetY){
+        float x = (rectanglePx.getX() + offsetX) * (A4_WIDTH_UU/A4_WIDTH_PX) ;
+        float y = (1 - (rectanglePx.getY() + offsetY)/A4_HEIGHT_PX) * A4_HEIGHT_UU;
         float width = rectanglePx.getWidth() * (A4_WIDTH_UU/A4_WIDTH_PX);
         float height = rectanglePx.getHeight() * (A4_HEIGHT_UU/A4_HEIGHT_PX);
         return new Rectangle(x,y,width,height);
@@ -49,7 +50,7 @@ public class GestorImpresion {
     protected void imprimirDatos(PdfPage pdfPage, Map<Rectangle,String> datos, PdfFont font, Integer fontSize){
         for(Map.Entry<Rectangle,String> entry : datos.entrySet()){
             Paragraph para = new Paragraph(entry.getValue());
-            Rectangle area = this.convertToUserUnits(entry.getKey());
+            Rectangle area = this.convertToUserUnits(entry.getKey(),0,45);
             para.setFont(font);
             para.setFontSize(fontSize);
             try(Canvas canvas = new Canvas(pdfPage,area)){

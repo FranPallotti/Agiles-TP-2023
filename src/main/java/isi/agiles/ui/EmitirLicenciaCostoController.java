@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
+import isi.agiles.logica.GestorImpresionFactura;
 import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
 import javafx.event.ActionEvent;
@@ -66,6 +67,8 @@ public class EmitirLicenciaCostoController implements Initializable{
     
     GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
 
+    GestorImpresionFactura gestorImpresionFactura = new GestorImpresionFactura();
+
     public LicenciaDTO getLicencia() {
         return licencia;
     }
@@ -116,6 +119,8 @@ public class EmitirLicenciaCostoController implements Initializable{
             licenciaDadaDeAlta();
             File licenciaPdf = gestorImpresionLicencia.imprimirLicencia(licencia);
             pdfDisplayerController.mostrarPdf(licenciaPdf);
+            File facturaPdf = gestorImpresionFactura.imprimirFactura(licencia);
+            pdfDisplayerController.mostrarPdf(facturaPdf);
             Stage currentStage = (Stage) botonVolverAtras.getScene().getWindow();
             App.cambiarVentana("MenuPrincipal.fxml", currentStage);
 
