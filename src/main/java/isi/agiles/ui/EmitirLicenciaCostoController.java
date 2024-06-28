@@ -15,7 +15,7 @@ import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorImpresionFactura;
 import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
-import isi.agiles.ui.elementos.CustomAlert;
+import isi.agiles.ui.elementos.ErrorLicenciaAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -131,25 +131,25 @@ public class EmitirLicenciaCostoController implements Initializable{
 
         }catch(NoCumpleCondicionesLicenciaException ex){
             String msg = "El titular no cumple con las condiciones para obtener esta clase de licencia";
-            CustomAlert alert = new CustomAlert(msg);
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }catch(ObjetoNoEncontradoException ex){
             String msg = "El titular buscado no fue encontrado.";
-            CustomAlert alert = new CustomAlert(msg);
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }catch(NoPuedeEmitirExisteLicenciaException ex){
             String msg = "Si el titular tiene una licencia vigente, no pueden emitirse otras con la misma clase.";
-            CustomAlert alert = new CustomAlert(msg);
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }catch(FileNotFoundException | URISyntaxException ex){
             ex.printStackTrace();
             String msg = "Hubo un error imprimiendo su .pdf. Intentelo nuevamente mas tarde.";
-            CustomAlert alert = new CustomAlert(msg);
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }catch(Exception ex){
             ex.printStackTrace();
             String msg = "Hubo un problema. Intentelo más tarde";
-            CustomAlert alert = new CustomAlert(msg);
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }
     }
