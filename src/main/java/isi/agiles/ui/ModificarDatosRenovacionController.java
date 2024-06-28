@@ -8,6 +8,7 @@ import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
+import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
@@ -198,9 +199,12 @@ public class ModificarDatosRenovacionController implements Initializable {
         }
         }catch(NoCumpleCondicionesLicenciaException e){
             e.printStackTrace();
-            //TODOque tire una excepcion si no califica para el tipo de licencia
+            //TODO que tire una excepcion si no califica para el tipo de licencia
         }catch(ObjetoNoEncontradoException a){
             a.printStackTrace();
+        }catch(NoPuedeEmitirExisteLicenciaException e){
+            //TODO: Popup que avise que no se puede.
+            e.printStackTrace();
         }
     }
 

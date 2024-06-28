@@ -7,6 +7,7 @@ import java.time.Period;
 
 import isi.agiles.dao.TitularDAO;
 import isi.agiles.dto.ClaseLicenciaDTO;
+import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.Licencia;
@@ -39,8 +40,6 @@ public class GestorTitular {
 
     public Titular getTitular(TitularDTO dto)
     throws ObjetoNoEncontradoException{
-        if(dto==null)
-            throw new  ObjetoNoEncontradoException();
         Titular titular = titularDao.getById(dto.getIdTitular()).orElseThrow(() -> new ObjetoNoEncontradoException());
         return titular;
     }
@@ -231,5 +230,15 @@ public class GestorTitular {
             titularBD.setClaseSol((titular.getClaseSol()));
         }
         titularDao.updateInstance(titularBD);
+    }
+
+    public boolean tieneLicenciasVigentes(TitularDTO titularDto, ClaseLicenciaDTO clase)
+    throws ObjetoNoEncontradoException{
+        GestorLicencia gestorLicencia = new GestorLicencia();
+        Titular titular = this.getTitular(titularDto);
+        List<LicenciaDTO> licenciasTitular = titular.getLicencias().stream().
+            map(l -> gestorLicencia.getLicenciaDTO(l)).
+            toList();
+        return gestorLicencia.muchasLicenciasVigentes(clase.getClase(),licenciasTitular);
     }
 }
