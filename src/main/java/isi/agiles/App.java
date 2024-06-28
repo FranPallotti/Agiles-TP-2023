@@ -10,15 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import isi.agiles.entidad.*;
-import isi.agiles.logica.GestorTitular;
 import isi.agiles.logica.GestorUsuario;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
-import isi.agiles.dao.TitularDAO;
 import isi.agiles.dao.UsuarioDAO;
 import isi.agiles.dto.UsuarioDTO;
 import isi.agiles.entidad.ClaseLicencia;
@@ -28,9 +24,7 @@ import isi.agiles.entidad.TipoRol;
 import isi.agiles.entidad.TipoSexo;
 import isi.agiles.entidad.Usuario;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
-import isi.agiles.logica.GestorUsuario;
 import isi.agiles.util.EntityManagerUtil;
-import isi.agiles.util.Poblador;
 
 /**
  * JavaFX App

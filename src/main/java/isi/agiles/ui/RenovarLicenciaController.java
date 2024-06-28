@@ -3,7 +3,6 @@ package isi.agiles.ui;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -117,7 +116,7 @@ public class RenovarLicenciaController implements Initializable {
         }
         else{
             try{ //ESTO PUEDE SER PARA REFACTORIZAR Y PONER EL CAMBIO DE PANTALLA EN OTRA FUNCION
-                puedeSerRenovada(listadoLicenciasTable.getSelectionModel().getSelectedItem());
+                gestorLicencia.puedeSerRenovada(listadoLicenciasTable.getSelectionModel().getSelectedItem(), licencias);
                 FXMLLoader loader = new FXMLLoader();
                 
                 loader.setLocation(App.class.getResource("ModificarDatosRenovacion.fxml"));
@@ -246,63 +245,6 @@ public class RenovarLicenciaController implements Initializable {
         alert.showAndWait();
     }
 
-    public void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
-        Character claselic = licencia.getClaseLic().getClase();
-        switch (claselic) {
-            case 'G':
-                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
-                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE)
-                                            && (lic.getClaseLic().getClase() == claselic))
-                                        .count() >=1 ){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }
-                if(muchasLicenciasVigentes(claselic)){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
-                    throw new NoPuedeRenovarVigenciaTemprana();
-                }
-            break;
-
-            case 'F':
-                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
-                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE)
-                                            && (lic.getClaseLic().getClase() == claselic))
-                                        .count() >=1 ){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }
-                if(muchasLicenciasVigentes(claselic)){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
-                    throw new NoPuedeRenovarVigenciaTemprana();
-                }
-            break;
-
-            default:
-                if(licencia.getEstado().equals(EstadoLicencia.EXPIRADA) && licencias.stream()
-                                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE))
-                                        .count() >=1 ){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }
-                if(muchasLicenciasVigentes(claselic)){
-                    throw new NoPuedeRenovarExisteLicencia();
-                }else if(licencia.getFinVigencia().isAfter(LocalDate.now().plus(3,ChronoUnit.MONTHS))){
-                    throw new NoPuedeRenovarVigenciaTemprana();
-                }
-                break;
-        }    
-    }
-
-    private boolean muchasLicenciasVigentes(Character clase) {
-        Long contador = licencias.stream()
-                        .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE) 
-                            && (lic.getClaseLic().getClase() == clase))
-                        .count();
-        if(contador>=2)
-        return true;
-        else
-        return false;
-    }
-
     private void errorNoPuedeRenovar(String message) {
         Alert alert = new Alert(AlertType.WARNING, message, ButtonType.OK);
         alert.setTitle("Advertencia");
@@ -313,17 +255,5 @@ public class RenovarLicenciaController implements Initializable {
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
-    }
-
-    //Metodo exclusivo para testeo
-    public void setLicencias (LicenciaDTO a, LicenciaDTO b, LicenciaDTO c){
-        licencias.add(a);
-        licencias.add(b);
-        licencias.add(c);
-
-    }
-    public void setLicencias (LicenciaDTO a, LicenciaDTO b){
-        licencias.add(a);
-        licencias.add(b);
     }
 }

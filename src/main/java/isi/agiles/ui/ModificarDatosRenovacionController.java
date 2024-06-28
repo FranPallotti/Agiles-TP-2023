@@ -2,27 +2,16 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import isi.agiles.App;
-import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
-import isi.agiles.dto.TitularDTO;
-import isi.agiles.dto.UsuarioDTO;
-import isi.agiles.entidad.ClaseLicencia;
-import isi.agiles.entidad.EstadoLicencia;
-import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
-import isi.agiles.util.DatosInvalidosException;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +21,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -89,7 +77,7 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     private LicenciaDTO licencia;
 
-    private GestorClaseLicencia gestorClase= new GestorClaseLicencia();
+    private GestorClaseLicencia gestorClase = new GestorClaseLicencia();
 
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
@@ -161,12 +149,7 @@ public class ModificarDatosRenovacionController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        
-        
-        
-        
-    }
+    public void initialize(URL location, ResourceBundle resources) { }
 
     private void faltanDatosLicencias(){
             Alert alert = new Alert(AlertType.WARNING, "Advertencia: No existen clases de licencia que se puedan emitir ", ButtonType.OK);

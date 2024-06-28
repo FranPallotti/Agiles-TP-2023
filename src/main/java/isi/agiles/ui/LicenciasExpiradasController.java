@@ -91,7 +91,7 @@ public class LicenciasExpiradasController implements Initializable {
             Pane header = (Pane) listadoExpiradasTable.lookup("TableHeaderRow");
             listadoExpiradasTable.fixedCellSizeProperty().bind(
                 listadoExpiradasTable.heightProperty().
-                subtract(header.heightProperty()).
+                subtract(header.heightProperty().add(2)). //+2 px. para evitar que aparezca la scrollbar
                 divide(FILAS_POR_PAGINA)
             );
         });

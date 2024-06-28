@@ -241,7 +241,6 @@ public class EmitirLicenciaController implements Initializable{
             
         }
 
-
         public LicenciaDTO getLicenciaDTO(TitularDTO t, String obs, ClaseLicenciaDTO clase){
             LicenciaDTO l = new LicenciaDTO();
             l.setTitular(t);
