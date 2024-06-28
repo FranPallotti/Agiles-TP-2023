@@ -246,7 +246,7 @@ public class RenovarLicenciaController implements Initializable {
         alert.showAndWait();
     }
 
-    private void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
+    public void puedeSerRenovada(LicenciaDTO licencia) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
         Character claselic = licencia.getClaseLic().getClase();
         switch (claselic) {
             case 'G':
@@ -313,5 +313,17 @@ public class RenovarLicenciaController implements Initializable {
         alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
         alert.setResizable(false);
         alert.showAndWait();
+    }
+
+    //Metodo exclusivo para testeo
+    public void setLicencias (LicenciaDTO a, LicenciaDTO b, LicenciaDTO c){
+        licencias.add(a);
+        licencias.add(b);
+        licencias.add(c);
+
+    }
+    public void setLicencias (LicenciaDTO a, LicenciaDTO b){
+        licencias.add(a);
+        licencias.add(b);
     }
 }
