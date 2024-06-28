@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import isi.agiles.logica.GestorTitular;
 import isi.agiles.logica.GestorUsuario;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
@@ -36,8 +38,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        //App.poblar();
-               
+        //App.poblar();        
         launch();
     }
 

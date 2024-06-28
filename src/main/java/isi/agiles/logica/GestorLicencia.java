@@ -11,6 +11,7 @@ import isi.agiles.dao.LicenciaDAO;
 import isi.agiles.dto.*;
 import isi.agiles.entidad.*;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
+import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
 import isi.agiles.excepcion.NoPuedeRenovarExisteLicencia;
 import isi.agiles.excepcion.NoPuedeRenovarVigenciaTemprana;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
@@ -98,13 +99,25 @@ public class GestorLicencia {
     }
 
     public Licencia altaLicencia(LicenciaDTO dto)
-    throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException{
+    throws NoCumpleCondicionesLicenciaException, ObjetoNoEncontradoException, NoPuedeEmitirExisteLicenciaException{
         if(!gestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClaseLic())){
             throw new NoCumpleCondicionesLicenciaException();
+        }
+        if(gestorTitular.tieneLicenciasVigentes(dto.getTitular(), dto.getClaseLic())){
+            throw new NoPuedeEmitirExisteLicenciaException();
         }
         Licencia licencia = this.crearLicencia(dto);
         licenciaDao.saveInstance(licencia);
         return licencia;
+    }
+
+    public boolean tieneLicenciasVigentes(TitularDTO titularDto, ClaseLicenciaDTO clase)
+    throws ObjetoNoEncontradoException{
+        Titular titular = gestorTitular.getTitular(titularDto);
+        List<LicenciaDTO> licenciasTitular = titular.getLicencias().stream().
+            map(l -> this.getLicenciaDTO(l)).
+            toList();
+        return muchasLicenciasVigentes(clase.getClase(),licenciasTitular);
     }
 
     public List<Licencia> getLicenciasExpiradas()
@@ -186,7 +199,8 @@ public class GestorLicencia {
         }    
     }
 
-    private boolean muchasLicenciasVigentes(Character clase, List<LicenciaDTO> licencias) {
+    //Sin keyword de visibilidad: Solo para clases del paquete. Necesario por ser llamada por GestorTitular.
+    boolean muchasLicenciasVigentes(Character clase, List<LicenciaDTO> licencias) {
         Long contador = licencias.stream()
                         .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE) 
                             && (lic.getClaseLic().getClase() == clase))
