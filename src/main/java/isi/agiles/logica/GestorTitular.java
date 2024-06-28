@@ -39,6 +39,8 @@ public class GestorTitular {
 
     public Titular getTitular(TitularDTO dto)
     throws ObjetoNoEncontradoException{
+        if(dto==null)
+            throw new  ObjetoNoEncontradoException();
         Titular titular = titularDao.getById(dto.getIdTitular()).orElseThrow(() -> new ObjetoNoEncontradoException());
         return titular;
     }
