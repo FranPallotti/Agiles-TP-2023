@@ -37,6 +37,14 @@ public class App extends Application {
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
         //App.poblar();
+        try{
+            GestorTitular g =new GestorTitular();
+            g.getTitular(null);
+        }
+        catch(ObjetoNoEncontradoException e){
+           System.out.println("HABIA NULL");
+        }
+        
         launch();
     }
 
