@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -113,12 +112,12 @@ public class GestorImpresionFactura extends GestorImpresion{
                         append(", ").
                         append(t.getNombre()).
                         toString();
-        map.put(hoyDiaRectPx,String.format("%01d",hoy.getDayOfMonth()));
-        map.put(hoyMesRectPx,String.format("%01d",hoy.getMonthValue()));
+        map.put(hoyDiaRectPx,String.format("%02d",hoy.getDayOfMonth()));
+        map.put(hoyMesRectPx,String.format("%02d",hoy.getMonthValue()));
         /*<año>%100 para recuperar solo los ultimos dos digitos
          * Ej: 2024%100 = 24
         */
-        map.put(hoyAnioRectPx,String.format("%01d",hoy.getYear()%100));
+        map.put(hoyAnioRectPx,String.format("%02d",hoy.getYear()%100));
         map.put(seniorRectPx,apeNom);
         map.put(direccionEncabRectPx,t.getDireccion());
         return map;
