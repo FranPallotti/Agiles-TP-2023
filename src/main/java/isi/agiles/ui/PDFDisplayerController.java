@@ -1,7 +1,6 @@
 package isi.agiles.ui;
 
 import java.io.File;
-import java.io.IOException;
 
 import com.dansoftware.pdfdisplayer.PDFDisplayer;
 import com.dansoftware.pdfdisplayer.PdfJSVersion;

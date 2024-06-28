@@ -1,7 +1,6 @@
 package isi.agiles.util;
 
 import isi.agiles.dao.TitularDAO;
-import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Titular;
 
 public class Poblador {

@@ -1,12 +1,9 @@
 package isi.agiles.ui;
 
-import java.io.File;
 import java.io.IOException;
 
 import isi.agiles.App;
-import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoRol;
-import isi.agiles.logica.GestorImpresionLicencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -61,11 +58,6 @@ public class MenuPrincipalController {
 
     @FXML
     private ImageView logoStaFe;
-
-    private PDFDisplayerController pdfDisplayerController = new PDFDisplayerController();
-    
-    GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
-
 
     public void informacionFuncionalidadNoDesarrollada(){
         Alert alert = new Alert(AlertType.INFORMATION, "Importante: La implementación de esta funcionalidad todavía no está desarrollada.", ButtonType.OK);
