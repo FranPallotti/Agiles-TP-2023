@@ -35,9 +35,9 @@ public class GestorImpresionLicencia extends GestorImpresion {
     private final Rectangle inicioVigRectPx = new Rectangle(886,1326,670,61);
     private final Rectangle finVigRectPx = new Rectangle(1723,1326,527,61);
     private final Rectangle claseRectPx = new Rectangle(1944,603,307,61);
-    private final Rectangle esDonanteRectPx = new Rectangle(867,2587,46,30);
+    private final Rectangle esDonanteRectPx = new Rectangle(867,2587,70,30);
     private final Rectangle grupoFactorRectPx = new Rectangle(1542,2587,665,30);
-    private final Rectangle observacionesRectangle = new Rectangle(500,2735,1712,70);
+    private final Rectangle observacionesRectangle = new Rectangle(500,2660,1712,30);
 
     public File imprimirLicencia(LicenciaDTO licencia)
     throws FileNotFoundException,IOException, URISyntaxException{
@@ -83,7 +83,7 @@ public class GestorImpresionLicencia extends GestorImpresion {
         TitularDTO t = l.getTitular();
         map.put(esDonanteRectPx,t.getEsDonante() ? "SI" : "NO");
         map.put(grupoFactorRectPx,t.getGrupoSanguineo().toString());
-        map.put(observacionesRectangle, l.getObservaciones());
+        map.put(observacionesRectangle, l.getObservaciones().substring(0, 64));
         return map;
     }
     
