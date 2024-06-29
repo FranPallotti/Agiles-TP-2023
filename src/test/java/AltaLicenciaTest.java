@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -17,11 +20,13 @@ import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 
 import isi.agiles.entidad.EstadoLicencia;
+import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
 import isi.agiles.entidad.TipoSexo;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
+import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
 import isi.agiles.excepcion.NoPuedeRenovarExisteLicencia;
 import isi.agiles.excepcion.NoPuedeRenovarVigenciaTemprana;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
@@ -38,10 +43,11 @@ public class AltaLicenciaTest {
     private GestorTitular gestorTitular;
     private GestorClaseLicencia gestorClaseLic;
     private GestorUsuario gestorUsuario;
-    GestorLicencia gestorLicencia;
+    private GestorLicencia gestorLicencia;
+    private LicenciaDAO licenciaDAO;
     @BeforeEach
     void setUp(){
-        //licenciaDao = Mockito.mock(LicenciaDAO.class);
+        licenciaDAO = Mockito.mock(LicenciaDAO.class);
         EntityManagerUtil.createEntityManagerFactory();
         gestorLicencia = new GestorLicencia();
         gestorTitular = Mockito.mock(GestorTitular.class);
@@ -127,6 +133,85 @@ public class AltaLicenciaTest {
         assertThrows(NoCumpleCondicionesLicenciaException.class, 
         () ->{gestorLicencia.altaLicencia(l);});
     }
+    //Intenta crear una licencia de una clase para la cual el titular ya tiene una licencia vigente
+    @Test 
+    void testCrearLicenciaYaVigente(){
+        try{
+            Mockito.when(gestorTitular.puedeTenerLicencia(any(TitularDTO.class), any(ClaseLicenciaDTO.class))).thenReturn(true);
+            Mockito.when(gestorTitular.tieneLicenciasVigentes(any(TitularDTO.class), any(ClaseLicenciaDTO.class))).thenReturn(true);
+            injectMocks(gestorLicencia, "gestorTitular", gestorTitular);
+        }
+        catch(Exception e){
+            System.out.println("Error inyectando dependencias en testing");
+        }
+        LicenciaDTO l = new LicenciaDTO();
+        TitularDTO t = new TitularDTO();
+        l.setTitular(t);
+        
+        ClaseLicenciaDTO clase=  new ClaseLicenciaDTO();
+        clase.setClase('A');
+        l.setClaseLic(clase);
+        l.setCosto(Float.valueOf("42.0"));
+        assertThrows(NoPuedeEmitirExisteLicenciaException.class, 
+        () ->{gestorLicencia.altaLicencia(l);});
+    }
+    //Intenta crear una licencia para una clase inexistente
+    @Test
+    void testCrearLicenciaClaseInexistente(){
+        try{
+            Mockito.when(gestorTitular.puedeTenerLicencia(any(TitularDTO.class), any(ClaseLicenciaDTO.class))).thenThrow(new ObjetoNoEncontradoException());
+            
+            injectMocks(gestorLicencia, "gestorTitular", gestorTitular);
+        }
+        catch(Exception e){
+            System.out.println("Error inyectando dependencias en testing");
+        }
+        LicenciaDTO l = new LicenciaDTO();
+        TitularDTO t = new TitularDTO();
+        l.setTitular(t);
+        
+        ClaseLicenciaDTO clase=  new ClaseLicenciaDTO();
+        clase.setClase('A');
+        l.setClaseLic(clase);
+        l.setCosto(Float.valueOf("42.0"));
+        assertThrows(ObjetoNoEncontradoException.class, 
+        () ->{gestorLicencia.altaLicencia(l);});
+    }
+
+    @Test
+    void licenciaCreadaConExito(){
+        try{
+            Mockito.when(gestorTitular.puedeTenerLicencia(any(TitularDTO.class), any(ClaseLicenciaDTO.class))).thenReturn(true);
+            Mockito.when(gestorTitular.tieneLicenciasVigentes(any(TitularDTO.class), any(ClaseLicenciaDTO.class))).thenReturn(false);
+            injectMocks(gestorLicencia, "gestorTitular", gestorTitular);
+            Mockito.doNothing().when(licenciaDAO).saveInstance(any(Licencia.class));
+        }
+        catch(Exception e){
+            System.out.println("Error inyectando dependencias en testing");
+        }
+
+        LicenciaDTO l = new LicenciaDTO();
+        TitularDTO t = new TitularDTO();
+        l.setTitular(t);
+        
+        ClaseLicenciaDTO clase=  new ClaseLicenciaDTO();
+        clase.setClase('A');
+        l.setClaseLic(clase);
+        l.setCosto(Float.valueOf("42.0"));
+        try{
+            assertTrue(gestorLicencia.altaLicencia(l).getClass().equals(Licencia.class));
+            verify(licenciaDAO,times(1)).saveInstance(any(Licencia.class));
+        }
+        catch(Exception e){
+            System.out.println("Error en test");
+        }
+        
+
+
+
+    }
+
+
 
     
 
