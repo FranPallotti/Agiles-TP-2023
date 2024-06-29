@@ -28,7 +28,7 @@ public class Licencia {
     @Column(name = "id_licencia")
     private Long idLicencia;
 
-    @Column(name = "obsrvaciones")
+    @Column(name = "observaciones")
     private String observaciones;
 
     @Column(name = "inicio_vigencia", nullable = false)

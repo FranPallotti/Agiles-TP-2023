@@ -105,43 +105,22 @@ public class RenovarLicenciaController implements Initializable {
     }
     catch(ObjetoNoEncontradoException e){
         titularNoEncontrado();
-        //e.printStackTrace();
     }
     }
 
     @FXML
     void continuarCliqueado(ActionEvent event) {
+        //Si no se selecciona ninguna licencia, se muestra un cartel pertinente
         if(listadoLicenciasTable.getSelectionModel().isEmpty()){
             seleccioneUnaLicencia();
         }
         else{
-            try{ //ESTO PUEDE SER PARA REFACTORIZAR Y PONER EL CAMBIO DE PANTALLA EN OTRA FUNCION
+            try{
+                //Se verifica que la licencia cumple con los requisitos para ser renovada 
                 gestorLicencia.puedeSerRenovada(listadoLicenciasTable.getSelectionModel().getSelectedItem(), licencias);
-                FXMLLoader loader = new FXMLLoader();
-                
-                loader.setLocation(App.class.getResource("ModificarDatosRenovacion.fxml"));
-                
-                
-                Stage stage = new Stage();
-                stage.setTitle("Confirme los datos y el Costo");
-                
-                    
-                Parent root = loader.load();
-                //aca recien me carga el controlador
-                ModificarDatosRenovacionController formularioDatos = loader.getController();
-                stage.setScene(new Scene(root));
-                stage.setResizable(false);
-                stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
-                stage.show();
-                LicenciaDTO l= listadoLicenciasTable.getSelectionModel().getSelectedItem();
-                //gestorLicencia.calcularVigenciaLicencia(l);
-                //l.setCosto(gestorLicencia.getCostoLicencia(l));
-                formularioDatos.setLicencia(l);
-                formularioDatos.setearDatos();
-
-                Stage currentStage = (Stage) this.botonContinuar.getScene().getWindow();
-                currentStage.close();
-            }
+                //Se carga la nueva pantalla
+                cargarPantallaModificacionDatos();
+            }//Manejo de excepciones
             catch(NoPuedeRenovarVigenciaTemprana e){
                 errorNoPuedeRenovar(e.getMessage());
             }
@@ -153,6 +132,30 @@ public class RenovarLicenciaController implements Initializable {
             }
         }
         
+    }
+
+    private void cargarPantallaModificacionDatos() throws IOException{
+        //Se carga el archivo fxml correspondiente a la pantalla y se le setea el título
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.class.getResource("ModificarDatosRenovacion.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Confirme los datos y el Costo");
+        
+            
+        Parent root = loader.load();
+        //Se carga el controlador
+        ModificarDatosRenovacionController formularioDatos = loader.getController();
+        //Se obtiene la nueva escena y setean valores fijos de la misma
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("isi/agiles/logoStaFe.png"));
+        stage.show();
+        LicenciaDTO l= listadoLicenciasTable.getSelectionModel().getSelectedItem();
+        formularioDatos.setLicencia(l);
+        formularioDatos.setearDatos();
+        Stage currentStage = (Stage) this.botonContinuar.getScene().getWindow();
+        //Se destruye la escena que se estaba utilizando
+        currentStage.close();
     }
 
     @FXML

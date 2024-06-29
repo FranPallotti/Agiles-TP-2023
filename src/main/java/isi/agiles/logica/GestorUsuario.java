@@ -99,7 +99,16 @@ public class GestorUsuario {
         invalidos |=this.sexoInvalido(u);
         invalidos |=this.dniInvalido(u);
         invalidos |=this.nombreUsuarioInvalido(u);
+        invalidos |= this.rolInvalido(u);
         return invalidos;
+    }
+
+    private Boolean rolInvalido(UsuarioDTO u) {
+        Boolean invalido = false;
+        if(u.getRol() == null){
+            invalido=true;
+        }
+        return invalido;
     }
 
     public Boolean nombreInvalido(UsuarioDTO u){
@@ -139,7 +148,7 @@ public class GestorUsuario {
 
     public Boolean sexoInvalido(UsuarioDTO u){
         Boolean invalido = false;
-        if(u.getSexo()== null){
+        if(u.getSexo()==null){
             invalido=true;
         }
         return invalido;
@@ -160,9 +169,12 @@ public class GestorUsuario {
         return getUsuarioDTO(user);
     }
 
-    public void modificarUsuario(UsuarioDTO dto) throws ObjetoNoEncontradoException {
+    public void modificarUsuario(UsuarioDTO dto) throws ObjetoNoEncontradoException, DatosInvalidosException {
         Usuario usuario;
         usuario = usuarioDao.getbyDocumento(dto.getTipoDoc(), dto.getNumDoc()).orElseThrow(() -> new ObjetoNoEncontradoException());
+        if(this.datosInvalidos(dto)){
+            throw new DatosInvalidosException();
+        }
         if(!usuario.getNombre().equals(dto.getNombre())){
             usuario.setNombre(dto.getNombre());
         }

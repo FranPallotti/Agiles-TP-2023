@@ -1,6 +1,9 @@
 package isi.agiles.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,8 +14,11 @@ import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
+import isi.agiles.logica.GestorImpresionFactura;
+import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
+import isi.agiles.ui.elementos.ErrorLicenciaAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -84,8 +90,11 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     private GestorTitular gestorTitular = new GestorTitular();
 
-    
+    private GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
 
+    private GestorImpresionFactura gestorImpresionFactura = new GestorImpresionFactura();
+    
+    private PDFDisplayerController pdfDisplayerController = new PDFDisplayerController();
     @FXML
     void volverAtrasCliqueado(ActionEvent event) {
          try{
@@ -192,6 +201,10 @@ public class ModificarDatosRenovacionController implements Initializable {
             gestorLicencia.altaLicencia(licencia);
             gestorLicencia.marcarRenovada(licencia);
             renovacionExitosa();
+            File licenciaPdf = gestorImpresionLicencia.imprimirLicencia(licencia);
+            pdfDisplayerController.mostrarPdf(licenciaPdf);
+            File facturaPdf = gestorImpresionFactura.imprimirFactura(licencia);
+            pdfDisplayerController.mostrarPdf(facturaPdf);
             volverMenuPrincipal();
         }
         else{
@@ -200,11 +213,24 @@ public class ModificarDatosRenovacionController implements Initializable {
         }catch(NoCumpleCondicionesLicenciaException e){
             e.printStackTrace();
             //TODO que tire una excepcion si no califica para el tipo de licencia
-        }catch(ObjetoNoEncontradoException a){
-            a.printStackTrace();
-        }catch(NoPuedeEmitirExisteLicenciaException e){
-            //TODO: Popup que avise que no se puede.
-            e.printStackTrace();
+        }catch(ObjetoNoEncontradoException ex){
+            String msg = "El titular buscado no fue encontrado.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(NoPuedeEmitirExisteLicenciaException ex){
+            String msg = "Si el titular tiene una licencia vigente, no pueden emitirse otras con la misma clase.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(FileNotFoundException | URISyntaxException ex){
+            ex.printStackTrace();
+            String msg = "Hubo un error imprimiendo su .pdf. Intentelo nuevamente mas tarde.";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            String msg = "Hubo un problema. Intentelo más tarde";
+            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+            alert.showAndWait();
         }
     }
 
