@@ -10,6 +10,7 @@ import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.ClaseLicencia;
+import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.Titular;
@@ -232,13 +233,13 @@ public class GestorTitular {
         titularDao.updateInstance(titularBD);
     }
 
-    public boolean tieneLicenciasVigentes(TitularDTO titularDto, ClaseLicenciaDTO clase)
+    public boolean tieneLicenciasVigentes(TitularDTO titularDto, ClaseLicenciaDTO claseLic)
     throws ObjetoNoEncontradoException{
-        GestorLicencia gestorLicencia = new GestorLicencia();
         Titular titular = this.getTitular(titularDto);
-        List<LicenciaDTO> licenciasTitular = titular.getLicencias().stream().
-            map(l -> gestorLicencia.getLicenciaDTO(l)).
-            toList();
-        return gestorLicencia.muchasLicenciasVigentes(clase.getClase(),licenciasTitular);
+        List<Licencia> licenciasTitular = titular.getLicencias();
+        Character clase = claseLic.getClase();
+        return licenciasTitular.stream().
+            filter(l -> l.getEstado().equals(EstadoLicencia.VIGENTE)).
+            anyMatch(l -> gestorClaseLic.esClase(l.getClaseLicencia(),clase));
     }
 }
