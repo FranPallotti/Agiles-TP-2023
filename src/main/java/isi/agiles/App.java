@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import isi.agiles.logica.GestorTitular;
 import isi.agiles.logica.GestorUsuario;
 
 import isi.agiles.dao.ClaseLicenciaDAO;
@@ -38,26 +37,8 @@ public class App extends Application {
 
     public static void main(String[] args) {
         EntityManagerUtil.createEntityManagerFactory();
-        //App.poblar();        
+        //App.poblar(); 
         launch();
-    }
-
-    private static void primeraEjecucion(){
-        App.poblar();
-        completarUsuario(usuarioLogueado);
-    }
-
-    //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION
-    private static void completarUsuario(UsuarioDTO usuario) {
-        usuario.setNombre("Juan");
-        usuario.setApellido("Perez");
-        usuario.setFechaNacimiento(LocalDate.of(2003,03,04));
-        usuario.setMail("ejemplo@gmail.com");
-        usuario.setTipoDoc(TipoDoc.DNI);
-        usuario.setNumDoc("22103847");
-        usuario.setSexo(TipoSexo.MASCULINO);
-        usuario.setNombreUsuario("JPerez");
-        usuario.setRol(TipoRol.ADMINISTRADOR);
     }
 
     @Override
@@ -362,5 +343,25 @@ public class App extends Application {
            a.setCostoClase(c);
            d.saveInstance(a);
         }
+
+    /*
+    private static void primeraEjecucion(){
+        App.poblar();
+        completarUsuario(usuarioLogueado);
+    }
+
+    //ESTO DSPS DEBERIA REEMPLAZARSE POR LAS CREDENCIALES DE INICIO DE SESION
+    private static void completarUsuario(UsuarioDTO usuario) {
+        usuario.setNombre("Juan");
+        usuario.setApellido("Perez");
+        usuario.setFechaNacimiento(LocalDate.of(2003,03,04));
+        usuario.setMail("ejemplo@gmail.com");
+        usuario.setTipoDoc(TipoDoc.DNI);
+        usuario.setNumDoc("22103847");
+        usuario.setSexo(TipoSexo.MASCULINO);
+        usuario.setNombreUsuario("JPerez");
+        usuario.setRol(TipoRol.ADMINISTRADOR);
+    }
+    */
     
 }

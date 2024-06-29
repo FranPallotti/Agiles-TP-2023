@@ -29,7 +29,6 @@ public class PDFDisplayerController {
          * el displayer se usa la función toNode()
          */
         VBox displayerConBotonBox = new VBox(generarDisplayer(pdf),recargarButton);
-        
         displayerConBotonBox.setStyle("-fx-background-color: #424242");
         displayerConBotonBox.setAlignment(Pos.CENTER);
         pdfDisplayStage.setScene(new Scene(displayerConBotonBox));

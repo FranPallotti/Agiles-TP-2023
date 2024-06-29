@@ -196,7 +196,6 @@ public class GestorTitular {
 
     public void actualizarTitular(TitularDTO titular) throws ObjetoNoEncontradoException{
         Titular titularBD = titularDao.getById(titular.getIdTitular()).orElseThrow(() -> new ObjetoNoEncontradoException());
-
         if(!titular.getNombre().equals(titularBD.getNombre())){
             titularBD.setNombre(titular.getNombre());
         }

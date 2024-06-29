@@ -1,4 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -6,10 +5,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,16 +14,10 @@ import isi.agiles.dto.ClaseLicenciaDTO;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 
-import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.Licencia;
 import isi.agiles.entidad.TipoDoc;
-import isi.agiles.entidad.TipoFactorRH;
-import isi.agiles.entidad.TipoGrupoS;
-import isi.agiles.entidad.TipoSexo;
 import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
 import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
-import isi.agiles.excepcion.NoPuedeRenovarExisteLicencia;
-import isi.agiles.excepcion.NoPuedeRenovarVigenciaTemprana;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
 import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorLicencia;

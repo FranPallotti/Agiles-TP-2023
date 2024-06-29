@@ -198,8 +198,7 @@ public class ModificarDatosRenovacionController implements Initializable {
             licencia.getTitular().setNroDoc(campoNroDoc.getText());
             //En el caso de que sea una renovación temprana se marcará como Expirada la licencia vieja.
             gestorTitular.actualizarTitular(licencia.getTitular());
-            gestorLicencia.altaLicencia(licencia);
-            gestorLicencia.marcarRenovada(licencia);
+            gestorLicencia.renuevaLicencia(licencia);
             renovacionExitosa();
             File licenciaPdf = gestorImpresionLicencia.imprimirLicencia(licencia);
             pdfDisplayerController.mostrarPdf(licenciaPdf);
@@ -210,15 +209,8 @@ public class ModificarDatosRenovacionController implements Initializable {
         else{
             datosInvalidosWarning();
         }
-        }catch(NoCumpleCondicionesLicenciaException e){
-            e.printStackTrace();
-            //TODO que tire una excepcion si no califica para el tipo de licencia
         }catch(ObjetoNoEncontradoException ex){
             String msg = "El titular buscado no fue encontrado.";
-            ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
-            alert.showAndWait();
-        }catch(NoPuedeEmitirExisteLicenciaException ex){
-            String msg = "Si el titular tiene una licencia vigente, no pueden emitirse otras con la misma clase.";
             ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
             alert.showAndWait();
         }catch(FileNotFoundException | URISyntaxException ex){

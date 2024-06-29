@@ -15,8 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
 import java.util.*;
+
+import isi.agiles.dao.LicenciaDAO;
 
 
 @Entity
@@ -73,6 +76,20 @@ public class Licencia {
                cascade = {CascadeType.REMOVE, CascadeType.PERSIST},
                mappedBy = "licencia")
     private List<CopiaLicencia> copias;
+
+    @PostLoad
+    private void modificarEstadoSegunFecha(){
+        if(this.estado.equals(EstadoLicencia.EXPIRADA)){
+            return;
+        }
+        LocalDate hoy = LocalDate.now();
+        /*Si la fecha de hoy es posterior o igual a la fecha de fin de vigencia.
+        El estado deberia ser "EXPIRADA"*/
+        if(hoy.isAfter(this.finVigencia.minusDays(1))){
+            this.estado = EstadoLicencia.EXPIRADA;
+        }
+        return;
+    }
 
     /*Getters y setters */
 
@@ -139,10 +156,6 @@ public class Licencia {
     public void setEstado(EstadoLicencia estado) {
         this.estado = estado;
     }
-
-    
-
-  
 
     public Float getCosto() {
         return costo;

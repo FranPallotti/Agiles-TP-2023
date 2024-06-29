@@ -103,9 +103,17 @@ public class GestorLicencia {
         if(!gestorTitular.puedeTenerLicencia(dto.getTitular(),dto.getClaseLic())){
             throw new NoCumpleCondicionesLicenciaException();
         }
-        if(gestorTitular.tieneLicenciasVigentes(dto.getTitular(), dto.getClaseLic())){
+        if(gestorTitular.tieneLicenciasVigentes(dto.getTitular(),dto.getClaseLic())){
             throw new NoPuedeEmitirExisteLicenciaException();
         }
+        Licencia licencia = this.crearLicencia(dto);
+        licenciaDao.saveInstance(licencia);
+        return licencia;
+    }
+
+    public Licencia renuevaLicencia(LicenciaDTO dto)
+    throws ObjetoNoEncontradoException{
+        this.marcarRenovada(dto);
         Licencia licencia = this.crearLicencia(dto);
         licenciaDao.saveInstance(licencia);
         return licencia;
@@ -136,11 +144,9 @@ public class GestorLicencia {
     }
 
     public void marcarRenovada(LicenciaDTO licencia) throws ObjetoNoEncontradoException{
-        if(licencia.getEstado().equals(EstadoLicencia.VIGENTE)){
-            Licencia aux = (Licencia) licenciaDao.getById(licencia.getIdLicencia()).orElseThrow(()-> new ObjetoNoEncontradoException());
-            aux.setEstado(EstadoLicencia.EXPIRADA);
-            licenciaDao.updateInstance(aux);
-        }
+        Licencia aux = licenciaDao.getById(licencia.getIdLicencia()).orElseThrow(()-> new ObjetoNoEncontradoException());
+        aux.setEstado(EstadoLicencia.EXPIRADA);
+        licenciaDao.updateInstance(aux);
     }
     public void emitirCopia(LicenciaDTO dto)throws ObjetoNoEncontradoException{
         Licencia l=this.getLicencia(dto);
@@ -153,7 +159,8 @@ public class GestorLicencia {
         licenciaDao.saveInstance(l);
     }
 
-    public void puedeSerRenovada(LicenciaDTO licencia, List<LicenciaDTO> licencias) throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
+    public void puedeSerRenovada(LicenciaDTO licencia, List<LicenciaDTO> licencias)
+    throws NoPuedeRenovarVigenciaTemprana, NoPuedeRenovarExisteLicencia{
         Character claselic = licencia.getClaseLic().getClase();
         switch (claselic) {
             case 'G':
@@ -199,8 +206,7 @@ public class GestorLicencia {
         }    
     }
 
-    //Sin keyword de visibilidad: Solo para clases del paquete. Necesario por ser llamada por GestorTitular.
-    boolean muchasLicenciasVigentes(Character clase, List<LicenciaDTO> licencias) {
+    private boolean muchasLicenciasVigentes(Character clase, List<LicenciaDTO> licencias) {
         Long contador = licencias.stream()
                         .filter(lic -> lic.getEstado().equals(EstadoLicencia.VIGENTE) 
                             && (lic.getClaseLic().getClase() == clase))
