@@ -19,9 +19,6 @@ import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
 import java.util.*;
 
-import isi.agiles.dao.LicenciaDAO;
-
-
 @Entity
 @Table(name = "licencia")
 public class Licencia {

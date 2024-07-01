@@ -2,11 +2,8 @@ package isi.agiles.ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 import isi.agiles.App;
 import isi.agiles.dto.TitularDTO;
-import isi.agiles.entidad.TipoClasesLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.entidad.TipoFactorRH;
 import isi.agiles.entidad.TipoGrupoS;
@@ -158,7 +155,7 @@ public class DarAltaTitularController{
         TitularDTO titularDTO = new TitularDTO();
         titularDTO.setNombre(textNombre.getText());
         titularDTO.setApellido(textApellido.getText());
-        //TODO: titularDTO.setClaseSol(generarListaClases());
+        //titularDTO.setClaseSol(generarListaClases());
         titularDTO.setDireccion(textDireccion.getText());
         titularDTO.setNroDoc(nroDocumento.getText());
         Boolean esDonante = false;
@@ -174,7 +171,7 @@ public class DarAltaTitularController{
         return titularDTO;
     }
 
-    //TODO: Hablar con quien hizo esta parte para charlarlo.
+    /*  Este método no se usa porque no se persiste en la base de datos
     private ArrayList<TipoClasesLicencia> generarListaClases() {
         ArrayList<TipoClasesLicencia> claseSolicitadas = new ArrayList<>();
         if(choiceClaseA.isSelected()){
@@ -199,7 +196,7 @@ public class DarAltaTitularController{
             claseSolicitadas.add(TipoClasesLicencia.G);
         }
         return claseSolicitadas;
-    }
+    }*/
 
     private void validarDatos() throws DatosInvalidosException {
         Boolean datoInvalido = false;

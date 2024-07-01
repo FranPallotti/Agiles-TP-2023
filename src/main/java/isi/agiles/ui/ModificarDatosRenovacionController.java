@@ -10,10 +10,7 @@ import java.util.ResourceBundle;
 import isi.agiles.App;
 import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.entidad.TipoDoc;
-import isi.agiles.excepcion.NoCumpleCondicionesLicenciaException;
-import isi.agiles.excepcion.NoPuedeEmitirExisteLicenciaException;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
-import isi.agiles.logica.GestorClaseLicencia;
 import isi.agiles.logica.GestorImpresionFactura;
 import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
@@ -80,11 +77,10 @@ public class ModificarDatosRenovacionController implements Initializable {
 
     @FXML
     private Label errorClaseLicencia;
+    
     // atributos internos
 
     private LicenciaDTO licencia;
-
-    private GestorClaseLicencia gestorClase = new GestorClaseLicencia();
 
     private GestorLicencia gestorLicencia = new GestorLicencia();
 
@@ -159,18 +155,8 @@ public class ModificarDatosRenovacionController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { }
-
-    private void faltanDatosLicencias(){
-            Alert alert = new Alert(AlertType.WARNING, "Advertencia: No existen clases de licencia que se puedan emitir ", ButtonType.OK);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText(null);
-            alert.getDialogPane().getChildren().stream()
-                    .filter(node -> node instanceof Label)
-                    .forEach(node -> ((Label) node).setFont(Font.font("Arial Rounded MT Bold", 14)));
-            alert.getDialogPane().lookupButton(ButtonType.OK).setCursor(Cursor.HAND);
-            alert.setResizable(false);
-            alert.showAndWait();
+    public void initialize(URL location, ResourceBundle resources) { 
+        
     }
 
         

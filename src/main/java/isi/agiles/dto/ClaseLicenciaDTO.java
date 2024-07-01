@@ -1,6 +1,5 @@
 package isi.agiles.dto;
 
-//TODO: Rever que campos son realmente necesarios
 public class ClaseLicenciaDTO {
     private Character clase;
     private Integer edadMinima;

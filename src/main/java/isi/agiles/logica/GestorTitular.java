@@ -7,7 +7,6 @@ import java.time.Period;
 
 import isi.agiles.dao.TitularDAO;
 import isi.agiles.dto.ClaseLicenciaDTO;
-import isi.agiles.dto.LicenciaDTO;
 import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.ClaseLicencia;
 import isi.agiles.entidad.EstadoLicencia;

@@ -197,27 +197,23 @@ public class EmitirLicenciaController implements Initializable{
                 }
                 else{
                     noCumpleCondicionesLicencia();
-                    // TODO resetear datos
                 }
             }
             catch(ObjetoNoEncontradoException e){
                 // Si no encuentra el objeto a la hora de validar si puede tener licencia o no
                 errorEmitirLicencia();
-                // TODO resetear datos
-                e.printStackTrace();
 
             }
             catch(IOException io){
                 io.printStackTrace();
                 errorEnBaseDeDatos();
-                //TODO resetear datos
             }
 
            
 
         }
         else{
-            /// poner un popup de datos invalidos
+            // Agregado de popup de datos invalidos
             datosInvalidos();
         }
         
@@ -248,13 +244,6 @@ public class EmitirLicenciaController implements Initializable{
             l.setClaseLic(clase);
             return l;
     
-        }
-
-        private void setErroresFalse() {
-            errorFormatoObservaciones.setVisible(false);
-            errorFaltaClaseLicencia.setVisible(false);
-            errorFaltaTitular.setVisible(false);
-            
         }
 
         public Boolean validarDatos(){

@@ -1,6 +1,9 @@
 package isi.agiles.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,9 +17,11 @@ import isi.agiles.dto.TitularDTO;
 import isi.agiles.entidad.EstadoLicencia;
 import isi.agiles.entidad.TipoDoc;
 import isi.agiles.excepcion.ObjetoNoEncontradoException;
+import isi.agiles.logica.GestorImpresionFactura;
+import isi.agiles.logica.GestorImpresionLicencia;
 import isi.agiles.logica.GestorLicencia;
 import isi.agiles.logica.GestorTitular;
-
+import isi.agiles.ui.elementos.ErrorLicenciaAlert;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -88,7 +93,11 @@ public class EmitirCopiaController implements Initializable {
     
     private GestorTitular gestorTitular = new GestorTitular();
 
-    
+    private GestorImpresionLicencia gestorImpresionLicencia = new GestorImpresionLicencia();
+
+    private GestorImpresionFactura gestorImpresionFactura = new GestorImpresionFactura();
+
+    private PDFDisplayerController pdfDisplayerController = new PDFDisplayerController();
 
    @FXML
     void continuarCliqueado(ActionEvent event) {
@@ -100,23 +109,29 @@ public class EmitirCopiaController implements Initializable {
             try{ 
                 LicenciaDTO licencia =listadoLicenciasTable.getSelectionModel().getSelectedItem();
                 gestorLicencia.emitirCopia(licencia);
-                //TODO IMPRIMIR LICENCIA
+                File licenciaPdf = gestorImpresionLicencia.imprimirLicencia(licencia);
+                pdfDisplayerController.mostrarPdf(licenciaPdf);
+                File facturaPdf = gestorImpresionFactura.imprimirFactura(licencia);
+                pdfDisplayerController.mostrarPdf(facturaPdf);
                 licenciaCopiadaConExito();
                 Stage currentStage = (Stage) botonContinuar.getScene().getWindow();
                 App.cambiarVentana("MenuPrincipal.fxml", currentStage);
-
-
             }
             catch(ObjetoNoEncontradoException o){
                 errorAlEmitirLicencia();
                 
             }
-            catch(IOException e){
-                e.printStackTrace();
+            catch(FileNotFoundException | URISyntaxException ex){
+                ex.printStackTrace();
+                String msg = "Hubo un error imprimiendo su .pdf. Intentelo nuevamente mas tarde.";
+                ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+                alert.showAndWait();
+            }catch(Exception ex){
+                ex.printStackTrace();
+                String msg = "Hubo un problema. Intentelo más tarde";
+                ErrorLicenciaAlert alert = new ErrorLicenciaAlert(msg);
+                alert.showAndWait();
             }
-            
-                
-            
             
         }
         
